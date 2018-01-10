@@ -1,0 +1,9 @@
+Project 2
+Presentations: Monday, January 22nd
+Requirements: 
+Angular
+Spring MVC
+Spring AOP
+Spring Data/Hibernate
+Jenkins Pipeline
+Live EC2 Site
