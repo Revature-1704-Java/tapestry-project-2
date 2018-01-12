@@ -12,10 +12,10 @@ import javax.persistence.ElementCollection;
 public class Comment {
 	private Integer commentID;
 	private Integer userID;
-	private String imagePath;
-	private String textContent;
-	private Date postTime;
-	List<Comment> replies;
+	//private String imagePath;
+	//private String textContent;
+	//private Date postTime;
+	//List<Comment> replies;
 	
 	@Id
 	@Column
@@ -32,7 +32,7 @@ public class Comment {
 	public void setUserID(Integer userID) {
 		this.userID = userID;
 	}
-	@Column
+	/*@Column
 	public String getImagePath() {
 		return imagePath;
 	}
@@ -59,5 +59,5 @@ public class Comment {
 	}
 	public void setReplies(List<Comment> replies) {
 		this.replies = replies;
-	}
+	}*/
 }

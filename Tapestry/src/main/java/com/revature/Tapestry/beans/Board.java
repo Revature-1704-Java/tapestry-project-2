@@ -9,7 +9,7 @@ import javax.persistence.Id;
 @Entity
 public class Board {
 	private int BoardID;
-	private List<Post> threads;
+	//private List<Post> threads;
 	
 	@Id
 	@Column(nullable=false)
@@ -19,13 +19,13 @@ public class Board {
 	public void setBoardID(int boardID) {
 		BoardID = boardID;
 	}
-	@Column(nullable=false)
+	/*@Column(nullable=false)
 	public List<Post> getThreads() {
 		return threads;
 	}
 	public void setThreads(List<Post> threads) {
 		this.threads = threads;
-	} 
+	} */
 	
 	
 }
