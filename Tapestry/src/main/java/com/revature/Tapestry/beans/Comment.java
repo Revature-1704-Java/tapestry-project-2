@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ElementCollection;
 
@@ -18,6 +19,7 @@ public class Comment {
 	protected List<Comment> replies;
 	
 	@Id
+	@GeneratedValue
 	@Column
 	public Integer getCommentID() {
 		return commentID;

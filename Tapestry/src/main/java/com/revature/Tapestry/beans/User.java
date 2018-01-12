@@ -10,6 +10,7 @@ public class User {
 	private String role;
 	
 	@Id
+	@GeneratedValue
 	@Column
 	public Integer getUserID() {
 		return userID;
