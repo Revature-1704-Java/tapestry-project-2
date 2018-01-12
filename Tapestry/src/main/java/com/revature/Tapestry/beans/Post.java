@@ -8,8 +8,8 @@ import javax.persistence.Entity;
 @Entity
 public class Post extends Comment {
 	
-	private String title;
-	//List<Board> boardsPosted;
+	protected String title;
+	List<Board> boardsPosted;
 	
 	@Column
 	public String getTitle() {
@@ -18,11 +18,11 @@ public class Post extends Comment {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	/*@ElementCollection
+	@ElementCollection
 	public List<Board> getBoardsPosted() {
 		return boardsPosted;
 	}
 	public void setBoardsPosted(List<Board> boardsPosted) {
 		this.boardsPosted = boardsPosted;
-	}*/
+	}
 }
