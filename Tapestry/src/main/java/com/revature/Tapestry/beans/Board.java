@@ -13,6 +13,13 @@ public class Board {
 	private Integer BoardID;
 	private List<Post> threads;
 	
+	
+	public Board() {}
+	public Board(Integer boardID, List<Post> threads) {
+		super();
+		BoardID = boardID;
+		this.threads = threads;
+	}
 	@Id
 	@GeneratedValue
 	@Column

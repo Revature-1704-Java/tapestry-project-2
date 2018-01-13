@@ -18,6 +18,17 @@ public class Comment {
 	protected Date postTime;
 	protected List<Comment> replies;
 	
+	public Comment() {}
+	public Comment(Integer commentID, Integer userID, String imagePath, String textContent, Date postTime,
+			List<Comment> replies) {
+		super();
+		this.commentID = commentID;
+		this.userID = userID;
+		this.imagePath = imagePath;
+		this.textContent = textContent;
+		this.postTime = postTime;
+		this.replies = replies;
+	}
 	@Id
 	@GeneratedValue
 	@Column
