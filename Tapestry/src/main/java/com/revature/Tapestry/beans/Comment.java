@@ -5,19 +5,32 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ElementCollection;
 
 @Entity
 public class Comment {
-	private Integer commentID;
-	private Integer userID;
-	//private String imagePath;
-	//private String textContent;
-	//private Date postTime;
-	//List<Comment> replies;
+	protected Integer commentID;
+	protected Integer userID;
+	protected String imagePath;
+	protected String textContent;
+	protected Date postTime;
+	protected List<Comment> replies;
 	
+	public Comment() {}
+	public Comment(Integer commentID, Integer userID, String imagePath, String textContent, Date postTime,
+			List<Comment> replies) {
+		super();
+		this.commentID = commentID;
+		this.userID = userID;
+		this.imagePath = imagePath;
+		this.textContent = textContent;
+		this.postTime = postTime;
+		this.replies = replies;
+	}
 	@Id
+	@GeneratedValue
 	@Column
 	public Integer getCommentID() {
 		return commentID;
@@ -32,7 +45,7 @@ public class Comment {
 	public void setUserID(Integer userID) {
 		this.userID = userID;
 	}
-	/*@Column
+	@Column
 	public String getImagePath() {
 		return imagePath;
 	}
@@ -59,5 +72,5 @@ public class Comment {
 	}
 	public void setReplies(List<Comment> replies) {
 		this.replies = replies;
-	}*/
+	}
 }

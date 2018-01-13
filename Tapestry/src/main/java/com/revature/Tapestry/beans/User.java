@@ -7,9 +7,18 @@ public class User {
 	private Integer userID;
 	private String username;
 	private String email;
+	public User () {}
+	public User(Integer userID, String username, String email, String role) {
+		super();
+		this.userID = userID;
+		this.username = username;
+		this.email = email;
+		this.role = role;
+	}
 	private String role;
 	
 	@Id
+	@GeneratedValue
 	@Column
 	public Integer getUserID() {
 		return userID;
