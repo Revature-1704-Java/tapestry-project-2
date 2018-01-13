@@ -1,5 +1,8 @@
 pipeline{
-node {
+
+agent any
+
+stages {
    stage('Preparation') { 
       git 'https://github.com/Revature-1704-Java/tapestry-project-2'
       
