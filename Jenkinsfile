@@ -9,13 +9,7 @@ stages {
       }
    }
    stage('Build') {
-       steps{
-       //set environment variables for RDS connection
-       sh '''export RDSUSER="Moirai"
-            export RDSPASSWORD="Lachesis"
-            export 
-RDSURL="jdbc:oracle:thin:@tapestry.cprm20bvxv7j.us-east-1.rds.amazonaws.com:1521:ORCL"'''
-       
+       steps{       
        //move dist folder into our resources folder for our maven project
        /*sh '''cd front
             ng build -p
