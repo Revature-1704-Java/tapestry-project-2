@@ -4,10 +4,12 @@ agent any
 
 stages {
    stage('Preparation') { 
-      git 'https://github.com/Revature-1704-Java/tapestry-project-2'
-      
+      steps{
+      	it 'https://github.com/Revature-1704-Java/tapestry-project-2'
+      }
    }
    stage('Build') {
+       steps{
        //set environment variables for RDS connection
        sh '''export RDSUSER="Moirai"
             export RDSPASSWORD="Lachesis"
@@ -24,18 +26,21 @@ project
         
         sh '''cd Tapestry
         mvn clean package'''
-            
+       }     
     
    }
    stage('Results') {
+      steps{
       junit '**/target/surefire-reports/*.xml'
       archive 'target/*.jar'
+      }
    }
    
    stage('Deploy'){
+   	steps{
        //sh 'java -jar 0.0.1-SNAPSHOT.jar'
        slackSend color: '#0F0F0F', message: 'Build was successful '
-
+	}
    }
 }
 }
