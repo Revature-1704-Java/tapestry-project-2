@@ -8,6 +8,6 @@ public class TapestryApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TapestryApplication.class, args);
-		//trivial change
+		//does this build
 	}
 }
