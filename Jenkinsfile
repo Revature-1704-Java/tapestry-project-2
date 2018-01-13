@@ -16,8 +16,7 @@ stages {
             export 
 RDSURL="jdbc:oracle:thin:@tapestry.cprm20bvxv7j.us-east-1.rds.amazonaws.com:1521:ORCL"'''
        
-       //move dist folder into our resources folder for our maven 
-project
+       //move dist folder into our resources folder for our maven project
        /*sh '''cd front
             ng build -p
             mv dist ../Tapestry/src/main/resources/'''*/
