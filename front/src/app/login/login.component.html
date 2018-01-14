@@ -1,0 +1,25 @@
+<div class="dropdown">
+    <button type="button form-control" class="btn btn-secondary dropdown-toggle" id="dropdownLogin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Pic
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownLogin">
+        <h6 class="dropdown-header">Your Name</h6>
+        <div [ngSwitch]="true">
+            <div *ngSwitchCase="true">
+                <a class="dropdown-item" href="#"><span class="oi oi-person">&nbsp;</span> Profile</a>
+                <a class="dropdown-item" href="#"><span class="oi oi-cog">&nbsp;</span> Settings</a>
+                <button class="dropdown-item" type="button" href="#">
+                    <span class="oi oi-account-logout">&nbsp;</span> Logout
+                </button>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Night mode &nbsp;&nbsp;<span class="oi oi-moon"></span></a>
+            </div>
+
+            <div *ngSwitchDefault>
+                <button type="button" class="dropdown-item" href="#">
+                    <span class="oi oi-account-login">&nbsp;</span> Login
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -12,6 +12,9 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { ThreadComponent } from './thread/thread.component';
 import { ThreadService } from './shared/thread.service';
 import { HttpClient } from '@angular/common/http/src/client';
+import { HeaderComponent } from './header/header.component';
+import { LoginComponent } from './login/login.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -21,7 +24,10 @@ import { HttpClient } from '@angular/common/http/src/client';
     SearchComponent,
     ViewComponent,
     CatalogComponent,
-    ThreadComponent
+    ThreadComponent,
+    HeaderComponent,
+    LoginComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
