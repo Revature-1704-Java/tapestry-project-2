@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Thread } from '../shared/thread';
 import { ThreadService } from '../shared/thread.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-catalog',
@@ -9,7 +10,7 @@ import { ThreadService } from '../shared/thread.service';
   styleUrls: ['./catalog.component.css']
 })
 export class CatalogComponent implements OnInit {
-  threads: Thread[] = [];
+  public threads: Observable<Thread[]>;
 
   constructor(private threadService: ThreadService) { }
 
