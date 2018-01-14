@@ -8,12 +8,12 @@ stages {
       	git 'https://github.com/Revature-1704-Java/tapestry-project-2'
       }
    }
+  try{
    stage('Build') {
        steps{       
+	   slackSend color: '#888888', message: 'Building ${BRANCH_NAME}'
        //move dist folder into our resources folder for our maven project
-       /*sh '''cd front
-            ng build -p
-            mv dist ../Tapestry/src/main/resources/'''*/
+       /*sh 'ng build -p*'/
             
       // Run the maven build
         
@@ -22,8 +22,14 @@ stages {
        }     
     
    }
+  }
+  catch(e){
+	slackSend color: '#FFFFF', message: 'Build failed   ${BRANCH_NAME}'
+  }
+  
    stage('Results') {
       steps{
+	  slackSend color: '#0F0F0F', message: 'Build was successful, Saving JUnit results'
       junit '**/target/surefire-reports/*.xml'
       archive 'target/*.jar'
       }
@@ -32,7 +38,6 @@ stages {
    stage('Deploy'){
    	steps{
        //sh 'java -jar 0.0.1-SNAPSHOT.jar'
-       slackSend color: '#0F0F0F', message: 'Build was successful '
 	}
    }
 }
