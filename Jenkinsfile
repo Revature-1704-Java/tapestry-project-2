@@ -10,7 +10,8 @@ stages {
    }
 
    stage('Build') {
-       steps{       
+       steps{
+       
 	   slackSend color: '#888888', message: 'Building ${BRANCH_NAME}'
        //move dist folder into our resources folder for our maven project
        /*sh 'ng build -p*'/
