@@ -8,11 +8,11 @@ stages {
       	git 'https://github.com/Revature-1704-Java/tapestry-project-2'
       }
    }
-
+ script{
+  try{
    stage('Build') {
-       steps{
-       
-	   slackSend color: '#888888', message: 'Building ${BRANCH_NAME}'
+       steps{       
+	   slackSend color: '#888888', message: 'Building Project'
        //move dist folder into our resources folder for our maven project
        /*sh 'ng build -p*'/
             
@@ -20,8 +20,14 @@ stages {
         
         sh '''cd Tapestry
         mvn clean package'''
-       }
-	}
+       }     
+    
+   }
+  }
+  catch(e){
+	slackSend color: '#FFFFF', message: 'Build failed'
+  }
+  }
   
    stage('Results') {
       steps{
@@ -36,5 +42,5 @@ stages {
        //sh 'java -jar 0.0.1-SNAPSHOT.jar'
 	}
    }
-  }
+}
 }
