@@ -10,21 +10,21 @@ stages {
    }
    stage('Build') {
        steps{       
-	   slackSend color: '#888888', message: 'Building Project'
        //move dist folder into our resources folder for our maven project
-       /*sh 'ng build -p*'/
+       /*sh '''cd front
+            ng build -p
+            mv dist ../Tapestry/src/main/resources/'''*/
             
       // Run the maven build
         
+		slackSend color: '#888888', message: 'Building Project'
         sh '''cd Tapestry
         mvn clean package'''
        }     
     
    }
-  
    stage('Results') {
       steps{
-	  slackSend color: '#0F0F0F', message: 'Build was successful, Saving JUnit results'
       junit '**/target/surefire-reports/*.xml'
       archive 'target/*.jar'
       }
@@ -33,6 +33,7 @@ stages {
    stage('Deploy'){
    	steps{
        //sh 'java -jar 0.0.1-SNAPSHOT.jar'
+       slackSend color: '#0F0F0F', message: 'Build was successful '
 	}
    }
 }
