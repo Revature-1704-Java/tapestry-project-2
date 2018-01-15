@@ -8,8 +8,6 @@ stages {
       	git 'https://github.com/Revature-1704-Java/tapestry-project-2'
       }
    }
- script{
-  try{
    stage('Build') {
        steps{       
 	   slackSend color: '#888888', message: 'Building Project'
@@ -23,10 +21,6 @@ stages {
        }     
     
    }
-  }
-  catch(e){
-	slackSend color: '#FFFFF', message: 'Build failed'
-  }
   }
   
    stage('Results') {
@@ -42,5 +36,4 @@ stages {
        //sh 'java -jar 0.0.1-SNAPSHOT.jar'
 	}
    }
-}
 }
