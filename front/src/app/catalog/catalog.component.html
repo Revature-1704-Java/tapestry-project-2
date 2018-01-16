@@ -1,6 +1,6 @@
 <div class="row" id="catalogView">
   <div class="col-sm-12">
-    <button type="button" class="btn btn-success col-sm-4 offset-sm-4" (click)="badTimes()">Create New Thread</button>
+    <button type="button" class="btn btn-success col-sm-4 offset-sm-4" data-toggle="modal" data-target="#postModal">Create New Thread</button>
     <hr>
   </div>
   <div *ngFor="let thread of threads | async; trackBy:trackByFn" class="col-sm-4">
