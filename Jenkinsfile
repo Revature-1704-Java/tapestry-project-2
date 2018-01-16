@@ -5,7 +5,7 @@ agent any
 stages {
    stage('Preparation') { 
       steps{
-      	git branch: 'Backend' 'https://github.com/Revature-1704-Java/tapestry-project-2/'
+      	git branch: 'Backend', url: 'https://github.com/Revature-1704-Java/tapestry-project-2.git'
       }
    }
    stage('Build') {
@@ -17,10 +17,16 @@ stages {
             
       // Run the maven build
         
-		slackSend color: '#888888', message: 'Building branch Backend'
+		slackSend color: '#888888', message: 'Building Backend Project'
         sh '''cd Tapestry
         mvn clean package'''
-       }     
+       }
+	   
+	   post{
+		failure{
+			slackSend color: '#FFFFFF', message: 'Backend Building Failed'
+		}
+	   }
     
    }
    stage('Results') {
@@ -32,8 +38,9 @@ stages {
    
    stage('Deploy'){
    	steps{
+	   slackSend color: '#0F0F0F', message: 'Backend Build was successful'
        //sh 'java -jar 0.0.1-SNAPSHOT.jar'
-       slackSend color: '#0F0F0F', message: 'Build on branch Backend was successful '
+       slackSend color: '#000000', message: 'Backend Build was Deployed'
 	}
    }
 }
