@@ -10,8 +10,10 @@ import { TokenService } from '../shared/token.service';
 })
 export class ModalComponent implements OnInit {
   private user = { email: '', password: '' };
+  private newuser = { username: '', email: '', password: '' };
   private myForm: FormGroup = this.myForm;
   @ViewChild('loginClose') loginClose: ElementRef;
+  @ViewChild('signupClose') signupClose: ElementRef;
 
   constructor(private httpClient: HttpClient, public token: TokenService) { }
 
@@ -34,10 +36,36 @@ export class ModalComponent implements OnInit {
       .subscribe(res => {
         this.token.token = res['token'];
         this.token.auth = true;
+        this.token.id = 1;
         console.log(this.token);
 
         this.loginClose.nativeElement.click();
       }, err => console.log(err));
   }
 
+  signup(): void {
+    const apiUrl = 'https://reqres.in/api/register';
+
+    const newUsername = this.newuser.username;
+    const newEmail = this.newuser.email;
+    const newPass = this.newuser.password;
+
+    const body = new HttpParams()
+      .set('email', newEmail)
+      .set('password', newPass);
+    const header = new HttpHeaders()
+      .set('Content-Type', 'application/x-www-form-urlencoded');
+    
+    this.httpClient.post(apiUrl, body, { headers: header })
+      .subscribe(res => {
+        if (res['token'] != undefined) {
+          this.token.token = res['token'];
+          this.token.auth = true;
+          this.token.id = 1;
+          console.log(this.token);
+
+          this.signupClose.nativeElement.click();
+        }
+      }, err => console.log(err));
+  }
 }
