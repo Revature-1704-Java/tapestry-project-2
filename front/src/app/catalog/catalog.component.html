@@ -1,0 +1,7 @@
+<div class="row" id="catalogView">
+  <div *ngFor="let thread of threads | async; trackBy:trackByFn" class="col-sm-4">
+    <a href="#" (click)="viewSpecific(thread.id)">
+      <app-thread-item [thread]="thread"></app-thread-item>
+    </a>
+  </div>
+</div>

@@ -19,9 +19,15 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../node_modules/open-iconic/font/css/open-iconic-bootstrap.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/popper.js/dist/umd/popper.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
@@ -37,7 +43,14 @@
   "lint": [
     {
       "project": "src/tsconfig.app.json",
-      "exclude": "**/node_modules/**"
+      "exclude": [
+        "**/node_modules/**",
+        "**/e2e/*",
+        "**/src/app/*.spec.ts",
+        "**/src/app/**/*.spec.ts",
+        "**/src/polyfills.ts",
+        "**/src/test.ts"
+      ]
     },
     {
       "project": "src/tsconfig.spec.json",
