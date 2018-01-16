@@ -63,7 +63,7 @@ public class Post {
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
-	@Column
+	@Column(length=8191)
 	public String getTextContent() {
 		return textContent;
 	}
