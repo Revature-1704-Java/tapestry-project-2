@@ -5,7 +5,7 @@ agent any
 stages {
    stage('Preparation') { 
       steps{
-      	git branch master 'https://github.com/Revature-1704-Java/tapestry-project-2.git'
+      	git branch: 'master', 'https://github.com/Revature-1704-Java/tapestry-project-2.git'
       }
    }
    stage('Build') {
@@ -23,7 +23,7 @@ stages {
        }
 	   
 	   post{
-		failure{
+		fail		ure{
 			slackSend color: '#FFFFFF', message: 'Master Building Failed'
 		}
 	   }
@@ -38,8 +38,9 @@ stages {
    
    stage('Deploy'){
    	steps{
+	   slackSend color: '#0F0F0F', message: 'Master Build was successful'
        //sh 'java -jar 0.0.1-SNAPSHOT.jar'
-       slackSend color: '#000000', message: 'Master Build was successful'
+       slackSend color: '#000000', message: 'Master Build was Deployed'
 	}
    }
 }
