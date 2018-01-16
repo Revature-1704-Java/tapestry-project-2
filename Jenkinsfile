@@ -17,7 +17,7 @@ stages {
             
       // Run the maven build
         
-		slackSend color: '#888888', message: 'Building Project'
+		slackSend color: '#888888', message: 'Building branch Backend'
         sh '''cd Tapestry
         mvn clean package'''
        }     
@@ -33,7 +33,7 @@ stages {
    stage('Deploy'){
    	steps{
        //sh 'java -jar 0.0.1-SNAPSHOT.jar'
-       slackSend color: '#0F0F0F', message: 'Build was successful '
+       slackSend color: '#0F0F0F', message: 'Build on branch Backend was successful '
 	}
    }
 }
