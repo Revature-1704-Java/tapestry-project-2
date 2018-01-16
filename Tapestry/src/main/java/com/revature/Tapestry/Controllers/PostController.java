@@ -38,8 +38,7 @@ public class PostController {
 	
 	@PostMapping(value="/createThread", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public void createThread(@RequestBody Post post) {
-		System.out.println(post.toString());
-		//postDao.save(post);
+		postDao.save(post);
 	}
 	
 	@PostMapping(value="/createReply/{id}", consumes=MediaType.APPLICATION_JSON_VALUE)
@@ -49,6 +48,7 @@ public class PostController {
 		replies.add(comment);
 		p.setReplies(replies);
 		postDao.save(p);
+		//Getting an 500 internal server error "object references an unsaved transient instance"
 	}
 	
 }
