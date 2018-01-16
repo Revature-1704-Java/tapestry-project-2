@@ -7,9 +7,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.ElementCollection;
 
 @Entity
+@Table(name = "COMMENT")
 public class Comment {
 	protected Integer commentID;
 	protected Integer userID;

@@ -5,7 +5,7 @@ agent any
 stages {
    stage('Preparation') { 
       steps{
-      	git 'https://github.com/Revature-1704-Java/tapestry-project-2'
+      	git 'https://github.com/Revature-1704-Java/tapestry-project-2/tree/Backend'
       }
    }
    stage('Build') {

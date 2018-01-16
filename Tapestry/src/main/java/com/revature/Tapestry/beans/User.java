@@ -5,6 +5,7 @@ import javax.persistence.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
+@Table(name = "USER")
 public class User {
 	private Integer userID;
 	private String username;
