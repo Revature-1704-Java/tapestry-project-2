@@ -5,8 +5,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.revature.Tapestry.DatabaseAccessors.BoardDAO;
 import com.revature.Tapestry.beans.Board;
-import com.revature.Tapestry.beans.Post;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -27,8 +24,7 @@ public class TapestryApplicationTests {
 	@Test
 	public void basicDatabaseConnectivityExists() {
 		int numBoardsBefore = boardDAO.findAll().size();
-		List<Post> postList = new ArrayList<Post>();
-		Board testBoard = new Board("testBoard", postList);
+		Board testBoard = new Board("testBoard");
 		ArrayList<Board> boards = new ArrayList<Board>();
 		boards.add(testBoard);
 		boardDAO.save(boards);

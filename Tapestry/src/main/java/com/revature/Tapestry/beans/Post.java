@@ -1,9 +1,9 @@
 package com.revature.Tapestry.beans;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.ElementCollection;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,6 +37,7 @@ public class Post {
 		this.postTime = postTime;
 		this.title = title;
 		this.boardsPosted = boardsPosted;
+		this.replies = new ArrayList<Comment>();
 	}
 
 	@Id
