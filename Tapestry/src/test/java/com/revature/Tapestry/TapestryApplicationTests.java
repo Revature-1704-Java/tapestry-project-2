@@ -24,14 +24,14 @@ public class TapestryApplicationTests {
 
 	@Test
 	public void basicDatabaseConnectivityExists() {
-		/*List<Post> postList = new ArrayList<Post>();
+		List<Post> postList = new ArrayList<Post>();
 		Board testBoard = new Board("testBoard", postList);
 		ArrayList<Board> boards = new ArrayList<Board>();
 		boards.add(testBoard);
 		boardDAO.save(boards);
 		List<Board> searchresults = boardDAO.findAll();
-		assertTrue(searchresults.size() != 0);*/
-		assertTrue(true);//temp to test something
+		assertTrue(searchresults.size() != 0);
+		//assertTrue(true);//temp to test something
 	}
 
 }
