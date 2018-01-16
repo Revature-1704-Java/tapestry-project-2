@@ -9,13 +9,15 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SearchComponent } from './search/search.component';
 import { ViewComponent } from './view/view.component';
 import { CatalogComponent } from './catalog/catalog.component';
-import { ThreadComponent } from './thread/thread.component';
+import { ThreadItemComponent } from './thread-item/thread-item.component';
 import { ThreadService } from './shared/thread.service';
 import { HttpClient } from '@angular/common/http/src/client';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { FooterComponent } from './footer/footer.component';
 import { ModalComponent } from './modal/modal.component';
+import { SpecificComponent } from './specific/specific.component';
+import { CurrentViewService } from './shared/current-view.service';
 
 
 @NgModule({
@@ -25,11 +27,12 @@ import { ModalComponent } from './modal/modal.component';
     SearchComponent,
     ViewComponent,
     CatalogComponent,
-    ThreadComponent,
+    ThreadItemComponent,
     HeaderComponent,
     LoginComponent,
     FooterComponent,
-    ModalComponent
+    ModalComponent,
+    SpecificComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,7 @@ import { ModalComponent } from './modal/modal.component';
       {path: '', component: ViewComponent}
     ])
   ],
-  providers: [ThreadService],
+  providers: [ThreadService, CurrentViewService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
