@@ -1,6 +1,8 @@
 package com.revature.Tapestry.Controllers;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -42,7 +44,7 @@ public class UserController {
 	@GetMapping("/user/{id}")
 	public ResponseEntity<?> getUser(@PathVariable("id") int id) {
 
-		User user = userDao.getOne(id);
+		User user = userDao.findOne(id);
 		if (user == null) {
 			return new ResponseEntity<>("No user found for ID " + id, HttpStatus.NOT_FOUND);
 		}
