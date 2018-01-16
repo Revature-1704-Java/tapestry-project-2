@@ -5,7 +5,7 @@ agent any
 stages {
    stage('Preparation') { 
       steps{
-      	git branch: 'master', 'https://github.com/Revature-1704-Java/tapestry-project-2.git'
+      	git branch: 'master', url: 'https://github.com/Revature-1704-Java/tapestry-project-2.git'
       }
    }
    stage('Build') {
