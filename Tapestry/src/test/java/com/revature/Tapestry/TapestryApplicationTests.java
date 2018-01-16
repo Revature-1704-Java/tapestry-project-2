@@ -19,8 +19,8 @@ import com.revature.Tapestry.beans.Post;
 @SpringBootTest
 public class TapestryApplicationTests {
 	
-	@Autowired
-    BoardDAO boardDAO;
+	//@Autowired
+    //BoardDAO boardDAO;
 
 	@Test
 	public void basicDatabaseConnectivityExists() {
