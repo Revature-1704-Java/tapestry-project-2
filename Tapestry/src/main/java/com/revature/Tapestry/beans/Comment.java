@@ -19,10 +19,9 @@ public class Comment {
 	protected List<Comment> replies;
 	
 	public Comment() {}
-	public Comment(Integer commentID, Integer userID, String imagePath, String textContent, Date postTime,
+	public Comment(Integer userID, String imagePath, String textContent, Date postTime,
 			List<Comment> replies) {
 		super();
-		this.commentID = commentID;
 		this.userID = userID;
 		this.imagePath = imagePath;
 		this.textContent = textContent;

@@ -14,9 +14,9 @@ public class Post extends Comment {
 	
 	
 	public Post() {}
-	public Post(Integer commentID, Integer userID, String imagePath, String textContent, Date postTime,
+	public Post(Integer userID, String imagePath, String textContent, Date postTime,
 			List<Comment> replies, String title, List<Board> boardsPosted) {
-		super(commentID, userID, imagePath, textContent, postTime, replies);
+		super(userID, imagePath, textContent, postTime, replies);
 		this.title = title;
 		this.boardsPosted = boardsPosted;
 	}

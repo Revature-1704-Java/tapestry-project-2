@@ -17,6 +17,7 @@ stages {
             
       // Run the maven build
         
+		slackSend color: '#888888', message: 'Building Project'
         sh '''cd Tapestry
         mvn clean package'''
        }     
@@ -36,3 +37,7 @@ stages {
 	}
    }
 }
+<<<<<<< HEAD
+=======
+}
+>>>>>>> master

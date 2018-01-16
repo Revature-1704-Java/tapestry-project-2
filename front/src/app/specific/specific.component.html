@@ -1,0 +1,12 @@
+<div class="row" id="specificView">
+  <div class="mr-auto"></div>
+  <a href="#" class="btn btn-warning" (click)="viewCatalog()">Back</a>
+</div>
+
+<div class="row">
+  <ul *ngFor="let reply of replies | async; trackBy:trackByFn" class="list-group">
+    <li class="list-group-item">
+      <app-thread-item [thread]="reply"></app-thread-item>
+    </li>
+  </ul>
+</div>

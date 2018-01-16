@@ -21,7 +21,11 @@
     "@angular/platform-browser": "^5.0.0",
     "@angular/platform-browser-dynamic": "^5.0.0",
     "@angular/router": "^5.0.0",
+    "bootstrap": "4.0.0-beta.2",
     "core-js": "^2.4.1",
+    "jquery": "^3.2.1",
+    "open-iconic": "^1.1.1",
+    "popper.js": "^1.13.0",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"
   },
@@ -43,7 +47,8 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
-    "tslint": "~5.7.0",
-    "typescript": "~2.4.2"
+    "tslint": "~5.9.1",
+    "typescript": "~2.4.2",
+    "angular-tslint-rules": "^1.1.0"
   }
 }
