@@ -41,7 +41,7 @@ public class BoardController {
 	
 	@GetMapping(value="/Sales", produces=MediaType.APPLICATION_JSON_VALUE)
 	public Collection<Post> getSalesPosts() {
-		Board board = boardDao.findOne(2);
+		Board board = boardDao.getOne(2);
 		Collection<Post> threads = board.getThreads();
 		return threads;
 	}
