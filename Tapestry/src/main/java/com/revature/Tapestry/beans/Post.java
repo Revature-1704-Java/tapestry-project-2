@@ -79,6 +79,7 @@ public class Post {
 		this.postTime = postTime;
 	}
 	@Column
+	@ElementCollection
 	public List<Comment> getReplies() {
 		return replies;
 	}
@@ -94,6 +95,7 @@ public class Post {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	@Column
 	@ElementCollection
 	public List<Board> getBoardsPosted() {
 		return boardsPosted;

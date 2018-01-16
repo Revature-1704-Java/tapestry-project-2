@@ -7,24 +7,25 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.ElementCollection;
 
 @Entity
-@Table(name = "COMMENT")
+@Table(name = "COMMENT_TABLE")
 public class Comment {
 	protected Integer commentID;
-	protected Integer userID;
+	protected User user;
 	protected String imagePath;
 	protected String textContent;
 	protected Date postTime;
 	protected List<Comment> replies;
 	
 	public Comment() {}
-	public Comment(Integer userID, String imagePath, String textContent, Date postTime,
+	public Comment(User user, String imagePath, String textContent, Date postTime,
 			List<Comment> replies) {
 		super();
-		this.userID = userID;
+		this.user = user;
 		this.imagePath = imagePath;
 		this.textContent = textContent;
 		this.postTime = postTime;
@@ -39,12 +40,12 @@ public class Comment {
 	public void setCommentID(Integer commentID) {
 		this.commentID = commentID;
 	}
-	@Column
-	public Integer getUserID() {
-		return userID;
+	@ManyToOne
+	public User getUser() {
+		return user;
 	}
-	public void setUserID(Integer userID) {
-		this.userID = userID;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	@Column
 	public String getImagePath() {
@@ -67,6 +68,7 @@ public class Comment {
 	public void setPostTime(Date postTime) {
 		this.postTime = postTime;
 	}
+	@Column
 	@ElementCollection
 	public List<Comment> getReplies() {
 		return replies;

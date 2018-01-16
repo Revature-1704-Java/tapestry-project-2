@@ -38,6 +38,7 @@ public class Board {
 	public void setBoardID(Integer boardID) {
 		this.boardID = boardID;
 	}
+	@Column
 	@ElementCollection
 	public List<Post> getThreads() {
 		return threads;
