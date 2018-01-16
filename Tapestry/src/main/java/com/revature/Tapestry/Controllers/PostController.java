@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,10 +42,13 @@ public class PostController {
 		//postDao.save(post);
 	}
 	
-	@PostMapping(value="/createReply", consumes=MediaType.APPLICATION_JSON_VALUE)
-	public void createReply(@RequestBody Comment comment) {
-		//Need a comment DAO?
-		//postDao.save(comment);
+	@PostMapping(value="/createReply/{id}", consumes=MediaType.APPLICATION_JSON_VALUE)
+	public void createReply(@RequestBody Comment comment, @PathVariable("id") int id) {
+		Post p = postDao.getOne(id);
+		List<Comment> replies = p.getReplies();
+		replies.add(comment);
+		p.setReplies(replies);
+		postDao.save(p);
 	}
 	
 }
