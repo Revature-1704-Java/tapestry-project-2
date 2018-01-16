@@ -7,8 +7,10 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "BOARD")
 public class Board {
 	protected Integer boardID;
 	protected String boardName;
@@ -36,6 +38,7 @@ public class Board {
 	public void setBoardID(Integer boardID) {
 		this.boardID = boardID;
 	}
+	@Column
 	@ElementCollection
 	public List<Post> getThreads() {
 		return threads;
