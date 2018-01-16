@@ -3,10 +3,12 @@ package com.revature.Tapestry.beans;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.ElementCollection;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -63,7 +65,8 @@ public class Post {
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
 	}
-	@Column(length=8191)
+	@Lob
+	@Column
 	public String getTextContent() {
 		return textContent;
 	}
