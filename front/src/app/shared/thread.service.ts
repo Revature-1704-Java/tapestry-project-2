@@ -23,8 +23,7 @@ export class ThreadService {
             });
     }
 
-    getThread(id: number): Observable<Array<Thread>> {
-        // TODO: Also keep the Thread OP
+    getReplies(id: number): Observable<Array<Thread>> {
         const apiUrl = `https://jsonplaceholder.typicode.com/comments?postId=${id}`;
 
         return this.httpClient
@@ -33,22 +32,13 @@ export class ThreadService {
                 return val as Array<Thread>;
             });
     }
-}
 
-const threads2 = [
-    {
-        picture: 'http://placehold.it/150x150',
-        title: 'great',
-        content: 'pork chops'
-    },
-    {
-        picture: 'http://placehold.it/150x150',
-        title: 'round',
-        content: 'apple'
-    },
-    {
-        picture: 'http://placehold.it/150x150',
-        title: 'me',
-        content: 'the money'
+    getThread(id: number): Observable<Thread> {
+        const apiUrl = `https://jsonplaceholder.typicode.com/posts/${id}`;
+        return this.httpClient
+            .get<Post>(apiUrl)
+            .map(val => {
+                return val as Thread;
+            });
     }
-];
+}

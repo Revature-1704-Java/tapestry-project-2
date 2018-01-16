@@ -1,4 +1,8 @@
 <div class="row" id="catalogView">
+  <div class="col-sm-12">
+    <button type="button" class="btn btn-success col-sm-4 offset-sm-4" (click)="badTimes()">Create New Thread</button>
+    <hr>
+  </div>
   <div *ngFor="let thread of threads | async; trackBy:trackByFn" class="col-sm-4">
     <a href="#" (click)="viewSpecific(thread.id)">
       <app-thread-item [thread]="thread"></app-thread-item>

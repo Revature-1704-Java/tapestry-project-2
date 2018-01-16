@@ -1,10 +1,18 @@
 <div class="row" id="specificView">
-  <div class="mr-auto"></div>
-  <a href="#" class="btn btn-warning" (click)="viewCatalog()">Back</a>
+  <div class="mr-auto">
+    <div *ngIf="post">
+      <h4>{{ post.title }}</h4>
+    </div>
+  </div>
+  <a href="#" class="btn btn-success" (click)="funTimes()" id="createReply"><span class="oi oi-comment-square">&nbsp;</span></a>
+  <a href="#" class="btn btn-warning" (click)="viewCatalog()"><span class="oi oi-share">&nbsp;</span></a>
 </div>
 
 <div class="row">
-  <ul *ngFor="let reply of replies | async; trackBy:trackByFn" class="list-group col-sm-12">
+  <div *ngIf="post" class="col-sm-11">
+    <app-thread-item [thread]="post"></app-thread-item>
+  </div>
+  <ul *ngFor="let reply of replies | async; trackBy:trackByFn" class="list-group col-sm-11 offset-sm-1">
     <app-thread-item [thread]="reply"></app-thread-item>
   </ul>
 </div>
