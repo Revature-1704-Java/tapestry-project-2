@@ -27,24 +27,26 @@ public class UserController {
 	}
 	
 	@PostMapping(value="/login")
-	public void login() {
+	public ResponseEntity<?> login(@RequestBody User user) {
 		//Login a user
+		
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	
 	@PostMapping(value="/signup")
-	public ResponseEntity signUp(@RequestBody User user) {
+	public ResponseEntity<?> signUp(@RequestBody User user) {
 		userDao.save(user);
-		return new ResponseEntity(user, HttpStatus.OK);
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	
 	@GetMapping("/user/{id}")
-	public ResponseEntity getCustomer(@PathVariable("id") int id) {
+	public ResponseEntity<?> getUser(@PathVariable("id") int id) {
 
 		User user = userDao.getOne(id);
 		if (user == null) {
-			return new ResponseEntity("No user found for ID " + id, HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("No user found for ID " + id, HttpStatus.NOT_FOUND);
 		}
 
-		return new ResponseEntity(user, HttpStatus.OK);
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 }

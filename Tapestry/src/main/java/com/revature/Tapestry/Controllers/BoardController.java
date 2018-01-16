@@ -35,13 +35,33 @@ public class BoardController {
 	public Collection<Post> getITPosts() {
 		Board board = boardDao.findOne(1);
 		Collection<Post> threads = board.getThreads();
-		//Not sure what this will give... thinking it is not enough to populate board
 		return threads;
 	}
 	
 	@GetMapping(value="/Sales", produces=MediaType.APPLICATION_JSON_VALUE)
 	public Collection<Post> getSalesPosts() {
 		Board board = boardDao.getOne(2);
+		Collection<Post> threads = board.getThreads();
+		return threads;
+	}
+	
+	@GetMapping(value="/HR", produces=MediaType.APPLICATION_JSON_VALUE)
+	public Collection<Post> getHRPosts() {
+		Board board = boardDao.getOne(3);
+		Collection<Post> threads = board.getThreads();
+		return threads;
+	}
+	
+	@GetMapping(value="/Finance", produces=MediaType.APPLICATION_JSON_VALUE)
+	public Collection<Post> getFinancePosts() {
+		Board board = boardDao.getOne(4);
+		Collection<Post> threads = board.getThreads();
+		return threads;
+	}
+	
+	@GetMapping(value="/Production", produces=MediaType.APPLICATION_JSON_VALUE)
+	public Collection<Post> getProductionPosts() {
+		Board board = boardDao.getOne(5);
 		Collection<Post> threads = board.getThreads();
 		return threads;
 	}

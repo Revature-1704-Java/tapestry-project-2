@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.revature.Tapestry.DatabaseAccessors.BoardDAO;
 import com.revature.Tapestry.DatabaseAccessors.PostDAO;
 import com.revature.Tapestry.beans.Comment;
 import com.revature.Tapestry.beans.Post;
@@ -20,19 +21,24 @@ import com.revature.Tapestry.beans.User;
 public class PostController {
 
 	private PostDAO postDao;
+	private BoardDAO boardDao;
 	
-	public PostController(PostDAO postDao) {
+	public PostController(PostDAO postDao, BoardDAO boardDao) {
 		this.postDao = postDao;
+		this.boardDao = boardDao;
 	}
 	
-	@GetMapping(value="/getposts", produces=MediaType.APPLICATION_JSON_VALUE)
+	//Get All Posts in DB, return as JSON
+	@GetMapping(value="/getPosts", produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Post> getPosts() {
 		return postDao.findAll().stream().collect(Collectors.toList());
-	}
+	}	
+	
 	
 	@PostMapping(value="/createThread", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public void createThread(@RequestBody Post post) {
-		postDao.save(post);
+		System.out.println(post.toString());
+		//postDao.save(post);
 	}
 	
 	@PostMapping(value="/createReply", consumes=MediaType.APPLICATION_JSON_VALUE)

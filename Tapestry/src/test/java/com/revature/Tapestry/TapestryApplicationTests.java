@@ -3,22 +3,12 @@ package com.revature.Tapestry;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-import java.util.Date;
-=======
->>>>>>> master
 import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-<<<<<<< HEAD
-import org.mockito.Mockito;
-import org.mockito.stubbing.OngoingStubbing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-=======
-import org.springframework.beans.factory.annotation.Autowired;
->>>>>>> master
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -33,15 +23,6 @@ import com.revature.Tapestry.DatabaseAccessors.BoardDAO;
 import com.revature.Tapestry.beans.Board;
 import com.revature.Tapestry.beans.Post;
 
-<<<<<<< HEAD
-//@RunWith(SpringRunner.class)
-=======
-import com.revature.Tapestry.DatabaseAccessors.BoardDAO;
-import com.revature.Tapestry.beans.Board;
-import com.revature.Tapestry.beans.Post;
-
-@RunWith(SpringRunner.class)
->>>>>>> master
 @SpringBootTest
 @WebMvcTest(value = BoardController.class, secure = false)
 public class TapestryApplicationTests {
