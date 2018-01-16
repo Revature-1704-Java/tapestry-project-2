@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http/src/client';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -17,6 +18,7 @@ import { SpecificComponent } from './specific/specific.component';
 import { ThreadItemComponent } from './thread-item/thread-item.component';
 import { ThreadService } from './shared/thread.service';
 import { ViewComponent } from './view/view.component';
+import { TokenService } from './shared/token.service';
 
 @NgModule({
   declarations: [
@@ -34,12 +36,13 @@ import { ViewComponent } from './view/view.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     HttpClientModule,
     RouterModule.forRoot([
       {path: '', component: ViewComponent}
     ])
   ],
-  providers: [ThreadService, CurrentViewService],
+  providers: [ThreadService, CurrentViewService, TokenService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
