@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CurrentViewService } from '../shared/current-view.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-view',
@@ -7,5 +8,18 @@ import { CurrentViewService } from '../shared/current-view.service';
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent {
-  constructor(public curView: CurrentViewService) { }
+  constructor(public curView: CurrentViewService, private route: ActivatedRoute) { }
+
+  ngOnInit() {
+    this.route.paramMap.subscribe(res => {
+      const postId = res.get('postId');
+      if (postId == null) {
+        this.curView.view = 'catalog';
+        this.curView.id = 0;
+      } else {
+        this.curView.view = 'specific';
+        this.curView.id = Number(postId);
+      }
+    });
+  }
 }
