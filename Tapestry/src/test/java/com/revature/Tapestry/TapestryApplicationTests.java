@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +26,14 @@ public class TapestryApplicationTests {
 
 	@Test
 	public void basicDatabaseConnectivityExists() {
+		int numBoardsBefore = boardDAO.findAll().size();
 		List<Post> postList = new ArrayList<Post>();
 		Board testBoard = new Board("testBoard", postList);
 		ArrayList<Board> boards = new ArrayList<Board>();
 		boards.add(testBoard);
 		boardDAO.save(boards);
 		List<Board> searchresults = boardDAO.findAll();
-		assertTrue(searchresults.size() != 0);
+		assertTrue(searchresults.size() == numBoardsBefore + 1);
 		//assertTrue(true);//temp to test something
 	}
 
