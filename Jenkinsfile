@@ -39,8 +39,7 @@ stages {
    stage('Deploy'){
    	steps{
        //sh 'java -jar 0.0.1-SNAPSHOT.jar'
-       slackSend color: '#000000', message: 'Master Build was successful' 
-'
+       slackSend color: '#000000', message: 'Master Build was successful'
 	}
    }
 }
