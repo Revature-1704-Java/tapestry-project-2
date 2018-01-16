@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,7 +15,7 @@ import javax.persistence.Table;
 public class Post {
 	
 	protected Integer postID;
-	protected Integer userID;
+	protected User user;
 	protected String imagePath;
 	protected String textContent;
 	protected Date postTime;
@@ -25,10 +26,10 @@ public class Post {
 	
 	public Post() {}
 	
-	public Post(Integer userID, String imagePath, String textContent, Date postTime, String title,
+	public Post(User user, String imagePath, String textContent, Date postTime, String title,
 			List<Board> boardsPosted) {
 		super();
-		this.userID = userID;
+		this.user = user;
 		this.imagePath = imagePath;
 		this.textContent = textContent;
 		this.postTime = postTime;
@@ -46,13 +47,13 @@ public class Post {
 	public void setPostID(Integer postID) {
 		this.postID = postID;
 	}
-	@Column
-	public Integer getUserID() {
-		return userID;
+	@ManyToOne
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserID(Integer userID) {
-		this.userID = userID;
+	public void setUserID(User user) {
+		this.user = user;
 	}
 	@Column
 	public String getImagePath() {
