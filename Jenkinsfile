@@ -23,7 +23,7 @@ stages {
        }
 	   
 	   post{
-		fail		ure{
+		failure{
 			slackSend color: '#FFFFFF', message: 'Master Building Failed'
 		}
 	   }
