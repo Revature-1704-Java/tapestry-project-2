@@ -4,7 +4,7 @@
 </div>
 
 <div class="row">
-  <ul *ngFor="let reply of replies | async" class="list-group">
+  <ul *ngFor="let reply of replies | async; trackBy:trackByFn" class="list-group">
     <li class="list-group-item">
       <app-thread-item [thread]="reply"></app-thread-item>
     </li>

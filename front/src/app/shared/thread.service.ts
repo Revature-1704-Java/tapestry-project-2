@@ -9,46 +9,46 @@ import { ReturnStatement } from '@angular/compiler/src/output/output_ast';
 
 @Injectable()
 export class ThreadService {
-    private threads: Thread[];
+    private threads: Array<Thread>;
 
     constructor(private httpClient: HttpClient) { }
 
-    getThreads(): Observable<Thread[]> {
-        const apiUrl: string = 'https://jsonplaceholder.typicode.com/posts';
+    getThreads(): Observable<Array<Thread>> {
+        const apiUrl = 'https://jsonplaceholder.typicode.com/posts';
 
         return this.httpClient
-            .get<Post[]>(apiUrl)
+            .get<Array<Post>>(apiUrl)
             .map(val => {
-                return <Thread[]> val;
+                return val as Array<Thread>;
             });
     }
 
-    getThread(id: number): Observable<Thread[]> {
+    getThread(id: number): Observable<Array<Thread>> {
         // TODO: Also keep the Thread OP
-        const apiUrl: string = 'https://jsonplaceholder.typicode.com/comments?postId=' + id;
+        const apiUrl = `https://jsonplaceholder.typicode.com/comments?postId=${id}`;
 
         return this.httpClient
-            .get<Post[]>(apiUrl)
+            .get<Array<Post>>(apiUrl)
             .map(val => {
-                return <Thread[]> val;
+                return val as Array<Thread>;
             });
     }
 }
 
 const threads2 = [
     {
-        'picture': 'http://placehold.it/150x150',
-        'title': 'great',
-        'content': 'pork chops'
+        picture: 'http://placehold.it/150x150',
+        title: 'great',
+        content: 'pork chops'
     },
     {
-        'picture': 'http://placehold.it/150x150',
-        'title': 'round',
-        'content': 'apple'
+        picture: 'http://placehold.it/150x150',
+        title: 'round',
+        content: 'apple'
     },
     {
-        'picture': 'http://placehold.it/150x150',
-        'title': 'me',
-        'content': 'the money'
+        picture: 'http://placehold.it/150x150',
+        title: 'me',
+        content: 'the money'
     }
-]
+];

@@ -11,11 +11,11 @@ import { CurrentViewService } from '../shared/current-view.service';
   styleUrls: ['./catalog.component.css']
 })
 export class CatalogComponent implements OnInit {
-  public threads: Observable<Thread[]>;
+  public threads: Observable<Array<Thread>>;
 
   constructor(private threadService: ThreadService, public curView: CurrentViewService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.threads = this.threadService.getThreads();
   }
 
