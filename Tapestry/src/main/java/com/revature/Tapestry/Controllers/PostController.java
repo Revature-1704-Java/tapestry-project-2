@@ -1,5 +1,7 @@
 package com.revature.Tapestry.Controllers;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,12 +32,13 @@ public class PostController {
 	
 	@PostMapping(value="/createThread", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public void createThread(@RequestBody Post post) {
-		
+		postDao.save(post);
 	}
 	
 	@PostMapping(value="/createReply", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public void createReply(@RequestBody Comment comment) {
-		
+		//Need a comment DAO?
+		//postDao.save(comment);
 	}
 	
 }
