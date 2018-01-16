@@ -3,9 +3,10 @@
   <a href="#" class="btn btn-warning" (click)="viewCatalog()">Back</a>
 </div>
 
-{{this.curView.view}} <br/>
-{{this.curView.id}}
-
 <div class="row">
-  <p>hohohoho</p>
+  <ul *ngFor="let reply of replies | async" class="list-group">
+    <li class="list-group-item">
+      <app-thread-item [thread]="reply"></app-thread-item>
+    </li>
+  </ul>
 </div>

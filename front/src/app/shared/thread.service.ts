@@ -22,6 +22,17 @@ export class ThreadService {
                 return <Thread[]> val;
             });
     }
+
+    getThread(id: number): Observable<Thread[]> {
+        // TODO: Also keep the Thread OP
+        const apiUrl: string = 'https://jsonplaceholder.typicode.com/comments?postId=' + id;
+
+        return this.httpClient
+            .get<Post[]>(apiUrl)
+            .map(val => {
+                return <Thread[]> val;
+            });
+    }
 }
 
 const threads2 = [

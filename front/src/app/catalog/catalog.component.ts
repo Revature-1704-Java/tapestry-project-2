@@ -21,7 +21,7 @@ export class CatalogComponent implements OnInit {
 
   viewSpecific(id: number): void {
     console.log(id);
-    this.curView.view = 'specific';
     this.curView.id = id;
+    this.curView.view = 'specific';
   }
 }
