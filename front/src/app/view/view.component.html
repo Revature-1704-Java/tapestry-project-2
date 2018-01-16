@@ -1,9 +1,8 @@
-<div [ngSwitch]="catalog">
-  <div *ngSwitchDefault>
-    Hello [catalog-view]
-    <app-catalog></app-catalog>
+<div [ngSwitch]="this.curView.view">
+  <div *ngSwitchCase="'specific'">
+    <app-specific></app-specific>
   </div>
-  <div *ngSwitchCase="false">
-    Olleh [list-view]
+  <div *ngSwitchDefault>
+    <app-catalog></app-catalog>
   </div>
 </div>
