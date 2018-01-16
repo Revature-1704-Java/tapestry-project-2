@@ -10,24 +10,31 @@ import javax.persistence.Id;
 
 @Entity
 public class Board {
-	private Integer BoardID;
-	private List<Post> threads;
+	protected Integer boardID;
+	protected String boardName;
+	protected List<Post> threads;
 	
 	
 	public Board() {}
-	public Board(Integer boardID, List<Post> threads) {
+	public Board(String boardName, List<Post> threads) {
 		super();
-		BoardID = boardID;
+		this.boardName = boardName;
 		this.threads = threads;
+	}
+	public String getBoardName() {
+		return boardName;
+	}
+	public void setBoardName(String boardName) {
+		this.boardName = boardName;
 	}
 	@Id
 	@GeneratedValue
 	@Column
 	public Integer getBoardID() {
-		return BoardID;
+		return boardID;
 	}
 	public void setBoardID(Integer boardID) {
-		BoardID = boardID;
+		this.boardID = boardID;
 	}
 	@ElementCollection
 	public List<Post> getThreads() {
