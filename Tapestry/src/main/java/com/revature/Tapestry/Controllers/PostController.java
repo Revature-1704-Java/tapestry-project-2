@@ -36,10 +36,11 @@ public class PostController {
 	//Get All Posts in DB, return as JSON
 	@GetMapping(value="/getPosts", produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Post> getPosts() {
+		/*
 		Date d = new Date();
 		List<Post> myThreads = new ArrayList<Post>();
 		List<Board> boards = new ArrayList<Board>();
-		Board b = boardDao.findOne(6);
+		Board b = boardDao.findOne(11);
 		User u1 = userDao.findOne(9);
 		boards.add(b);
 		Post p = new Post(u1,"user/foo.jpg", "test post", d, "title", boards);
@@ -48,19 +49,20 @@ public class PostController {
 		myThreads.add(p1);
 		
 		return myThreads;
-		//return postDao.findAll().stream().collect(Collectors.toList());
+		*/
+		return postDao.findAll().stream().collect(Collectors.toList());
 	}	
 	
 	
 	@PostMapping(value="/createThread", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public void createThread(@RequestBody Post post) {		
 		postDao.save(post);
-		//Not adding to board thread???? Must add?
+		//Now doesn't work. SQL error Integrity violated.
 	}
 	
 	@PostMapping(value="/createReply/{id}", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public void createReply(@RequestBody Comment comment, @PathVariable("id") int id) {
-		Post p = postDao.getOne(id);
+		Post p = postDao.findOne(id);
 		List<Comment> replies = p.getReplies();
 		replies.add(comment);
 		p.setReplies(replies);
