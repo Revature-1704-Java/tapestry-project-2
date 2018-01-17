@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,8 +27,12 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.revature.Tapestry.DatabaseAccessors.BoardDAO;
 import com.revature.Tapestry.DatabaseAccessors.PostDAO;
 import com.revature.Tapestry.DatabaseAccessors.UserDAO;
+import com.revature.Tapestry.beans.Board;
+import com.revature.Tapestry.beans.Comment;
 import com.revature.Tapestry.beans.Post;
 import com.revature.Tapestry.beans.User;
+
+import oracle.sql.DATE;
 
 @RestController
 public class PostController {
@@ -120,7 +126,8 @@ public class PostController {
 	@PostMapping(value="/createThread", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
 	public void submitPost(@RequestParam("type") String type, @RequestParam("userId") String userId,
 			@RequestParam("title") String title, @RequestParam("body") String textContent, 
-			@RequestParam("file") MultipartFile inputImage)
+			@RequestParam("file") MultipartFile inputImage, @RequestParam("board") String board,
+			@RequestParam("parentId") String postId)
 	{
 		String bucketName = "moirai";
 		AWSCredentialsProvider credentials = new AWSStaticCredentialsProvider 
@@ -136,7 +143,7 @@ public class PostController {
 		{
 			String alteredEmail = uploader.getEmail().replace('@', '.');
 			//code to insert an image to s3
-			key = "" + alteredEmail + "/" + inputImage.getOriginalFilename();
+			key = "/" + alteredEmail + "/" + inputImage.getOriginalFilename();
 			InputStream image;
 			try {
 				image = inputImage.getInputStream();
@@ -144,33 +151,28 @@ public class PostController {
 				s3Client.putObject(putObjectRequest);
 			} catch (IOException e) {
 			}
+			
+			if(type.equals("post"))
+			{
+				Board boardPosted = boardDao.findByBoardName(board);
+				List<Board> boardsPosted = new ArrayList<Board>();
+				boardsPosted.add(boardPosted);
+				Post postToSubmit = new Post(uploader, key, textContent, new Date(), title, boardsPosted);
+				postDao.save(postToSubmit);
+			}
+			else if (type.equals("comment"))
+			{
+				Comment commentToSubmit = new Comment(uploader, key, textContent, new Date());
+				Post parentPost = postDao.findOne(Integer.parseInt(parentId));
+				List<Comment> parentPostReplies = parentPost.getReplies();
+				parentPostReplies.add(commentToSubmit);
+				parentPost.setReplies(parentPostReplies);
+				postDao.save(parentPost);
+			}
 		}
 		
 	}
 	
-	/*@PostMapping(value="/createThread", consumes=MediaType.APPLICATION_JSON_VALUE)
-	public void createThread(@RequestBody Post post) {		
-		postDao.save(post);
-		//Now doesn't work. SQL error Integrity violated.
-	}*/
-	
-	/*@PostMapping(value="createPost")
-	public void submitComment()
-	{
-		//get s3client
-		String bucketName = "bucketOfPhotos";
-		AWSCredentialsProvider credentials = new AWSStaticCredentialsProvider 
-				(new BasicAWSCredentials(System.getenv("ACCESSKEY"), System.getenv("SECRETKEY")));
-		AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
-                .withCredentials(credentials)
-                .build();
-		
-		//code to insert an image to s3
-		InputStream image = null;
-		String key = "";
-		PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, image, new ObjectMetadata());
-		s3Client.putObject(putObjectRequest);
-	}*/
 	/*@PostMapping(value="/createReply/{id}", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public void createReply(@RequestBody Comment comment, @PathVariable("id") int id) {
 		Post p = postDao.findOne(id);

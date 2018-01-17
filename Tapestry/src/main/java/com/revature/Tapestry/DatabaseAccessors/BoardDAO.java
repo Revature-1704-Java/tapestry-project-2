@@ -7,5 +7,5 @@ import com.revature.Tapestry.beans.Board;
 
 @Repository
 public interface BoardDAO extends JpaRepository<Board,Integer>{
-
+	Board findByBoardName(String boardName);
 }
