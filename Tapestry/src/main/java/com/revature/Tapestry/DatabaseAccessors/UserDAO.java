@@ -7,5 +7,5 @@ import com.revature.Tapestry.beans.User;
 
 @Repository
 public interface UserDAO extends JpaRepository<User,Integer>{
-
+	
 }
