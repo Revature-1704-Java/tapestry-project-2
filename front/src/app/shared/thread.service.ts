@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Thread } from './thread';
 import { Post } from './post';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toArray';
@@ -13,15 +13,18 @@ export class ThreadService {
 
     constructor(private httpClient: HttpClient) { }
 
-    getThreads(): Observable<Array<Thread>> {
+    getThreads(board: string): Observable<Array<Thread>> {
         const apiUrl = 'https://jsonplaceholder.typicode.com/posts';
 
+        const body = new HttpParams()
+            .set('board', board);
+
         return this.httpClient
-            .get<Array<Post>>(apiUrl)
+            .get<Array<Post>>(apiUrl, { params: body })
             .map(val => {
-                let threads: Array<Thread> = [];
-                val.map(res => { 
-                    let thread = {
+                const threads: Array<Thread> = [];
+                val.map(res => {
+                    const thread = {
                         postID: res.id,
                         commentID: 0,
                         userId: res.userId,
@@ -30,9 +33,10 @@ export class ThreadService {
                         imagePath: 'http://placehold.it/150x150',
                         postTime: ''
                     };
-                    threads.push(thread as Thread)
+                    threads.push(thread as Thread);
                 });
-                return threads
+
+                return threads;
             });
     }
 
@@ -42,9 +46,9 @@ export class ThreadService {
         return this.httpClient
             .get<Array<Post>>(apiUrl)
             .map(val => {
-                let threads: Array<Thread> = [];
+                const threads: Array<Thread> = [];
                 val.map(res => {
-                    let reply = {
+                    const reply = {
                         postID: 0,
                         commentID: res.id,
                         userId: 42,
@@ -55,16 +59,18 @@ export class ThreadService {
                     };
                     threads.push(reply as Thread);
                 });
+
                 return threads;
             });
     }
 
     getThread(id: number): Observable<Thread> {
         const apiUrl = `https://jsonplaceholder.typicode.com/posts/${id}`;
+
         return this.httpClient
             .get<Post>(apiUrl)
             .map(val => {
-                let thread = {
+                const thread = {
                     postID: val.id,
                     commentID: 0,
                     userId: val.userId,
@@ -73,6 +79,7 @@ export class ThreadService {
                     imagePath: 'http://placehold.it/150x150',
                     postTime: ''
                 };
+
                 return thread as Thread;
             });
     }
