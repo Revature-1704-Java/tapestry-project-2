@@ -2,6 +2,6 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class CurrentViewService {
-  view: string;
+  view: string = 'catalog';
   id: number;
 }

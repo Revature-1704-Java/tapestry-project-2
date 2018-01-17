@@ -20,8 +20,11 @@ export class CatalogComponent implements OnInit {
   }
 
   viewSpecific(id: number): void {
-    console.log(id);
     this.curView.id = id;
     this.curView.view = 'specific';
+  }
+  
+  postTrackByFn(index: number, thread: Thread) {
+    return thread.postID;
   }
 }
