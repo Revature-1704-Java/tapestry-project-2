@@ -13,4 +13,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  logout(): void {
+    this.token.auth = false;
+    this.token.token = '';
+    this.token.id = 0;
+  }
+
 }

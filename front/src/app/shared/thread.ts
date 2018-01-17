@@ -1,5 +1,9 @@
 export interface Thread {
-    // picture: string;
+    postID: number;
+    commentID: number;
+    userId: number;
     title: string;
-    body: string;
+    textContent: string;
+    imagePath: string;
+    postTime: string;
 }

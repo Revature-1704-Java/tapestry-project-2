@@ -11,14 +11,20 @@ import { Thread } from '../shared/thread';
 })
 export class SpecificComponent implements OnInit {
   public replies: Observable<Array<Thread>>;
+  public post: Thread;
 
   constructor(private threadService: ThreadService, public curView: CurrentViewService) { }
 
   ngOnInit(): void {
-    this.replies = this.threadService.getThread(this.curView.id);
+    this.threadService.getThread(this.curView.id).subscribe(res => this.post = res);
+    this.replies = this.threadService.getReplies(this.curView.id);
   }
 
   viewCatalog(): void {
     this.curView.view = 'catalog';
+  }
+
+  postTrackByFn(index: number, thread: Thread) {
+    return thread.commentID;
   }
 }

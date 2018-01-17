@@ -4,4 +4,5 @@ import { Injectable } from '@angular/core';
 export class TokenService {
   auth: boolean;
   token: string;
+  id: number;
 }

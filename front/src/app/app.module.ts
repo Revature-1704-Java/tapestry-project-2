@@ -39,7 +39,9 @@ import { TokenService } from './shared/token.service';
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      {path: '', component: ViewComponent}
+      { path: 'post/:postId', component: ViewComponent},
+      { path: 'catalog', component: ViewComponent },
+      { path: '', component: ViewComponent, pathMatch: 'full' }
     ])
   ],
   providers: [ThreadService, CurrentViewService, TokenService],
