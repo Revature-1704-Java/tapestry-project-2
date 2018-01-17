@@ -37,7 +37,7 @@ public class UserController {
 		
 		for (User u : users) {
 			if(u.isCorrectPassword(password)) {
-				u.setPassword(null);
+				u.nullPassword();
 				return new ResponseEntity<>(u, HttpStatus.OK);
 			}
 		}
@@ -46,7 +46,7 @@ public class UserController {
 		if(user!=null) user.toString();
 		System.out.println(username);
 		if(user!=null) {
-			user.setPassword(null);
+			user.nullPassword();
 			return new ResponseEntity<>(user, HttpStatus.OK);
 		}
 			

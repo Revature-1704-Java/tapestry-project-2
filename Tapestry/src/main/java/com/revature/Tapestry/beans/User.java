@@ -17,14 +17,14 @@ public class User {
 		this.username = username;
 		this.email = email;
 		this.role = role;
-		this.setPassword(password);
+		this.encryptPassword(password);
 	}
 	
 	public User(String username, String email, String password) {
 		super();
 		this.username = username;
 		this.email = email;
-		this.setPassword(password);
+		this.password = encryptPassword(password);
 	}
 	private String role;
 	
@@ -58,17 +58,29 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public void setPassword(String password) {
+	public String encryptPassword(String password) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String hashedPassword = passwordEncoder.encode(password);
-		this.password = hashedPassword;
+		System.out.println("Password " + hashedPassword );
+		return hashedPassword;
 	}
 	@Column
 	private String getPassword()
 	{
 		return password;
 	}
+	
+	private void setPassword(String password){
+		this.password=password;
+	}
+	
+	public void nullPassword()
+	{
+		this.password=null;
+	}
+	
 	public boolean isCorrectPassword(String passwordToCheck) {
+		System.out.println(password);
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		return passwordEncoder.matches(passwordToCheck, this.getPassword());
 	}
