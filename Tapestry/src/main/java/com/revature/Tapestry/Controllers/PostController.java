@@ -1,6 +1,9 @@
 package com.revature.Tapestry.Controllers;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,6 +19,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.S3Object;
 import com.revature.Tapestry.DatabaseAccessors.BoardDAO;
 import com.revature.Tapestry.DatabaseAccessors.PostDAO;
 import com.revature.Tapestry.DatabaseAccessors.UserDAO;
@@ -37,6 +41,62 @@ public class PostController {
 	//Get All Posts in DB, return as JSON
 	@GetMapping(value="/getPosts", produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Post> getPosts() {
+		
+		/* //get s3client
+		String bucketName = "bucketOfPhotos";
+		AWSCredentialsProvider credentials = new AWSStaticCredentialsProvider 
+				(new BasicAWSCredentials(System.getenv("ACCESSKEY"), System.getenv("SECRETKEY")));
+		AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                .withCredentials(credentials)
+                .build();
+                
+         //get image from s3
+          //key should be the image path field of the post/comment object
+		String key = null;
+        S3Object imageToReturn = s3Client.getObject(bucketName, key);
+        InputStream in = imageToReturn.getObjectContent();
+        byte[] buf = new byte[1024];
+        OutputStream out = null;							//this is where the object goes, what type of output stream is needed to send to response
+        int count;
+		try {
+			while( (count = in.read(buf)) != -1)
+			{
+			   if( Thread.interrupted() )
+			   {
+			       throw new InterruptedException();
+			   }
+			   out.write(buf, 0, count);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+															//image is in out, do your stuff here, closing streams next
+		
+        try {
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        try {
+			in.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        try {
+			imageToReturn.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        */
+		 
 		/*
 		Date d = new Date();
 		List<Post> myThreads = new ArrayList<Post>();
