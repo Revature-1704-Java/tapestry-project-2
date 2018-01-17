@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.Tapestry.DatabaseAccessors.UserDAO;
@@ -28,10 +29,11 @@ public class UserController {
 	}
 	
 	@PostMapping(value="/login")
-	public ResponseEntity<?> login(@RequestBody String username, @RequestBody String password) {
+	public ResponseEntity<?> login(@RequestParam("username") String username,@RequestParam("password") String password) {
 		//Login a user
 		
 		List<User> users = userDao.findByUsername(username);
+		System.out.println(username);
 		
 		for (User u : users) {
 			if(u.isCorrectPassword(password)) {
@@ -41,7 +43,8 @@ public class UserController {
 		}
 		
 		User user = userDao.findByEmail(username);
-		
+		if(user!=null) user.toString();
+		System.out.println(username);
 		if(user!=null) {
 			user.setPassword(null);
 			return new ResponseEntity<>(user, HttpStatus.OK);
@@ -52,7 +55,7 @@ public class UserController {
 	}
 	
 	@PostMapping(value="/signup")
-	public ResponseEntity<?> signUp(@RequestBody String username, @RequestBody String password, @RequestBody String email) {
+	public ResponseEntity<?> signUp(@RequestParam("username") String username,@RequestParam("password") String password, @RequestParam("email") String email) {
 		User existingUser = userDao.findByEmail(email);
 		if (existingUser ==  null){
 			User user = new User(username, password, email);
