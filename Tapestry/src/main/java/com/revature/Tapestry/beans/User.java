@@ -12,12 +12,18 @@ public class User {
 	private String email;
 	private String password;
 	public User () {}
-	public User(Integer userID, String username, String email, String role, String password) {
+	public User( String username, String email, String role, String password) {
 		super();
-		this.userID = userID;
 		this.username = username;
 		this.email = email;
 		this.role = role;
+		this.setPassword(password);
+	}
+	
+	public User(String username, String email, String password) {
+		super();
+		this.username = username;
+		this.email = email;
 		this.setPassword(password);
 	}
 	private String role;

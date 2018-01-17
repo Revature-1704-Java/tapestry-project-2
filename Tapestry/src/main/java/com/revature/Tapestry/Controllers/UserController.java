@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.Tapestry.DatabaseAccessors.UserDAO;
-import com.revature.Tapestry.beans.Post;
 import com.revature.Tapestry.beans.User;
 
 @RestController
@@ -29,17 +28,39 @@ public class UserController {
 	}
 	
 	@PostMapping(value="/login")
-	public ResponseEntity<?> login(@RequestBody User user) {
+	public ResponseEntity<?> login(@RequestBody String username, @RequestBody String password) {
 		//Login a user
 		
-		return new ResponseEntity<>(user, HttpStatus.OK);
+		List<User> users = userDao.findByUsername(username);
+		
+		for (User u : users) {
+			if(u.isCorrectPassword(password)) {
+				u.setPassword(null);
+				return new ResponseEntity<>(u, HttpStatus.OK);
+			}
+		}
+		
+		User user = userDao.findByEmail(username);
+		
+		if(user!=null) {
+			user.setPassword(null);
+			return new ResponseEntity<>(user, HttpStatus.OK);
+		}
+			
+		
+		return new ResponseEntity<>("Username/Email " + username + " does not exist.", HttpStatus.NOT_FOUND);
 	}
 	
 	@PostMapping(value="/signup")
-	public ResponseEntity<?> signUp(@RequestBody User user) {
-		User user = userDao.findOne(id);
-		userDao.save(user);
-		return new ResponseEntity<>(user, HttpStatus.OK);
+	public ResponseEntity<?> signUp(@RequestBody String username, @RequestBody String password, @RequestBody String email) {
+		User existingUser = userDao.findByEmail(email);
+		if (existingUser ==  null){
+			User user = new User(username, password, email);
+			userDao.save(user);
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		}
+		
+		return new ResponseEntity<>("Email " + existingUser.getEmail() + " already exists", HttpStatus.IM_USED);
 	}
 	
 	@GetMapping("/user/{id}")
