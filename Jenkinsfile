@@ -21,13 +21,6 @@ stages {
         sh '''cd Tapestry
         mvn clean package'''
        }
-	   
-	   post{
-		failure{
-			slackSend color: '#FFFFFF', message: 'Master Building Failed'
-		}
-	   }
-    
    }
    stage('Results') {
       steps{
