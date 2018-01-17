@@ -10,7 +10,9 @@ import java.util.stream.Collectors;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -24,6 +26,7 @@ import com.revature.Tapestry.DatabaseAccessors.BoardDAO;
 import com.revature.Tapestry.DatabaseAccessors.PostDAO;
 import com.revature.Tapestry.DatabaseAccessors.UserDAO;
 import com.revature.Tapestry.beans.Post;
+import com.revature.Tapestry.beans.User;
 
 @RestController
 public class PostController {
@@ -115,20 +118,34 @@ public class PostController {
 	}	
 	
 	@PostMapping(value="/createThread", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
-	public void submitPost()
+	public void submitPost(@RequestParam("type") String type, @RequestParam("userId") String userId,
+			@RequestParam("title") String title, @RequestParam("body") String textContent, 
+			@RequestParam("file") MultipartFile inputImage)
 	{
 		String bucketName = "moirai";
-		
 		AWSCredentialsProvider credentials = new AWSStaticCredentialsProvider 
 				(new BasicAWSCredentials(System.getenv("ACCESSKEY"), System.getenv("SECRETKEY")));
 		AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
                 .withCredentials(credentials)
                 .build();
-		//code to insert an image to s3
-				InputStream image = null;
-				String key = "";
+		
+		Integer uploaderId = Integer.parseInt(userId);
+		User uploader = userDao.findOne(uploaderId);
+		String key = null;
+		if(!inputImage.isEmpty())//only post image if one is sent
+		{
+			String alteredEmail = uploader.getEmail().replace('@', '.');
+			//code to insert an image to s3
+			key = "" + alteredEmail + "/" + inputImage.getOriginalFilename();
+			InputStream image;
+			try {
+				image = inputImage.getInputStream();
 				PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, image, new ObjectMetadata());
 				s3Client.putObject(putObjectRequest);
+			} catch (IOException e) {
+			}
+		}
+		
 	}
 	
 	/*@PostMapping(value="/createThread", consumes=MediaType.APPLICATION_JSON_VALUE)
@@ -137,7 +154,7 @@ public class PostController {
 		//Now doesn't work. SQL error Integrity violated.
 	}*/
 	
-	@PostMapping(value="createPost")
+	/*@PostMapping(value="createPost")
 	public void submitComment()
 	{
 		//get s3client
@@ -153,7 +170,7 @@ public class PostController {
 		String key = "";
 		PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, image, new ObjectMetadata());
 		s3Client.putObject(putObjectRequest);
-	}
+	}*/
 	/*@PostMapping(value="/createReply/{id}", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public void createReply(@RequestBody Comment comment, @PathVariable("id") int id) {
 		Post p = postDao.findOne(id);
