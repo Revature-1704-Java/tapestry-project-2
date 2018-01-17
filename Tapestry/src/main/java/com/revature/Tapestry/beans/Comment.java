@@ -1,5 +1,6 @@
 package com.revature.Tapestry.beans;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,15 +24,15 @@ public class Comment {
 	protected List<Comment> replies;
 	
 	public Comment() {}
-	public Comment(User user, String imagePath, String textContent, Date postTime,
-			List<Comment> replies) {
+	public Comment(User user, String imagePath, String textContent, Date postTime) {
 		super();
 		this.user = user;
 		this.imagePath = imagePath;
 		this.textContent = textContent;
 		this.postTime = postTime;
-		this.replies = replies;
+		this.replies = new ArrayList<Comment>();
 	}
+
 	@Id
 	@GeneratedValue
 	@Column

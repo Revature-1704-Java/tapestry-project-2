@@ -21,14 +21,13 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.revature.Tapestry.Controllers.BoardController;
 import com.revature.Tapestry.DatabaseAccessors.BoardDAO;
 import com.revature.Tapestry.beans.Board;
-import com.revature.Tapestry.beans.Post;
 
 @SpringBootTest
 @WebMvcTest(value = BoardController.class, secure = false)
 public class TapestryApplicationTests {
 	
-	//@Autowired
-    //BoardDAO boardDAO;
+	@Autowired
+    BoardDAO boardDAO;
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -38,14 +37,14 @@ public class TapestryApplicationTests {
 	
 	@Test
 	public void basicDatabaseConnectivityExists() {
-		/*List<Post> postList = new ArrayList<Post>();
-		Board testBoard = new Board("testBoard", postList);
+		int numBoardsBefore = boardDAO.findAll().size();
+		Board testBoard = new Board("testBoard");
 		ArrayList<Board> boards = new ArrayList<Board>();
 		boards.add(testBoard);
 		boardDAO.save(boards);
 		List<Board> searchresults = boardDAO.findAll();
-		assertTrue(searchresults.size() != 0);*/
-		assertTrue(true);//temp to test something
+		assertTrue(searchresults.size() == numBoardsBefore + 1);
+		//assertTrue(true);//temp to test something
 	}
 	
 	@Test

@@ -1,5 +1,6 @@
 package com.revature.Tapestry.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -18,10 +19,10 @@ public class Board {
 	
 	
 	public Board() {}
-	public Board(String boardName, List<Post> threads) {
+	public Board(String boardName) {
 		super();
 		this.boardName = boardName;
-		this.threads = threads;
+		this.threads = new ArrayList<Post>();
 	}
 	public String getBoardName() {
 		return boardName;
