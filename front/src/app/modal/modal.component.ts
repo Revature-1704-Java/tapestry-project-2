@@ -28,7 +28,6 @@ export class ModalComponent implements OnInit {
   login(): void {
     const uName: string = this.user.username;
     const uPass: string = this.user.password;
-    console.log(`Tried to login: ${uName}, ${uPass}`);
 
     const apiUrl = 'https://reqres.in/api/login';
     // TODO: switch 'email' to 'username'
@@ -44,7 +43,6 @@ export class ModalComponent implements OnInit {
         this.token.token = res['token'];
         this.token.auth = true;
         this.token.id = 1;
-        console.log(this.token);
 
         this.loginClose.nativeElement.click();
       }, err => console.log(err));
@@ -71,7 +69,6 @@ export class ModalComponent implements OnInit {
           this.token.token = res['token'];
           this.token.auth = true;
           this.token.id = 1;
-          console.log(this.token);
 
           this.signupClose.nativeElement.click();
         }
@@ -98,8 +95,6 @@ export class ModalComponent implements OnInit {
       body.set('postID', this.curView.id.toString());
     }
 
-    console.log(body);
-
     // TODO: Switch x-www-form-urlencoded to multipart/form-data
     const header = new HttpHeaders()
       .set('Content-Type', 'application/x-www-form-urlencoded');
@@ -107,8 +102,6 @@ export class ModalComponent implements OnInit {
 
     this.httpClient.post(apiUrl, body, { headers: header })
       .subscribe(res => {
-        console.log(res);
-
         this.newpost.file = null;
         this.postFile.nativeElement.value = '';
 
