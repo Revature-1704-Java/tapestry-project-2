@@ -12,7 +12,7 @@
   <div *ngIf="post" class="col-sm-11">
     <app-thread-item [thread]="post"></app-thread-item>
   </div>
-  <ul *ngFor="let reply of replies | async; trackBy:trackByFn" class="list-group col-sm-11 offset-sm-1">
+  <ul *ngFor="let reply of replies | async; trackBy: postTrackByFn" class="list-group col-sm-11 offset-sm-1">
     <app-thread-item [thread]="reply"></app-thread-item>
   </ul>
 </div>

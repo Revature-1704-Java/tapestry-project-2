@@ -4,20 +4,26 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { TokenService } from '../shared/token.service';
 import { CurrentViewService } from '../shared/current-view.service';
 
+export interface User {
+  email: string;
+  password: string;
+}
+
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent implements OnInit {
-  private user = { email: '', password: '' };
-  private newuser = { username: '', email: '', password: '' };
-  private newpost = { title: '', body: ''}
+  public user = { email: '', password: '' };
+  public newuser = { username: '', email: '', password: '' };
+  public newpost = { title: '', body: '', file: null }
 
   private myForm: FormGroup = this.myForm;
   @ViewChild('loginClose') loginClose: ElementRef;
   @ViewChild('signupClose') signupClose: ElementRef;
   @ViewChild('postClose') postClose: ElementRef;
+  @ViewChild('postFile') postFile: ElementRef;
 
   constructor(private httpClient: HttpClient, public token: TokenService, public curView: CurrentViewService) { }
 
@@ -55,6 +61,7 @@ export class ModalComponent implements OnInit {
     const newPass = this.newuser.password;
 
     const body = new HttpParams()
+      .set('username', newUsername)
       .set('email', newEmail)
       .set('password', newPass);
     const header = new HttpHeaders()
@@ -73,24 +80,37 @@ export class ModalComponent implements OnInit {
       }, err => console.log(err));
   }
 
+  fileSelected(file: FormData): void {
+    this.newpost.file = file;
+  }
+
   createPost(): void {
     const apiUrl = 'https://jsonplaceholder.typicode.com/posts';
 
     const body = new HttpParams()
       .set('userId', this.token.id.toString())
-      .set('body', this.newpost.body);
+      .set('body', this.newpost.body)
+      .set('file', this.newpost.file);
     if (this.curView.view == 'catalog') {
       body.set('title', this.newpost.title);
+      body.set('type', 'post');
     } else {
       body.set('title', '');
+      body.set('type', 'comment');
     }
 
+    console.log(body);
+
     const header = new HttpHeaders()
-      .set('Content-Type', 'application/x-www-form-urlencoded');
+      .set('Content-Type', 'multipart/form-data');
 
     this.httpClient.post(apiUrl, body, { headers: header })
       .subscribe(res => {
         console.log(res);
+
+        this.newpost.file = null;
+        this.postFile.nativeElement.value = '';
+
         this.postClose.nativeElement.click();
       }, err => console.log(err));
 

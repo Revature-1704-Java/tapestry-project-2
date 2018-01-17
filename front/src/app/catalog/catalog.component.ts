@@ -24,8 +24,8 @@ export class CatalogComponent implements OnInit {
     this.curView.id = id;
     this.curView.view = 'specific';
   }
-
-  badTimes(): void {
-    console.log('bad times');
+  
+  postTrackByFn(index: number, thread: Thread) {
+    return thread.id;
   }
 }

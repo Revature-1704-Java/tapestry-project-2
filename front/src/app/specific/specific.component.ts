@@ -24,7 +24,7 @@ export class SpecificComponent implements OnInit {
     this.curView.view = 'catalog';
   }
 
-  funTimes(): void {
-    console.log('fun times');
+  postTrackByFn(index: number, thread: Thread) {
+    return thread.id;
   }
 }
