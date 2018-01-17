@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.amazonaws.auth.AWSCredentialsProvider;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.revature.Tapestry.DatabaseAccessors.BoardDAO;
 import com.revature.Tapestry.DatabaseAccessors.PostDAO;
 import com.revature.Tapestry.DatabaseAccessors.UserDAO;
@@ -57,7 +61,11 @@ public class PostController {
 	@PostMapping(value="/createThread", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public void submitPost()
 	{
-		AmazonS3 s3client;
+		AWSCredentialsProvider credentials = new AWSStaticCredentialsProvider 
+				(new BasicAWSCredentials(System.getenv("ACCESSKEY"), System.getenv("SECRETKEY")));
+		AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+                .withCredentials(credentials)
+                .build();
 	}
 	
 	/*@PostMapping(value="/createThread", consumes=MediaType.APPLICATION_JSON_VALUE)
