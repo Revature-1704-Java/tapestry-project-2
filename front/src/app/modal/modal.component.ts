@@ -4,11 +4,6 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { TokenService } from '../shared/token.service';
 import { CurrentViewService } from '../shared/current-view.service';
 
-export interface User {
-  email: string;
-  password: string;
-}
-
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
@@ -100,12 +95,15 @@ export class ModalComponent implements OnInit {
     } else {
       body.set('title', '');
       body.set('type', 'comment');
+      body.set('postID', this.curView.id.toString());
     }
 
     console.log(body);
 
+    // TODO: Switch x-www-form-urlencoded to multipart/form-data
     const header = new HttpHeaders()
-      .set('Content-Type', 'multipart/form-data');
+      .set('Content-Type', 'application/x-www-form-urlencoded');
+    //  .set('Content-Type', 'multipart/form-data');
 
     this.httpClient.post(apiUrl, body, { headers: header })
       .subscribe(res => {
