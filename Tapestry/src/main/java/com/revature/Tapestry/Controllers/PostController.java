@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +26,7 @@ import com.amazonaws.services.s3.model.S3Object;
 import com.revature.Tapestry.DatabaseAccessors.BoardDAO;
 import com.revature.Tapestry.DatabaseAccessors.PostDAO;
 import com.revature.Tapestry.DatabaseAccessors.UserDAO;
+import com.revature.Tapestry.beans.Board;
 import com.revature.Tapestry.beans.Post;
 import com.revature.Tapestry.beans.User;
 
@@ -41,9 +43,27 @@ public class PostController {
 		this.userDao = userDao;
 	}
 	
-	//Get All Posts in DB, return as JSON
-	@GetMapping(value="/getPosts", produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<Post> getPosts() {
+	//Get a thread. Post and all replies
+	@PostMapping(value="/getPost", produces=MediaType.APPLICATION_JSON_VALUE)
+	public Post getPosts(@RequestParam("postId") int postId) {
+		return postDao.findOne(postId);
+	}
+	
+	//Get all the posts in a board
+	@PostMapping(value="/getPosts", produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<Post> getPost(@RequestParam("boardName") String boardName) {
+		List<Post> postsReturned = new ArrayList<>();
+		List<Post> list = postDao.findAll();
+		for (Post p : list) {
+			List<Board> boards = p.getBoardsPosted();
+			for(Board b : boards) {
+				if (boardName == b.getBoardName()) {
+					postsReturned.add(p);
+				}
+			}	
+		}
+		
+		return postsReturned;
 		
 		/* //get s3client
 		String bucketName = "bucketOfPhotos";
@@ -54,7 +74,7 @@ public class PostController {
                 .build();
                 
          //get image from s3
-          //key should be the image path field of the post/comment object
+         //key should be the image path field of the post/comment object
 		String key = null;
         S3Object imageToReturn = s3Client.getObject(bucketName, key);
         InputStream in = imageToReturn.getObjectContent();
@@ -98,23 +118,7 @@ public class PostController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        */
-		 
-		/*
-		Date d = new Date();
-		List<Post> myThreads = new ArrayList<Post>();
-		List<Board> boards = new ArrayList<Board>();
-		Board b = boardDao.findOne(11);
-		User u1 = userDao.findOne(9);
-		boards.add(b);
-		Post p = new Post(u1,"user/foo.jpg", "test post", d, "title", boards);
-		Post p1 = new Post(u1, "user/bar.jpg", "test post2", d, "title2", boards);
-		myThreads.add(p);
-		myThreads.add(p1);
-		
-		return myThreads;
-		*/
-		return postDao.findAll().stream().collect(Collectors.toList());
+        */		
 	}	
 	
 	@PostMapping(value="/createThread", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
