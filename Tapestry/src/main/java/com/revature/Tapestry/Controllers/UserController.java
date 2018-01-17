@@ -37,6 +37,7 @@ public class UserController {
 	
 	@PostMapping(value="/signup")
 	public ResponseEntity<?> signUp(@RequestBody User user) {
+		User user = userDao.findOne(id);
 		userDao.save(user);
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
