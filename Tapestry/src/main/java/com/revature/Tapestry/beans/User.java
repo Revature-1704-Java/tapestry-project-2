@@ -2,18 +2,29 @@ package com.revature.Tapestry.beans;
 
 import javax.persistence.*;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 @Entity
+@Table(name = "USER_TABLE")
 public class User {
 	private Integer userID;
 	private String username;
 	private String email;
+	private String password;
 	public User () {}
-	public User(Integer userID, String username, String email, String role) {
+	public User( String username, String email, String role, String password) {
 		super();
-		this.userID = userID;
 		this.username = username;
 		this.email = email;
 		this.role = role;
+		this.setPassword(password);
+	}
+	
+	public User(String username, String email, String password) {
+		super();
+		this.username = username;
+		this.email = email;
+		this.setPassword(password);
 	}
 	private String role;
 	
@@ -46,5 +57,19 @@ public class User {
 	}
 	public void setRole(String role) {
 		this.role = role;
+	}
+	public void setPassword(String password) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String hashedPassword = passwordEncoder.encode(password);
+		this.password = hashedPassword;
+	}
+	@Column
+	private String getPassword()
+	{
+		return password;
+	}
+	public boolean isCorrectPassword(String passwordToCheck) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		return passwordEncoder.matches(passwordToCheck, this.getPassword());
 	}
 }
