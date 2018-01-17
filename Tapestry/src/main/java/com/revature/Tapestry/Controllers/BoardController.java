@@ -30,7 +30,7 @@ public class BoardController {
 	 * Collection<Post> threads = postDao.findAll().stream().collect(Collectors.toList());
 	 */
 	
-	
+	/*
 	@GetMapping(value="/IT", produces=MediaType.APPLICATION_JSON_VALUE)
 	//@CrossOrigin(origins = "http://localhost:4200")
 	public List<Post> getITPosts() {
@@ -39,32 +39,5 @@ public class BoardController {
 		//Adding @JsonIgnore to getThreads in board works but not sure if we want that...
 		return threads;
 	}
-	
-	@GetMapping(value="/Sales", produces=MediaType.APPLICATION_JSON_VALUE)
-	public Collection<Post> getSalesPosts() {
-		Board board = boardDao.findOne(2);
-		Collection<Post> threads = board.getThreads();
-		return threads;
-	}
-	
-	@GetMapping(value="/HR", produces=MediaType.APPLICATION_JSON_VALUE)
-	public Collection<Post> getHRPosts() {
-		Board board = boardDao.findOne(3);
-		Collection<Post> threads = board.getThreads();
-		return threads;
-	}
-	
-	@GetMapping(value="/Finance", produces=MediaType.APPLICATION_JSON_VALUE)
-	public Collection<Post> getFinancePosts() {
-		Board board = boardDao.findOne(4);
-		Collection<Post> threads = board.getThreads();
-		return threads;
-	}
-	
-	@GetMapping(value="/Production", produces=MediaType.APPLICATION_JSON_VALUE)
-	public Collection<Post> getProductionPosts() {
-		Board board = boardDao.findOne(5);
-		Collection<Post> threads = board.getThreads();
-		return threads;
-	}
+	*/
 }
