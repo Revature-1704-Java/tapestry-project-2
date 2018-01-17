@@ -25,6 +25,6 @@ export class SpecificComponent implements OnInit {
   }
 
   postTrackByFn(index: number, thread: Thread) {
-    return thread.id;
+    return thread.commentID;
   }
 }

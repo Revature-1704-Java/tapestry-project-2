@@ -4,7 +4,7 @@
     <hr>
   </div>
   <div *ngFor="let thread of threads | async; trackBy: postTrackByFn" class="col-sm-4">
-    <a [routerLink]="['post/', thread.id]" (click)="viewSpecific(thread.id)">
+    <a [routerLink]="['post/', thread.postID]" (click)="viewSpecific(thread.postID)">
       <app-thread-item [thread]="thread"></app-thread-item>
     </a>
   </div>

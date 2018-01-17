@@ -26,6 +26,6 @@ export class CatalogComponent implements OnInit {
   }
   
   postTrackByFn(index: number, thread: Thread) {
-    return thread.id;
+    return thread.postID;
   }
 }
