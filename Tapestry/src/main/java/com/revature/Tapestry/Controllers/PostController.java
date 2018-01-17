@@ -114,14 +114,21 @@ public class PostController {
 		return postDao.findAll().stream().collect(Collectors.toList());
 	}	
 	
-	@PostMapping(value="/createThread")
+	@PostMapping(value="/createThread", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
 	public void submitPost()
 	{
+		String bucketName = "moirai";
+		
 		AWSCredentialsProvider credentials = new AWSStaticCredentialsProvider 
 				(new BasicAWSCredentials(System.getenv("ACCESSKEY"), System.getenv("SECRETKEY")));
 		AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
                 .withCredentials(credentials)
                 .build();
+		//code to insert an image to s3
+				InputStream image = null;
+				String key = "";
+				PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, key, image, new ObjectMetadata());
+				s3Client.putObject(putObjectRequest);
 	}
 	
 	/*@PostMapping(value="/createThread", consumes=MediaType.APPLICATION_JSON_VALUE)
