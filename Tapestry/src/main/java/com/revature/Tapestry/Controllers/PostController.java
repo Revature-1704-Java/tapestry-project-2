@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.amazonaws.services.s3.AmazonS3;
 import com.revature.Tapestry.DatabaseAccessors.BoardDAO;
 import com.revature.Tapestry.DatabaseAccessors.PostDAO;
 import com.revature.Tapestry.DatabaseAccessors.UserDAO;
@@ -53,12 +54,17 @@ public class PostController {
 		return postDao.findAll().stream().collect(Collectors.toList());
 	}	
 	
-	
 	@PostMapping(value="/createThread", consumes=MediaType.APPLICATION_JSON_VALUE)
+	public void submitPost()
+	{
+		AmazonS3 s3client;
+	}
+	
+	/*@PostMapping(value="/createThread", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public void createThread(@RequestBody Post post) {		
 		postDao.save(post);
 		//Now doesn't work. SQL error Integrity violated.
-	}
+	}*/
 	
 	@PostMapping(value="/createReply/{id}", consumes=MediaType.APPLICATION_JSON_VALUE)
 	public void createReply(@RequestBody Comment comment, @PathVariable("id") int id) {
