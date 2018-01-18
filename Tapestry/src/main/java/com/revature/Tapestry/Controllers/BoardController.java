@@ -41,7 +41,7 @@ public class BoardController {
 	public ResponseEntity<?> findBoard(@RequestParam("boardName") String boardName) {
 		Board board = boardDao.findByBoardName(boardName);
 		if (board ==  null){
-			return new ResponseEntity<>("Board Name: " + board.getBoardName() + " doesn't exist", HttpStatus.IM_USED);
+			return new ResponseEntity<>("Board Name: " + boardName + " doesn't exist", HttpStatus.IM_USED);
 		}
 			
 		return new ResponseEntity<>("Board Name: " + board.getBoardName() + "Board Id: " + board.getBoardID(), HttpStatus.IM_USED);
