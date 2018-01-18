@@ -26,7 +26,6 @@ public class UserController {
 		//Login a user
 		
 		List<User> users = userDao.findByUsername(username);
-		System.out.println(username);
 		
 		for (User u : users) {
 			if(u.isCorrectPassword(password)) {
@@ -37,7 +36,6 @@ public class UserController {
 		
 		User user = userDao.findByEmail(username);
 		if(user!=null) user.toString();
-		System.out.println(username);
 		if(user!=null) {
 			user.nullPassword();
 			return new ResponseEntity<>(user, HttpStatus.OK);
