@@ -61,7 +61,6 @@ public class User {
 	public String encryptPassword(String password) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String hashedPassword = passwordEncoder.encode(password);
-		System.out.println("Password " + hashedPassword );
 		return hashedPassword;
 	}
 	@Column
