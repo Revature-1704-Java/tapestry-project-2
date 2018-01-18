@@ -7,9 +7,13 @@ import java.util.Date;
 import java.util.List;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -112,11 +116,14 @@ public class PostController {
         */		
 	}	
 	
-	@PostMapping(value="/createThread", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
-	public void submitPost(@RequestParam("type") String type, @RequestParam("userId") String userId,
-			@RequestParam("title") String title, @RequestParam("body") String textContent, 
-			@RequestParam("file") MultipartFile inputImage, @RequestParam("board") String board,
-			@RequestParam("postId") String postId)
+	@RequestMapping(value = "/createThread", method = {RequestMethod.POST})
+	public void submitPost(@RequestParam(value="type", required=true) String type, @RequestParam(value="userId", required=true) String userId,
+			@RequestParam(value="title", required = false) String title, @RequestParam(value="body", required=true) String textContent, 
+			@RequestParam(value="board", required=false) String board, @RequestParam(value="postId", required=false) String postId, 
+			@RequestParam(value="file", required=false) CommonsMultipartFile inputImage, MultipartHttpServletRequest mrequest)
+	
+	//@PostMapping(value="/createThread", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
+	//public void submitPost()
 	{
 		String bucketName = "moirai";
 		AWSCredentialsProvider credentials = new AWSStaticCredentialsProvider 
