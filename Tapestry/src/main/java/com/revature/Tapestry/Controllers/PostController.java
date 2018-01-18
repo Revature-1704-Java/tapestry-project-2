@@ -24,6 +24,7 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.revature.Tapestry.DatabaseAccessors.BoardDAO;
+import com.revature.Tapestry.DatabaseAccessors.CommentDAO;
 import com.revature.Tapestry.DatabaseAccessors.PostDAO;
 import com.revature.Tapestry.DatabaseAccessors.UserDAO;
 import com.revature.Tapestry.beans.Board;
@@ -37,11 +38,13 @@ public class PostController {
 	private PostDAO postDao;
 	private BoardDAO boardDao;
 	private UserDAO userDao;
+	private CommentDAO commentDao;
 	
-	public PostController(PostDAO postDao, BoardDAO boardDao, UserDAO userDao) {
+	public PostController(PostDAO postDao, BoardDAO boardDao, UserDAO userDao, CommentDAO commentDao) {
 		this.postDao = postDao;
 		this.boardDao = boardDao;
 		this.userDao = userDao;
+		this.commentDao = commentDao;
 	}
 	
 	//Get a thread. Post and all replies
@@ -169,6 +172,7 @@ public class PostController {
 				List<Comment> parentPostReplies = parentPost.getReplies();
 				parentPostReplies.add(commentToSubmit);
 				parentPost.setReplies(parentPostReplies);
+				commentDao.save(commentToSubmit);
 				postDao.save(parentPost);
 			}
 		}
