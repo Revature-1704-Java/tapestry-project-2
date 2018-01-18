@@ -2,14 +2,10 @@ package com.revature.Tapestry.Controllers;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,15 +18,13 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.model.S3Object;
 import com.revature.Tapestry.DatabaseAccessors.BoardDAO;
 import com.revature.Tapestry.DatabaseAccessors.PostDAO;
 import com.revature.Tapestry.DatabaseAccessors.UserDAO;
 import com.revature.Tapestry.beans.Board;
+import com.revature.Tapestry.beans.Comment;
 import com.revature.Tapestry.beans.Post;
 import com.revature.Tapestry.beans.User;
-
-import oracle.sql.DATE;
 
 @RestController
 public class PostController {
@@ -93,10 +87,8 @@ public class PostController {
 			   out.write(buf, 0, count);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -105,19 +97,16 @@ public class PostController {
         try {
 			out.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         try {
 			in.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         try {
 			imageToReturn.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         */		
@@ -163,7 +152,7 @@ public class PostController {
 			else if (type.equals("comment"))
 			{
 				Comment commentToSubmit = new Comment(uploader, key, textContent, new Date());
-				Post parentPost = postDao.findOne(Integer.parseInt(parentId));
+				Post parentPost = postDao.findOne(Integer.parseInt(postId));
 				List<Comment> parentPostReplies = parentPost.getReplies();
 				parentPostReplies.add(commentToSubmit);
 				parentPost.setReplies(parentPostReplies);
