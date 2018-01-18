@@ -2,6 +2,7 @@ package com.revature.Tapestry.Controllers;
 
 import java.util.List;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +24,8 @@ public class UserController {
 	}
 	
 	
-	@PostMapping(value="/login")
-	public ResponseEntity<?> login(@RequestParam("username") String username,@RequestParam("password") String password) {
+	@PostMapping(value="/login", produces=MediaType.APPLICATION_JSON_VALUE)
+	public User login(@RequestParam("username") String username,@RequestParam("password") String password) {
 		//Login a user
 		
 		List<User> users = userDao.findByUsername(username);
@@ -32,7 +33,7 @@ public class UserController {
 		for (User u : users) {
 			if(u.isCorrectPassword(password)) {
 				u.nullPassword();
-				return new ResponseEntity<>(u, HttpStatus.OK);
+				return u;
 			}
 		}
 		
@@ -40,23 +41,23 @@ public class UserController {
 		if(user!=null) user.toString();
 		if(user!=null) {
 			user.nullPassword();
-			return new ResponseEntity<>(user, HttpStatus.OK);
+			return user;
 		}
 			
 		
-		return new ResponseEntity<>("Username/Email " + username + " does not exist.", HttpStatus.NOT_FOUND);
+		return null;
 	}
 	
-	@PostMapping(value="/signup")
-	public ResponseEntity<?> signUp(@RequestParam("username") String username, @RequestParam("email") String email, @RequestParam("password") String password) {
+	@PostMapping(value="/signup", produces=MediaType.APPLICATION_JSON_VALUE)
+	public User signUp(@RequestParam("username") String username, @RequestParam("email") String email, @RequestParam("password") String password) {
 		User existingUser = userDao.findByEmail(email);
+		User user = new User(username, email, password);
 		if (existingUser ==  null){
-			User user = new User(username, email, password);
 			userDao.save(user);
-			return new ResponseEntity<>(HttpStatus.CREATED);
+			return null;
 		}
 		
-		return new ResponseEntity<>("Email " + existingUser.getEmail() + " already exists", HttpStatus.IM_USED);
+		return user;
 	}
 	
 	@GetMapping("/user/{id}")
