@@ -19,6 +19,7 @@ import { ThreadItemComponent } from './thread-item/thread-item.component';
 import { ThreadService } from './shared/thread.service';
 import { ViewComponent } from './view/view.component';
 import { TokenService } from './shared/token.service';
+import { UrlsService } from './shared/urls.service';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,7 @@ import { TokenService } from './shared/token.service';
       }
     ])
   ],
-  providers: [ThreadService, CurrentViewService, TokenService],
+  providers: [ThreadService, CurrentViewService, TokenService, UrlsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

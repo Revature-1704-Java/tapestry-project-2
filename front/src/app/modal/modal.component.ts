@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { CurrentViewService } from '../shared/current-view.service';
 import { TokenService } from '../shared/token.service';
+import { UrlsService } from '../shared/urls.service';
 
 @Component({
   selector: 'app-modal',
@@ -21,7 +22,8 @@ export class ModalComponent implements OnInit {
   @ViewChild('postClose') postClose: ElementRef;
   @ViewChild('postFile') postFile: ElementRef;
 
-  constructor(private httpClient: HttpClient, public token: TokenService, public curView: CurrentViewService) { }
+  constructor(private httpClient: HttpClient, public token: TokenService, 
+    public curView: CurrentViewService, public urls: UrlsService) { }
 
   ngOnInit(): void {
   }
@@ -30,27 +32,26 @@ export class ModalComponent implements OnInit {
     const uName: string = this.user.username;
     const uPass: string = this.user.password;
 
-    const apiUrl = 'https://reqres.in/api/login';
-    // TODO: switch 'email' to 'username'
+    const apiUrl = this.urls.serverBasePath + '/login';
+
     const body = new HttpParams()
-      .set('email', uName)
+      .set('username', uName)
       .set('password', uPass);
     const header = new HttpHeaders()
       .set('Content-Type', 'application/x-www-form-urlencoded');
 
     this.httpClient.post(apiUrl, body, { headers: header })
       .subscribe(res => {
-        // TODO: Switch res['token'] to proper response, token.id to recieve proper userId
-        this.token.token = res['token'];
-        this.token.auth = true;
-        this.token.id = 1;
-
+        if (res['user'] !== undefined) {
+          this.token.auth = true;
+          this.token.id = res['user'].userID;
+        }
         this.loginClose.nativeElement.click();
       }, err => console.log(err));
   }
 
   signup(): void {
-    const apiUrl = 'https://reqres.in/api/register';
+    const apiUrl = this.urls.serverBasePath + '/signup';
 
     const newUsername = this.newuser.username;
     const newEmail = this.newuser.email;
@@ -65,14 +66,11 @@ export class ModalComponent implements OnInit {
 
     this.httpClient.post(apiUrl, body, { headers: header })
       .subscribe(res => {
-        // TODO: Replace res['token'] with proper response, token.id to recieve proper userId
-        if (res['token'] !== undefined) {
-          this.token.token = res['token'];
+        if (res['user'] !== undefined) {
           this.token.auth = true;
-          this.token.id = 1;
-
-          this.signupClose.nativeElement.click();
+          this.token.id = res['user'].userID;
         }
+        this.signupClose.nativeElement.click();
       }, err => console.log(err));
   }
 
@@ -81,7 +79,7 @@ export class ModalComponent implements OnInit {
   }
 
   createPost(): void {
-    const apiUrl = 'https://jsonplaceholder.typicode.com/posts';
+    const apiUrl = this.urls.serverBasePath + '/createThread';
 
     const body = new HttpParams()
       .set('userId', this.token.id.toString())
@@ -97,10 +95,8 @@ export class ModalComponent implements OnInit {
       body.set('postID', this.curView.id.toString());
     }
 
-    // TODO: Switch x-www-form-urlencoded to multipart/form-data
     const header = new HttpHeaders()
-      .set('Content-Type', 'application/x-www-form-urlencoded');
-    //  .set('Content-Type', 'multipart/form-data');
+      .set('Content-Type', 'multipart/form-data');
 
     this.httpClient.post(apiUrl, body, { headers: header })
       .subscribe(res => {

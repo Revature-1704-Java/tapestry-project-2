@@ -15,10 +15,13 @@
 </div>
 
 <div class="row">
-  <div *ngIf="post" class="col-sm-11">
-    <app-thread-item [thread]="post"></app-thread-item>
+  <div *ngFor="let reply of replies | async; trackBy: postTrackByFn; first as isFirst">
+    <div *ngIf="isFirst === true" class="col-sm-11">
+      <app-thread-item *ngIf="isFirst === true" [thread]="reply"></app-thread-item>
+    </div>
+
+    <div *ngIf="isFirst === false" class="list-group col-sm-11 offset-sm-1">
+        <app-thread-item [thread]="reply"></app-thread-item>
+    </div>
   </div>
-  <ul *ngFor="let reply of replies | async; trackBy: postTrackByFn" class="list-group col-sm-11 offset-sm-1">
-    <app-thread-item [thread]="reply"></app-thread-item>
-  </ul>
 </div>
