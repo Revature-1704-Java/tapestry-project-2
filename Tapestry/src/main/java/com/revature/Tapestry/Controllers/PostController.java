@@ -149,10 +149,17 @@ public class PostController {
 				if(board != null)
 				{
 					Board boardPosted = boardDao.findByBoardName(board);
-					List<Board> boardsPosted = new ArrayList<Board>();
-					boardsPosted.add(boardPosted);
-					Post postToSubmit = new Post(uploader, key, textContent, new Date(), title, boardsPosted);
-					postDao.save(postToSubmit);
+					if (boardPosted != null) 
+					{
+						List<Board> boardsPosted = new ArrayList<Board>();
+						boardsPosted.add(boardPosted);
+						Post postToSubmit = new Post(uploader, key, textContent, new Date(), title, boardsPosted);
+						postDao.save(postToSubmit);
+						List<Post> postsOnBoard = boardPosted.getThreads();
+						postsOnBoard.add(postToSubmit);
+						boardPosted.setThreads(postsOnBoard);
+						boardDao.save(boardPosted);
+					}
 				}
 			}
 			else if (type.equals("comment"))
