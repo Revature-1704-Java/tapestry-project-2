@@ -24,7 +24,7 @@ export class SpecificComponent implements OnInit {
     this.curView.view = 'catalog';
   }
 
-  postTrackByFn(index: number, thread: Thread) {
+  postTrackByFn(index: number, thread: Thread): number {
     return thread.commentID;
   }
 }

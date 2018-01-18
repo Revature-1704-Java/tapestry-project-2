@@ -7,10 +7,10 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.css']
 })
-export class ViewComponent {
+export class ViewComponent implements OnInit {
   constructor(public curView: CurrentViewService, private route: ActivatedRoute) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.paramMap.subscribe(res => {
       const postId = res.get('postId');
       if (postId == null) {
@@ -20,6 +20,8 @@ export class ViewComponent {
         this.curView.view = 'specific';
         this.curView.id = Number(postId);
       }
+
+      this.curView.board = res.get('board');
     });
   }
 }

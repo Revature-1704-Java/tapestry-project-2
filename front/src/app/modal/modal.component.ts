@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms/src/model';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { TokenService } from '../shared/token.service';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+
 import { CurrentViewService } from '../shared/current-view.service';
+import { TokenService } from '../shared/token.service';
 
 @Component({
   selector: 'app-modal',
@@ -12,7 +13,7 @@ import { CurrentViewService } from '../shared/current-view.service';
 export class ModalComponent implements OnInit {
   public user = { username: '', password: '' };
   public newuser = { username: '', email: '', password: '' };
-  public newpost = { title: '', body: '', file: null }
+  public newpost = { title: '', body: '', file: undefined };
 
   private myForm: FormGroup = this.myForm;
   @ViewChild('loginClose') loginClose: ElementRef;
@@ -61,11 +62,11 @@ export class ModalComponent implements OnInit {
       .set('password', newPass);
     const header = new HttpHeaders()
       .set('Content-Type', 'application/x-www-form-urlencoded');
-    
+
     this.httpClient.post(apiUrl, body, { headers: header })
       .subscribe(res => {
         // TODO: Replace res['token'] with proper response, token.id to recieve proper userId
-        if (res['token'] != undefined) {
+        if (res['token'] !== undefined) {
           this.token.token = res['token'];
           this.token.auth = true;
           this.token.id = 1;
@@ -85,8 +86,9 @@ export class ModalComponent implements OnInit {
     const body = new HttpParams()
       .set('userId', this.token.id.toString())
       .set('body', this.newpost.body)
-      .set('file', this.newpost.file);
-    if (this.curView.view == 'catalog') {
+      .set('file', this.newpost.file)
+      .set('board', this.curView.board);
+    if (this.curView.view === 'catalog') {
       body.set('title', this.newpost.title);
       body.set('type', 'post');
     } else {
@@ -102,7 +104,7 @@ export class ModalComponent implements OnInit {
 
     this.httpClient.post(apiUrl, body, { headers: header })
       .subscribe(res => {
-        this.newpost.file = null;
+        this.newpost.file = undefined;
         this.postFile.nativeElement.value = '';
 
         this.postClose.nativeElement.click();

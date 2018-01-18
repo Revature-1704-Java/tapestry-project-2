@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Thread } from '../shared/thread';
-import { ThreadService } from '../shared/thread.service';
 import { Observable } from 'rxjs/Observable';
+
+import { ThreadService } from '../shared/thread.service';
 import { CurrentViewService } from '../shared/current-view.service';
 
 @Component({
@@ -16,15 +16,15 @@ export class CatalogComponent implements OnInit {
   constructor(private threadService: ThreadService, public curView: CurrentViewService) { }
 
   ngOnInit(): void {
-    this.threads = this.threadService.getThreads();
+    this.threads = this.threadService.getThreads(this.curView.board);
   }
 
   viewSpecific(id: number): void {
     this.curView.id = id;
     this.curView.view = 'specific';
   }
-  
-  postTrackByFn(index: number, thread: Thread) {
+
+  postTrackByFn(index: number, thread: Thread): number {
     return thread.postID;
   }
 }
