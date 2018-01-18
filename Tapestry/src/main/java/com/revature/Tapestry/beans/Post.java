@@ -107,14 +107,12 @@ public class Post {
 	}
 	
 	
-	@ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                CascadeType.PERSIST,
-                CascadeType.MERGE
-            })
-    @JoinTable(name = "POST_BOARD",
-            joinColumns = { @JoinColumn(name = "POSTID") },
-            inverseJoinColumns = { @JoinColumn(name = "BOARDID") })
+	@ManyToMany
+    @JoinTable(name="POST_BOARD",
+        joinColumns=
+            @JoinColumn(name="POST_ID", referencedColumnName="POSTID"),
+        inverseJoinColumns=
+            @JoinColumn(name="BOARD_ID", referencedColumnName="BOARDID"))
 	public List<Board> getBoardsPosted() {
 		return boardsPosted;
 	}
