@@ -43,9 +43,9 @@ export class ModalComponent implements OnInit {
     this.httpClient.post(apiUrl, body, { headers: header })
       .subscribe(res => {
         console.log(res);
-        if (res['user'] !== undefined) {
+        if (res['userID'] !== undefined) {
           this.token.auth = true;
-          this.token.id = res['user'].userID;
+          this.token.id = res['userID'];
         }
         this.loginClose.nativeElement.click();
       }, err => console.log(err));
@@ -68,9 +68,9 @@ export class ModalComponent implements OnInit {
     this.httpClient.post(apiUrl, body, { headers: header })
       .subscribe(res => {
         console.log(res);
-        if (res['user'] !== undefined) {
+        if (res['userID'] !== undefined) {
           this.token.auth = true;
-          this.token.id = res['user'].userID;
+          this.token.id = res['userID'];
         }
         this.signupClose.nativeElement.click();
       }, err => console.log(err));

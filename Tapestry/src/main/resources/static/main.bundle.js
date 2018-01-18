@@ -521,9 +521,9 @@ var ModalComponent = (function () {
         this.httpClient.post(apiUrl, body, { headers: header })
             .subscribe(function (res) {
             console.log(res);
-            if (res['user'] !== undefined) {
+            if (res['userID'] !== undefined) {
                 _this.token.auth = true;
-                _this.token.id = res['user'].userID;
+                _this.token.id = res['userID'];
             }
             _this.loginClose.nativeElement.click();
         }, function (err) { return console.log(err); });
@@ -543,9 +543,9 @@ var ModalComponent = (function () {
         this.httpClient.post(apiUrl, body, { headers: header })
             .subscribe(function (res) {
             console.log(res);
-            if (res['user'] !== undefined) {
+            if (res['userID'] !== undefined) {
                 _this.token.auth = true;
-                _this.token.id = res['user'].userID;
+                _this.token.id = res['userID'];
             }
             _this.signupClose.nativeElement.click();
         }, function (err) { return console.log(err); });
