@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -116,16 +114,15 @@ public class PostController {
         */		
 	}	
 	
-	@RequestMapping(value = "/createThread", method = {RequestMethod.POST})
+	@PostMapping(value="/createThread", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
 	public void submitPost(@RequestParam(value="type", required=true) String type, @RequestParam(value="userId", required=true) String userId,
 			@RequestParam(value="title", required = false) String title, @RequestParam(value="body", required=true) String textContent, 
-			@RequestParam(value="board", required=false) String board, @RequestParam(value="postId", required=false) String postId, 
-			@RequestParam(value="file", required=false) CommonsMultipartFile inputImage, MultipartHttpServletRequest mrequest)
-	
-	//@PostMapping(value="/createThread", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
-	//public void submitPost()
+			@RequestParam(value="file", required=false) MultipartFile inputImage, @RequestParam(value="board", required=false) String board,
+			@RequestParam(value="postId", required=false) String postId)
 	{
 		String bucketName = "moirai";
+		System.out.println(System.getenv("ACCESSKEY"));
+		System.out.println(System.getenv("SECRETKEY"));
 		AWSCredentialsProvider credentials = new AWSStaticCredentialsProvider 
 				(new BasicAWSCredentials(System.getenv("ACCESSKEY"), System.getenv("SECRETKEY")));
 		AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
