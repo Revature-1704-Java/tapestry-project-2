@@ -23,18 +23,29 @@ public class BoardController {
 		this.postDao = postDao;
 	}
 	
-	//Get a thread. Post and all replies
-		@PostMapping(value="/createBoard")
-		public ResponseEntity<?> getPosts(@RequestParam("postId") int boardId, @RequestParam("boardName") String boardName) {
-			Board board = boardDao.findOne(boardId);
-			if (board ==  null){
-				board = new Board(boardName);
-				boardDao.save(board);
-				return new ResponseEntity<>(HttpStatus.CREATED);
-			}
-			
-			return new ResponseEntity<>("Board Name: " + board.getBoardName() + " already exists", HttpStatus.IM_USED);
+	//Create a Board
+	@PostMapping(value="/createBoard")
+	public ResponseEntity<?> createBoard(@RequestParam("boardName") String boardName) {
+		Board board = boardDao.findByBoardName(boardName);
+		if (board ==  null){
+			board = new Board(boardName);
+			boardDao.save(board);
+			return new ResponseEntity<>(HttpStatus.CREATED);
 		}
+			
+		return new ResponseEntity<>("Board Name: " + board.getBoardName() + " already exists", HttpStatus.IM_USED);
+	}
+	
+	//Get a Board by name return id
+	@PostMapping(value="/getBoard")
+	public ResponseEntity<?> findBoard(@RequestParam("boardName") String boardName) {
+		Board board = boardDao.findByBoardName(boardName);
+		if (board ==  null){
+			return new ResponseEntity<>("Board Name: " + board.getBoardName() + " doesn't exist", HttpStatus.IM_USED);
+		}
+			
+		return new ResponseEntity<>("Board Name: " + board.getBoardName() + "Board Id: " + board.getBoardID(), HttpStatus.IM_USED);
+	}
 	
 	/*
 	 * Collection<Post> threads = postDao.findAll().stream().collect(Collectors.toList());
