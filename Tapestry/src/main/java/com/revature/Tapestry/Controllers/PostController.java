@@ -16,7 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
@@ -121,18 +124,14 @@ public class PostController {
 			@RequestParam(value="postId", required=false) String postId)
 	{
 		String bucketName = "moirai";
-		System.out.println(System.getenv("ACCESSKEY"));
-		System.out.println(System.getenv("SECRETKEY"));
-		AWSCredentialsProvider credentials = new AWSStaticCredentialsProvider 
-				(new BasicAWSCredentials(System.getenv("ACCESSKEY"), System.getenv("SECRETKEY")));
-		AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
-                .withCredentials(credentials)
-                .build();
+		//AWSCredentialsProvider credentials = new AWSStaticCredentialsProvider 
+		//		(new BasicAWSCredentials(System.getenv("ACCESSKEY"), System.getenv("SECRETKEY")));
+		AmazonS3 s3Client = new AmazonS3Client(new ProfileCredentialsProvider());
 		
 		Integer uploaderId = Integer.parseInt(userId);
 		User uploader = userDao.findOne(uploaderId);
 		String key = null;
-		if(!inputImage.isEmpty())//only post image if one is sent
+		if(inputImage != null && !inputImage.isEmpty())//only post image if one is sent
 		{
 			String alteredEmail = uploader.getEmail().replace('@', '.');
 			//code to insert an image to s3
@@ -147,11 +146,14 @@ public class PostController {
 			
 			if(type.equals("post"))
 			{
-				Board boardPosted = boardDao.findByBoardName(board);
-				List<Board> boardsPosted = new ArrayList<Board>();
-				boardsPosted.add(boardPosted);
-				Post postToSubmit = new Post(uploader, key, textContent, new Date(), title, boardsPosted);
-				postDao.save(postToSubmit);
+				//if(board != null)
+				//{
+				//	Board boardPosted = boardDao.findByBoardName(board);
+				//	List<Board> boardsPosted = new ArrayList<Board>();
+				//	boardsPosted.add(boardPosted);
+				//	Post postToSubmit = new Post(uploader, key, textContent, new Date(), title, boardsPosted);
+				//	postDao.save(postToSubmit);
+				//}
 			}
 			else if (type.equals("comment"))
 			{
