@@ -2,16 +2,14 @@ package com.revature.Tapestry.Controllers;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,31 +17,36 @@ import org.springframework.web.multipart.MultipartFile;
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.client.builder.AwsClientBuilder.EndpointConfiguration;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.model.S3Object;
 import com.revature.Tapestry.DatabaseAccessors.BoardDAO;
+import com.revature.Tapestry.DatabaseAccessors.CommentDAO;
 import com.revature.Tapestry.DatabaseAccessors.PostDAO;
 import com.revature.Tapestry.DatabaseAccessors.UserDAO;
 import com.revature.Tapestry.beans.Board;
+import com.revature.Tapestry.beans.Comment;
 import com.revature.Tapestry.beans.Post;
 import com.revature.Tapestry.beans.User;
 
-import oracle.sql.DATE;
-
 @RestController
+@CrossOrigin
 public class PostController {
 
 	private PostDAO postDao;
 	private BoardDAO boardDao;
 	private UserDAO userDao;
+	private CommentDAO commentDao;
 	
-	public PostController(PostDAO postDao, BoardDAO boardDao, UserDAO userDao) {
+	public PostController(PostDAO postDao, BoardDAO boardDao, UserDAO userDao, CommentDAO commentDao) {
 		this.postDao = postDao;
 		this.boardDao = boardDao;
 		this.userDao = userDao;
+		this.commentDao = commentDao;
 	}
 	
 	//Get a thread. Post and all replies
@@ -94,10 +97,8 @@ public class PostController {
 			   out.write(buf, 0, count);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -106,45 +107,40 @@ public class PostController {
         try {
 			out.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         try {
 			in.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         try {
 			imageToReturn.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         */		
 	}	
 	
 	@PostMapping(value="/createThread", consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
-	public void submitPost(@RequestParam("type") String type, @RequestParam("userId") String userId,
-			@RequestParam("title") String title, @RequestParam("body") String textContent, 
-			@RequestParam("file") MultipartFile inputImage, @RequestParam("board") String board,
-			@RequestParam("parentId") String postId)
+	public void submitPost(@RequestParam(value="type", required=true) String type, @RequestParam(value="userId", required=true) String userId,
+			@RequestParam(value="title", required = false) String title, @RequestParam(value="body", required=true) String textContent, 
+			@RequestParam(value="file", required=false) MultipartFile inputImage, @RequestParam(value="board", required=false) String board,
+			@RequestParam(value="postId", required=false) String postId)
 	{
 		String bucketName = "moirai";
-		AWSCredentialsProvider credentials = new AWSStaticCredentialsProvider 
-				(new BasicAWSCredentials(System.getenv("ACCESSKEY"), System.getenv("SECRETKEY")));
-		AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
-                .withCredentials(credentials)
-                .build();
+		//AWSCredentialsProvider credentials = new AWSStaticCredentialsProvider 
+		//		(new BasicAWSCredentials(System.getenv("ACCESSKEY"), System.getenv("SECRETKEY")));
+		AmazonS3 s3Client = new AmazonS3Client(new ProfileCredentialsProvider());
 		
 		Integer uploaderId = Integer.parseInt(userId);
 		User uploader = userDao.findOne(uploaderId);
 		String key = null;
-		if(!inputImage.isEmpty())//only post image if one is sent
+		if(inputImage != null && !inputImage.isEmpty())//only post image if one is sent
 		{
 			String alteredEmail = uploader.getEmail().replace('@', '.');
 			//code to insert an image to s3
-			key = "/" + alteredEmail + "/" + inputImage.getOriginalFilename();
+			key = "" + alteredEmail + "/" + inputImage.getOriginalFilename();
 			InputStream image;
 			try {
 				image = inputImage.getInputStream();
@@ -155,33 +151,32 @@ public class PostController {
 			
 			if(type.equals("post"))
 			{
-				Board boardPosted = boardDao.findByBoardName(board);
-				List<Board> boardsPosted = new ArrayList<Board>();
-				boardsPosted.add(boardPosted);
-				Post postToSubmit = new Post(uploader, key, textContent, new Date(), title, boardsPosted);
-				postDao.save(postToSubmit);
+				if(board != null)
+				{
+					Board boardPosted = boardDao.findByBoardName(board);
+					if (boardPosted != null) 
+					{
+						List<Board> boardsPosted = new ArrayList<Board>();
+						boardsPosted.add(boardPosted);
+						Post postToSubmit = new Post(uploader, key, textContent, new Date(), title, boardsPosted);
+						postDao.save(postToSubmit);
+						List<Post> postsOnBoard = boardPosted.getThreads();
+						postsOnBoard.add(postToSubmit);
+						boardPosted.setThreads(postsOnBoard);
+						boardDao.save(boardPosted);
+					}
+				}
 			}
 			else if (type.equals("comment"))
 			{
 				Comment commentToSubmit = new Comment(uploader, key, textContent, new Date());
-				Post parentPost = postDao.findOne(Integer.parseInt(parentId));
+				Post parentPost = postDao.findOne(Integer.parseInt(postId));
 				List<Comment> parentPostReplies = parentPost.getReplies();
 				parentPostReplies.add(commentToSubmit);
 				parentPost.setReplies(parentPostReplies);
+				commentDao.save(commentToSubmit);
 				postDao.save(parentPost);
 			}
-		}
-		
+		}	
 	}
-	
-	/*@PostMapping(value="/createReply/{id}", consumes=MediaType.APPLICATION_JSON_VALUE)
-	public void createReply(@RequestBody Comment comment, @PathVariable("id") int id) {
-		Post p = postDao.findOne(id);
-		List<Comment> replies = p.getReplies();
-		replies.add(comment);
-		p.setReplies(replies);
-		postDao.save(p);
-		//Getting an 500 internal server error "object references an unsaved transient instance"
-	}*/
-	
 }

@@ -4,15 +4,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.ElementCollection;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name = "POST")
@@ -102,8 +105,14 @@ public class Post {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	@Column
-	@ElementCollection
+	
+	
+	@ManyToMany
+    @JoinTable(name="POST_BOARD",
+        joinColumns=
+            @JoinColumn(name="POST_ID", referencedColumnName="POSTID"),
+        inverseJoinColumns=
+            @JoinColumn(name="BOARD_ID", referencedColumnName="BOARDID"))
 	public List<Board> getBoardsPosted() {
 		return boardsPosted;
 	}
