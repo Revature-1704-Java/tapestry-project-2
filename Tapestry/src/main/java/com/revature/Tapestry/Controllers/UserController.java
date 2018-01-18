@@ -48,10 +48,10 @@ public class UserController {
 	}
 	
 	@PostMapping(value="/signup")
-	public ResponseEntity<?> signUp(@RequestParam("username") String username,@RequestParam("password") String password, @RequestParam("email") String email) {
+	public ResponseEntity<?> signUp(@RequestParam("username") String username, @RequestParam("email") String email, @RequestParam("password") String password) {
 		User existingUser = userDao.findByEmail(email);
 		if (existingUser ==  null){
-			User user = new User(username, password, email);
+			User user = new User(username, email, password);
 			userDao.save(user);
 			return new ResponseEntity<>(HttpStatus.CREATED);
 		}
