@@ -135,7 +135,7 @@ public class PostController {
 		{
 			String alteredEmail = uploader.getEmail().replace('@', '.');
 			//code to insert an image to s3
-			key = "/" + alteredEmail + "/" + inputImage.getOriginalFilename();
+			key = "" + alteredEmail + "/" + inputImage.getOriginalFilename();
 			InputStream image;
 			try {
 				image = inputImage.getInputStream();
@@ -146,14 +146,14 @@ public class PostController {
 			
 			if(type.equals("post"))
 			{
-				//if(board != null)
-				//{
-				//	Board boardPosted = boardDao.findByBoardName(board);
-				//	List<Board> boardsPosted = new ArrayList<Board>();
-				//	boardsPosted.add(boardPosted);
-				//	Post postToSubmit = new Post(uploader, key, textContent, new Date(), title, boardsPosted);
-				//	postDao.save(postToSubmit);
-				//}
+				if(board != null)
+				{
+					Board boardPosted = boardDao.findByBoardName(board);
+					List<Board> boardsPosted = new ArrayList<Board>();
+					boardsPosted.add(boardPosted);
+					Post postToSubmit = new Post(uploader, key, textContent, new Date(), title, boardsPosted);
+					postDao.save(postToSubmit);
+				}
 			}
 			else if (type.equals("comment"))
 			{
