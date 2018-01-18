@@ -17,7 +17,7 @@ export class ThreadService {
         const apiUrl = this.urls.serverBasePath + '/getPosts';
 
         const body = new HttpParams()
-            .set('board', board);
+            .set('boardName', board);
         
         const header = new HttpHeaders()
             .set('Content-Type', 'application/x-www-form-urlencoded');
