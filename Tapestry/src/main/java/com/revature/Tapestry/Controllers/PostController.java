@@ -175,18 +175,6 @@ public class PostController {
 				commentDao.save(commentToSubmit);
 				postDao.save(parentPost);
 			}
-		}
-		
+		}	
 	}
-	
-	/*@PostMapping(value="/createReply/{id}", consumes=MediaType.APPLICATION_JSON_VALUE)
-	public void createReply(@RequestBody Comment comment, @PathVariable("id") int id) {
-		Post p = postDao.findOne(id);
-		List<Comment> replies = p.getReplies();
-		replies.add(comment);
-		p.setReplies(replies);
-		postDao.save(p);
-		//Getting an 500 internal server error "object references an unsaved transient instance"
-	}*/
-	
 }
