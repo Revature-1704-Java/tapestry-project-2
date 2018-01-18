@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -128,7 +127,7 @@ public class PostController {
 	public void submitPost(@RequestParam("type") String type, @RequestParam("userId") String userId,
 			@RequestParam("title") String title, @RequestParam("body") String textContent, 
 			@RequestParam("file") MultipartFile inputImage, @RequestParam("board") String board,
-			@RequestParam("parentId") String postId)
+			@RequestParam("postId") String postId)
 	{
 		String bucketName = "moirai";
 		AWSCredentialsProvider credentials = new AWSStaticCredentialsProvider 
