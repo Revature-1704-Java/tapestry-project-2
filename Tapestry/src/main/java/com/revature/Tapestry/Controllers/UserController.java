@@ -60,14 +60,14 @@ public class UserController {
 		return user;
 	}
 	
-	@GetMapping("/user/{id}")
-	public ResponseEntity<?> getUser(@PathVariable("id") int id) {
+	@GetMapping(value="/user/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public User getUser(@PathVariable("id") int id) {
 
 		User user = userDao.findOne(id);
 		if (user == null) {
-			return new ResponseEntity<>("No user found for ID " + id, HttpStatus.NOT_FOUND);
+			return null;
 		}
 
-		return new ResponseEntity<>(user, HttpStatus.OK);
+		return user;
 	}
 }
