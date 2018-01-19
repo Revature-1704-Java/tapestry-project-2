@@ -801,7 +801,6 @@ var ThreadService = (function () {
         this.urls = urls;
     }
     ThreadService.prototype.getThreads = function (board) {
-        var _this = this;
         var apiUrl = this.urls.serverBasePath + '/getPosts';
         var body = new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["d" /* HttpParams */]()
             .set('boardName', board);
@@ -810,21 +809,27 @@ var ThreadService = (function () {
         return this.httpClient
             .post(apiUrl, body, { headers: header })
             .map(function (val) {
-            var threads = [];
-            val.map(function (res) {
-                var thread = {
-                    postID: res.postID,
-                    commentID: 0,
-                    userId: res.user.userID,
-                    title: res.title,
-                    textContent: res.textContent,
-                    imagePath: _this.urls.imageBasePath + res.imagePath,
-                    postTime: res.postTime
-                };
-                threads.push(thread);
-            });
-            return threads;
+            console.log(val);
+            return val;
         });
+        // return this.httpClient
+        //     .post<Array<any>>(apiUrl, body, { headers: header })
+        //     .map(val => {
+        //         const threads: Array<Thread> = [];
+        //         val.map(res => {
+        //             const thread = {
+        //                 postID: res.postID,
+        //                 commentID: 0,
+        //                 userId: res.user.userID,
+        //                 title: res.title,
+        //                 textContent: res.textContent,
+        //                 imagePath: this.urls.imageBasePath + res.imagePath,
+        //                 postTime: res.postTime
+        //             };
+        //             threads.push(thread as Thread);
+        //         });
+        //         return threads;
+        //     });
     };
     ThreadService.prototype.getReplies = function (id) {
         var _this = this;
