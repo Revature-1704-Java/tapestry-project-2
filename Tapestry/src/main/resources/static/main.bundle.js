@@ -574,7 +574,9 @@ var ModalComponent = (function () {
         console.log(body.getAll);
         console.log('title is: ' + body.get('title'));
         console.log('body is: ' + body.get('body'));
-        this.httpClient.post(apiUrl, body)
+        var header = new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpHeaders */]();
+        header.delete('Content-Type');
+        this.httpClient.post(apiUrl, body, { headers: header })
             .subscribe(function (res) {
             _this.newpost.file = undefined;
             _this.postFile.nativeElement.value = '';
