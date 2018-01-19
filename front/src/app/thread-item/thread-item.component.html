@@ -1,17 +1,28 @@
-<li *ngIf="op !== true" class="list-group-item">
-    <div class="row">
-        <div class="col-sm-3 col-md-2">
-            <img [src]="thread.imagePath" class="rounded">
+<div [ngSwitch]="this.curView.view">
+    <li *ngSwitchCase="'specific'" class="list-group-item">
+        <div *ngIf="op === true" class="row">
+            <div class="col-sm-5 col-md-4">
+                <img [src]="thread.imagePath" class="rounded">
+            </div>
+            <div class="col-sm-7 col-md-8">
+                <p>{{ thread.textContent }}</p>
+            </div>
         </div>
-        <div class="col-sm-9 col-md-10">
+                
+        <div *ngIf="op !== true" class="row">
+            <div class="col-sm-3 col-md-2">
+                <img [src]="thread.imagePath" class="rounded">
+            </div>
+            <div class="col-sm-9 col-md-10">
+                <p>{{ thread.textContent }}</p>
+            </div>
+        </div>
+    </li>
+    <figure *ngSwitchDefault class="figure">
+        <img [src]="thread.imagePath" class="figure-img img-fluid rounded">
+        <figcaption class="figure-caption">
+            <h5>{{ thread.title }}</h5>
             <p>{{ thread.textContent }}</p>
-        </div>
-    </div>
-</li>
-<figure *ngIf="op === true" class="figure">
-    <img [src]="thread.imagePath" class="figure-img img-fluid rounded">
-    <figcaption class="figure-caption">
-        <h5>{{ thread.title }}</h5>
-        <p>{{ thread.textContent }}</p>
-    </figcaption>
-</figure>
+        </figcaption>
+    </figure>
+</div>
