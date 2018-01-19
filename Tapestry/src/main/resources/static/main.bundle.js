@@ -324,7 +324,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "h1 {\r\n    color: #ffffcc;\r\n    padding: 0 1em 0 .5em;\r\n    font-family:\"Courier New\", Courier, monospace;\r\n}", ""]);
+exports.push([module.i, "h4 {\r\n    color: #ffffcc;\r\n    padding: 0 1em 0 .5em;\r\n    font-family:\"Courier New\", Courier, monospace;\r\n}", ""]);
 
 // exports
 
@@ -337,7 +337,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-inverse bg-dark navbar-fixed-top\">\r\n  <div class=\"container\">\r\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n      <span class=\"navbar-toggler-icon\"></span>\r\n    </button>\r\n    <div class=\"collapse navbar-collapse\" id=\"navbarNav\">\r\n      <img src=\"../assets/taptrans.png\">\r\n      <h1>Tapestry</h1>\r\n      <div class=\"mr-auto\">\r\n        <app-navbar></app-navbar>\r\n      </div>\r\n\r\n      <app-search></app-search>\r\n      <app-login></app-login>\r\n    </div>\r\n  </div>\r\n</nav>"
+module.exports = "<nav class=\"navbar navbar-expand-lg navbar-inverse bg-dark navbar-fixed-top\">\r\n  <div class=\"container\">\r\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n      <span class=\"navbar-toggler-icon\"></span>\r\n    </button>\r\n    <div class=\"collapse navbar-collapse\" id=\"navbarNav\">\r\n      <img src=\"../assets/taptrans.png\">\r\n      <h4>Tapestry</h4>\r\n      <div class=\"mr-auto\">\r\n        <app-navbar></app-navbar>\r\n      </div>\r\n\r\n      <app-search></app-search>\r\n      <app-login></app-login>\r\n    </div>\r\n  </div>\r\n</nav>"
 
 /***/ }),
 
@@ -699,7 +699,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/search/search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form class=\"form-inline\">\n  <div class=\"input-group\">\n      <div class=\"input-group-addon\">\n          <span class=\"oi oi-magnifying-glass\"></span>\n      </div>\n    <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\n  </div>\n</form>"
+module.exports = "<form class=\"form-inline\">\r\n  <div class=\"input-group\">\r\n      <div class=\"input-group-addon\">\r\n          <span class=\"oi oi-magnifying-glass\"></span>\r\n      </div>\r\n    <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\r\n  </div>\r\n</form>"
 
 /***/ }),
 
@@ -1032,7 +1032,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/thread-item/thread-item.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div [ngSwitch]=\"this.curView.view\">\r\n    <li *ngSwitchCase=\"'specific'\" class=\"list-group-item\">\r\n        <div *ngIf=\"op === true\" class=\"row\">\r\n            <div class=\"col-sm-5 col-md-3\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded\" width=\"150\" height=\"150\">\r\n            </div>\r\n            <div class=\"col-sm-7 col-md-9\">\r\n                <h5>{{ thread.username }} says:</h5>\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n                \r\n        <div *ngIf=\"op !== true\" class=\"row\">\r\n            <div class=\"col-sm-3 col-md-2\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded\" width=\"100\" height=\"100\">\r\n            </div>\r\n            <div class=\"col-sm-9 col-md-10\">\r\n                <h5>From: {{ thread.username }}</h5>\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n    </li>\r\n    <figure *ngSwitchDefault class=\"figure\">\r\n        <img [src]=\"thread.imagePath\" class=\"figure-img rounded\" width=\"150\" height=\"150\">\r\n        <figcaption class=\"figure-caption\">\r\n            <h5>{{ thread.title }}</h5>\r\n            <p>{{ thread.textContent }}</p>\r\n        </figcaption>\r\n    </figure>\r\n</div>"
+module.exports = "<div [ngSwitch]=\"this.curView.view\">\r\n    <li *ngSwitchCase=\"'specific'\" class=\"list-group-item\">\r\n        <div *ngIf=\"op === true\" class=\"row\">\r\n            <div class=\"col-sm-5 col-md-3\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded\" width=\"150\" height=\"150\">\r\n            </div>\r\n            <div class=\"col-sm-7 col-md-9\">\r\n                <h5>{{ thread.username }} says:</h5>\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n                \r\n        <div *ngIf=\"op !== true\" class=\"row\">\r\n            <div class=\"col-sm-3 col-md-2\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded\" width=\"100\" height=\"100\">\r\n            </div>\r\n            <div class=\"col-sm-9 col-md-10\">\r\n                <h5>{{ thread.username }} says:</h5>\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n    </li>\r\n    <figure *ngSwitchDefault class=\"figure\">\r\n        <img [src]=\"thread.imagePath\" class=\"figure-img rounded\" width=\"150\" height=\"150\">\r\n        <figcaption class=\"figure-caption\">\r\n            <h5>{{ thread.title }}</h5>\r\n            <p>{{ thread.textContent }}</p>\r\n        </figcaption>\r\n    </figure>\r\n</div>"
 
 /***/ }),
 
