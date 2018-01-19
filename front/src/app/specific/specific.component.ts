@@ -17,7 +17,7 @@ export class SpecificComponent implements OnInit {
   constructor(private threadService: ThreadService, public curView: CurrentViewService) { }
 
   ngOnInit(): void {
-    this.threadService.getReplies(this.curView.id);
+    this.replies = this.threadService.getReplies(this.curView.id);
   }
 
   viewCatalog(): void {

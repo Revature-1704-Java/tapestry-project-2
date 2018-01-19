@@ -988,7 +988,7 @@ var SpecificComponent = (function () {
         this.curView = curView;
     }
     SpecificComponent.prototype.ngOnInit = function () {
-        this.threadService.getReplies(this.curView.id);
+        this.replies = this.threadService.getReplies(this.curView.id);
     };
     SpecificComponent.prototype.viewCatalog = function () {
         this.curView.view = 'catalog';
