@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Thread } from '../shared/thread';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/take';
 
 import { ThreadService } from '../shared/thread.service';
 import { CurrentViewService } from '../shared/current-view.service';
