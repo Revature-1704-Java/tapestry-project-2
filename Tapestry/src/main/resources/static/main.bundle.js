@@ -211,8 +211,9 @@ module.exports = "<div class=\"row\" id=\"catalogView\">\r\n  <div class=\"col-s
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CatalogComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_thread_service__ = __webpack_require__("../../../../../src/app/shared/thread.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_current_view_service__ = __webpack_require__("../../../../../src/app/shared/current-view.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_operators__ = __webpack_require__("../../../../rxjs/_esm5/operators.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_thread_service__ = __webpack_require__("../../../../../src/app/shared/thread.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_current_view_service__ = __webpack_require__("../../../../../src/app/shared/current-view.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -225,13 +226,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var CatalogComponent = (function () {
     function CatalogComponent(threadService, curView) {
         this.threadService = threadService;
         this.curView = curView;
+        this.threads = this.threadService.getThreads(this.curView.board).pipe(Object(__WEBPACK_IMPORTED_MODULE_1_rxjs_operators__["a" /* share */])());
     }
     CatalogComponent.prototype.ngOnInit = function () {
-        this.threads = this.threadService.getThreads(this.curView.board);
+        //this.threads = this.threadService.getThreads(this.curView.board);
     };
     CatalogComponent.prototype.viewSpecific = function (id) {
         this.curView.id = id;
@@ -246,7 +249,7 @@ var CatalogComponent = (function () {
             template: __webpack_require__("../../../../../src/app/catalog/catalog.component.html"),
             styles: [__webpack_require__("../../../../../src/app/catalog/catalog.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__shared_thread_service__["a" /* ThreadService */], __WEBPACK_IMPORTED_MODULE_2__shared_current_view_service__["a" /* CurrentViewService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__shared_thread_service__["a" /* ThreadService */], __WEBPACK_IMPORTED_MODULE_3__shared_current_view_service__["a" /* CurrentViewService */]])
     ], CatalogComponent);
     return CatalogComponent;
 }());
@@ -263,7 +266,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".footer {\n    margin-top: 20px;\n}", ""]);
+exports.push([module.i, ".footer {\r\n    margin-top: 20px;\r\n}", ""]);
 
 // exports
 
@@ -337,7 +340,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-inverse bg-dark navbar-fixed-top\">\n  <div class=\"container\">\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n      <span class=\"navbar-toggler-icon\"></span>\n    </button>\n    <div class=\"collapse navbar-collapse\" id=\"navbarNav\">\n      <img src=\"../assets/taptrans.png\">\n      <h1>Tapestry</h1>\n      <div class=\"mr-auto\">\n        <app-navbar></app-navbar>\n      </div>\n\n      <app-search></app-search>\n      <app-login></app-login>\n    </div>\n  </div>\n</nav>"
+module.exports = "<nav class=\"navbar navbar-expand-lg navbar-inverse bg-dark navbar-fixed-top\">\r\n  <div class=\"container\">\r\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n      <span class=\"navbar-toggler-icon\"></span>\r\n    </button>\r\n    <div class=\"collapse navbar-collapse\" id=\"navbarNav\">\r\n      <img src=\"../assets/taptrans.png\">\r\n      <h1>Tapestry</h1>\r\n      <div class=\"mr-auto\">\r\n        <app-navbar></app-navbar>\r\n      </div>\r\n\r\n      <app-search></app-search>\r\n      <app-login></app-login>\r\n    </div>\r\n  </div>\r\n</nav>"
 
 /***/ }),
 
@@ -496,12 +499,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var ModalComponent = (function () {
-    function ModalComponent(httpClient, token, curView, urls, arf) {
+    function ModalComponent(httpClient, token, curView, urls) {
         this.httpClient = httpClient;
         this.token = token;
         this.curView = curView;
         this.urls = urls;
-        this.arf = arf;
         this.user = { username: '', password: '' };
         this.newuser = { username: '', email: '', password: '' };
         this.newpost = { title: '', body: '', file: undefined };
@@ -582,7 +584,6 @@ var ModalComponent = (function () {
             _this.newpost.file = undefined;
             _this.postFile.nativeElement.value = '';
             _this.postClose.nativeElement.click();
-            _this.arf.tick();
         }, function (err) { return console.log(err); });
     };
     __decorate([
@@ -608,7 +609,7 @@ var ModalComponent = (function () {
             styles: [__webpack_require__("../../../../../src/app/modal/modal.component.css")]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__shared_token_service__["a" /* TokenService */],
-            __WEBPACK_IMPORTED_MODULE_2__shared_current_view_service__["a" /* CurrentViewService */], __WEBPACK_IMPORTED_MODULE_4__shared_urls_service__["a" /* UrlsService */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["g" /* ApplicationRef */]])
+            __WEBPACK_IMPORTED_MODULE_2__shared_current_view_service__["a" /* CurrentViewService */], __WEBPACK_IMPORTED_MODULE_4__shared_urls_service__["a" /* UrlsService */]])
     ], ModalComponent);
     return ModalComponent;
 }());
@@ -705,7 +706,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/search/search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form class=\"form-inline\">\r\n  <div class=\"input-group\">\r\n      <div class=\"input-group-addon\">\r\n          <span class=\"oi oi-magnifying-glass\"></span>\r\n      </div>\r\n    <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\r\n  </div>\r\n</form>"
+module.exports = "<form class=\"form-inline\">\n  <div class=\"input-group\">\n      <div class=\"input-group-addon\">\n          <span class=\"oi oi-magnifying-glass\"></span>\n      </div>\n    <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\n  </div>\n</form>"
 
 /***/ }),
 
@@ -951,7 +952,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "#specificView {\n    margin-top: 20px;\n}\n\n#createReply {\n    margin-right: 10px;\n}\n\nh4 {\n    color: #d9d9d9;\n}\n\n#btn button-success {\n    background-color: #a0a0c5;\n    border-color: #a0a0c5;\n}\n\nbutton:hover {\n    background-color: #3a3a5f;\n    border-color: #3a3a5f;\n}\n\nbutton:active {\n    background-color: #46466d;\n    border-color: #46466d;\n}", ""]);
+exports.push([module.i, "#specificView {\r\n    margin-top: 20px;\r\n}\r\n\r\n#createReply {\r\n    margin-right: 10px;\r\n}\r\n\r\nh4 {\r\n    color: #d9d9d9;\r\n}\r\n\r\n#btn button-success {\r\n    background-color: #a0a0c5;\r\n    border-color: #a0a0c5;\r\n}\r\n\r\nbutton:hover {\r\n    background-color: #3a3a5f;\r\n    border-color: #3a3a5f;\r\n}\r\n\r\nbutton:active {\r\n    background-color: #46466d;\r\n    border-color: #46466d;\r\n}", ""]);
 
 // exports
 
@@ -974,8 +975,9 @@ module.exports = "<div class=\"row\" id=\"specificView\">\r\n  <div class=\"mr-a
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SpecificComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_current_view_service__ = __webpack_require__("../../../../../src/app/shared/current-view.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_thread_service__ = __webpack_require__("../../../../../src/app/shared/thread.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_operators__ = __webpack_require__("../../../../rxjs/_esm5/operators.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_current_view_service__ = __webpack_require__("../../../../../src/app/shared/current-view.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_thread_service__ = __webpack_require__("../../../../../src/app/shared/thread.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -988,13 +990,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var SpecificComponent = (function () {
     function SpecificComponent(threadService, curView) {
         this.threadService = threadService;
         this.curView = curView;
+        this.replies = this.threadService.getReplies(this.curView.id).pipe(Object(__WEBPACK_IMPORTED_MODULE_1_rxjs_operators__["a" /* share */])());
     }
     SpecificComponent.prototype.ngOnInit = function () {
-        this.replies = this.threadService.getReplies(this.curView.id);
+        //this.threadService.getReplies(this.curView.id);
     };
     SpecificComponent.prototype.viewCatalog = function () {
         this.curView.view = 'catalog';
@@ -1008,7 +1012,7 @@ var SpecificComponent = (function () {
             template: __webpack_require__("../../../../../src/app/specific/specific.component.html"),
             styles: [__webpack_require__("../../../../../src/app/specific/specific.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__shared_thread_service__["a" /* ThreadService */], __WEBPACK_IMPORTED_MODULE_1__shared_current_view_service__["a" /* CurrentViewService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__shared_thread_service__["a" /* ThreadService */], __WEBPACK_IMPORTED_MODULE_2__shared_current_view_service__["a" /* CurrentViewService */]])
     ], SpecificComponent);
     return SpecificComponent;
 }());
@@ -1025,7 +1029,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".list-group-item {\n    margin-top: 10px;\n}\n\ndiv li {\n    background-color: #14141f;\n    color: #f2f2f2;\n}\n\nh5 {\n    color: #d9d9d9;\n}\n\np {\n    color: #f2f2f2;\n}", ""]);
+exports.push([module.i, ".list-group-item {\r\n    margin-top: 10px;\r\n}\r\n\r\ndiv li {\r\n    background-color: #14141f;\r\n    color: #f2f2f2;\r\n}\r\n\r\nh5 {\r\n    color: #d9d9d9;\r\n}\r\n\r\np {\r\n    color: #f2f2f2;\r\n}", ""]);
 
 // exports
 
