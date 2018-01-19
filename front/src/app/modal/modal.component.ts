@@ -100,24 +100,37 @@ export class ModalComponent implements OnInit {
     // console.log(this.newpost.file);
     // console.log('name: ' + this.newpost.file.name);
 
-    const data = {
-      'userId': this.token.id.toString(),
-      'body': this.newpost.body,
-      'board': this.curView.board
-    };
+    // const data = {
+    //   'userId': this.token.id.toString(),
+    //   'body': this.newpost.body,
+    //   'board': this.curView.board
+    // };
 
-    if (this.curView.view === 'catalog') {
-       data['title'] = this.newpost.title;
-       data['type'] = 'post';
-    } else {
-      data['title'] = '';
-      data['type'] = 'comment';
-      data['postID'] = this.curView.id.toString();
-    }
+    // if (this.curView.view === 'catalog') {
+    //    data['title'] = this.newpost.title;
+    //    data['type'] = 'post';
+    // } else {
+    //   data['title'] = '';
+    //   data['type'] = 'comment';
+    //   data['postID'] = this.curView.id.toString();
+    // }
 
     const body: FormData = new FormData();
     body.append('file', this.newpost.file, this.newpost.file.name);
-    body.append('data', JSON.stringify(data));
+    // body.append('data', JSON.stringify(data));
+
+    body.append('userId', this.token.id.toString());
+    body.append('body', this.newpost.body);
+    body.append('board', this.curView.board);
+
+  if (this.curView.view === 'catalog') {
+     body.append('title', this.newpost.title);
+     body.append('type', 'post');
+  } else {
+    body.append('title', '');
+    body.append('type', 'comment');
+    body.append('postID', this.curView.id.toString());
+  }
 
     // const header = new HttpHeaders()
     //   .set('Content-Type', 'multipart/form-data');
