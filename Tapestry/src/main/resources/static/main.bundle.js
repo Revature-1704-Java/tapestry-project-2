@@ -816,6 +816,7 @@ var ThreadService = (function () {
                     postID: res.postID,
                     commentID: 0,
                     userId: res.user.userID,
+                    username: res.user.username,
                     title: res.title,
                     textContent: res.textContent,
                     imagePath: _this.urls.imageBasePath + res.imagePath,
@@ -844,6 +845,7 @@ var ThreadService = (function () {
                 postID: val.postID,
                 commentID: 0,
                 userId: val.user.userID,
+                username: val.user.username,
                 title: val.title,
                 textContent: val.textContent,
                 imagePath: _this.urls.imageBasePath + val.imagePath,
@@ -858,6 +860,7 @@ var ThreadService = (function () {
                     postID: 0,
                     commentID: res.commentID,
                     userId: res.user.userID,
+                    username: res.user.username,
                     title: '',
                     textContent: res.textContent,
                     imagePath: _this.urls.imageBasePath + res.imagePath,
@@ -1033,7 +1036,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/thread-item/thread-item.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div [ngSwitch]=\"this.curView.view\">\r\n    <li *ngSwitchCase=\"'specific'\" class=\"list-group-item\">\r\n        <div *ngIf=\"op === true\" class=\"row\">\r\n            <div class=\"col-sm-5 col-md-4\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded\" width=\"150\" height=\"150\">\r\n            </div>\r\n            <div class=\"col-sm-7 col-md-8\">\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n                \r\n        <div *ngIf=\"op !== true\" class=\"row\">\r\n            <div class=\"col-sm-3 col-md-2\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded\" width=\"100\" height=\"100\">\r\n            </div>\r\n            <div class=\"col-sm-9 col-md-10\">\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n    </li>\r\n    <figure *ngSwitchDefault class=\"figure\">\r\n        <img [src]=\"thread.imagePath\" class=\"figure-img rounded\" width=\"150\" height=\"150\">\r\n        <figcaption class=\"figure-caption\">\r\n            <h5>{{ thread.title }}</h5>\r\n            <p>{{ thread.textContent }}</p>\r\n        </figcaption>\r\n    </figure>\r\n</div>"
+module.exports = "<div [ngSwitch]=\"this.curView.view\">\r\n    <li *ngSwitchCase=\"'specific'\" class=\"list-group-item\">\r\n        <div *ngIf=\"op === true\" class=\"row\">\r\n            <div class=\"col-sm-5 col-md-4\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded\" width=\"150\" height=\"150\">\r\n            </div>\r\n            <div class=\"col-sm-7 col-md-8\">\r\n                <h5>From: {{ thread.username }}</h5>\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n                \r\n        <div *ngIf=\"op !== true\" class=\"row\">\r\n            <div class=\"col-sm-3 col-md-2\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded\" width=\"100\" height=\"100\">\r\n            </div>\r\n            <div class=\"col-sm-9 col-md-10\">\r\n                <h5>From: {{ thread.username }}</h5>\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n    </li>\r\n    <figure *ngSwitchDefault class=\"figure\">\r\n        <img [src]=\"thread.imagePath\" class=\"figure-img rounded\" width=\"150\" height=\"150\">\r\n        <figcaption class=\"figure-caption\">\r\n            <h5>{{ thread.title }}</h5>\r\n            <p>{{ thread.textContent }}</p>\r\n        </figcaption>\r\n    </figure>\r\n</div>"
 
 /***/ }),
 
