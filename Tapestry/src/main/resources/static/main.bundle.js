@@ -520,7 +520,6 @@ var ModalComponent = (function () {
             .set('Content-Type', 'application/x-www-form-urlencoded');
         this.httpClient.post(apiUrl, body, { headers: header })
             .subscribe(function (res) {
-            console.log(res);
             if (res['userID'] !== undefined) {
                 _this.token.auth = true;
                 _this.token.id = res['userID'];
@@ -542,7 +541,6 @@ var ModalComponent = (function () {
             .set('Content-Type', 'application/x-www-form-urlencoded');
         this.httpClient.post(apiUrl, body, { headers: header })
             .subscribe(function (res) {
-            console.log(res);
             if (res['userID'] !== undefined) {
                 _this.token.auth = true;
                 _this.token.id = res['userID'];
@@ -572,6 +570,9 @@ var ModalComponent = (function () {
             body.append('type', 'comment');
             body.append('postID', this.curView.id.toString());
         }
+        var xhr = new XMLHttpRequest;
+        xhr.open('POST', '/', true);
+        xhr.send(body);
         this.httpClient.post(apiUrl, body)
             .subscribe(function (res) {
             _this.newpost.file = undefined;

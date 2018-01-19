@@ -42,7 +42,6 @@ export class ModalComponent implements OnInit {
 
     this.httpClient.post(apiUrl, body, { headers: header })
       .subscribe(res => {
-        console.log(res);
         if (res['userID'] !== undefined) {
           this.token.auth = true;
           this.token.id = res['userID'];
@@ -67,7 +66,6 @@ export class ModalComponent implements OnInit {
 
     this.httpClient.post(apiUrl, body, { headers: header })
       .subscribe(res => {
-        console.log(res);
         if (res['userID'] !== undefined) {
           this.token.auth = true;
           this.token.id = res['userID'];
@@ -100,6 +98,10 @@ export class ModalComponent implements OnInit {
     body.append('type', 'comment');
     body.append('postID', this.curView.id.toString());
   }
+
+  let xhr = new XMLHttpRequest;
+  xhr.open('POST', '/', true);
+  xhr.send(body);
 
     this.httpClient.post(apiUrl, body)
       .subscribe(res => {
