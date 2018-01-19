@@ -337,7 +337,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-inverse bg-dark navbar-fixed-top\">\r\n  <div class=\"container\">\r\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n      <span class=\"navbar-toggler-icon\"></span>\r\n    </button>\r\n    <div class=\"collapse navbar-collapse\" id=\"navbarNav\">\r\n      <img src=\"../assets/taptrans.png\">\r\n      <h4>Tapestry</h4>\r\n      <div class=\"mr-auto\">\r\n        <app-navbar></app-navbar>\r\n      </div>\r\n\r\n      <app-search></app-search>\r\n      <app-login></app-login>\r\n    </div>\r\n  </div>\r\n</nav>"
+module.exports = "<nav class=\"navbar navbar-expand-lg navbar-inverse bg-dark navbar-fixed-top\">\r\n  <div class=\"container\">\r\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n      <span class=\"navbar-toggler-icon\"></span>\r\n    </button>\r\n    <div class=\"collapse navbar-collapse\" id=\"navbarNav\">\r\n      <a href=\"/\">\r\n        <img src=\"../assets/taptrans.png\">\r\n        <h4>Tapestry</h4>\r\n      </a>\r\n      <div class=\"mr-auto\">\r\n        <app-navbar></app-navbar>\r\n      </div>\r\n\r\n      <app-search></app-search>\r\n      <app-login></app-login>\r\n    </div>\r\n  </div>\r\n</nav>"
 
 /***/ }),
 
@@ -705,7 +705,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/search/search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form class=\"form-inline\">\n  <div class=\"input-group\">\n      <div class=\"input-group-addon\">\n          <span class=\"oi oi-magnifying-glass\"></span>\n      </div>\n    <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\n  </div>\n</form>"
+module.exports = "<form class=\"form-inline\">\r\n  <div class=\"input-group\">\r\n      <div class=\"input-group-addon\">\r\n          <span class=\"oi oi-magnifying-glass\"></span>\r\n      </div>\r\n    <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\r\n  </div>\r\n</form>"
 
 /***/ }),
 
