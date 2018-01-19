@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { share } from 'rxjs/operators';
 
 import { CurrentViewService } from '../shared/current-view.service';
 import { ThreadService } from '../shared/thread.service';
@@ -12,15 +11,13 @@ import { Thread } from '../shared/thread';
   styleUrls: ['./specific.component.css']
 })
 export class SpecificComponent implements OnInit {
-  public replies: Array<Thread>;
+  public replies: Observable<Array<Thread>>;
   public post: Thread;
 
-  constructor(private threadService: ThreadService, public curView: CurrentViewService) {
-    this.threadService.getReplies(this.curView.id).subscribe(res => this.replies = res);
-  }
+  constructor(private threadService: ThreadService, public curView: CurrentViewService) { }
 
   ngOnInit(): void {
-    //this.threadService.getReplies(this.curView.id);
+    this.threadService.getReplies(this.curView.id);
   }
 
   viewCatalog(): void {

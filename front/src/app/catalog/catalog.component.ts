@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Thread } from '../shared/thread';
 import { Observable } from 'rxjs/Observable';
-import { share } from 'rxjs/operators';
 
 import { ThreadService } from '../shared/thread.service';
 import { CurrentViewService } from '../shared/current-view.service';
@@ -14,12 +13,10 @@ import { CurrentViewService } from '../shared/current-view.service';
 export class CatalogComponent implements OnInit {
   public threads: Observable<Array<Thread>>;
 
-  constructor(private threadService: ThreadService, public curView: CurrentViewService) { 
-    this.threads = this.threadService.getThreads(this.curView.board).pipe(share());
-  }
+  constructor(private threadService: ThreadService, public curView: CurrentViewService) { }
 
   ngOnInit(): void {
-    //this.threads = this.threadService.getThreads(this.curView.board);
+    this.threads = this.threadService.getThreads(this.curView.board);
   }
 
   viewSpecific(id: number): void {

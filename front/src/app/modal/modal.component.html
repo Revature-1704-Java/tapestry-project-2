@@ -118,7 +118,7 @@
                         <button *ngIf="this.token.id != 0 && this.token.id != undefined" type="submit" class="btn btn-primary" id="postButton">Submit</button>
                         <div *ngIf="this.token.id == 0 || this.token.id == undefined">
                             <label class="mr-auto font-weight-bold text-danger">Not logged in</label>
-                            <button type="submit" class="btn btn-danger" id="postButton" disabled>Submit</button>
+                            <button [routerLink]="['./']" type="submit" class="btn btn-danger" id="postButton" disabled>Submit</button>
                         </div>
                     </div>
                 </form>
