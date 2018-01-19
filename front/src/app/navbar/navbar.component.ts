@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
     this.curView.board = newBoard;
     
     const curUrl = this.router.url;
-    this.router.navigateByUrl('/', { skipLocationChange: true })
+    this.router.navigateByUrl('/Dummy', { skipLocationChange: true })
       .then(() => this.router.navigate([curUrl]));
   }
 
