@@ -571,15 +571,15 @@ var ModalComponent = (function () {
             body.set('postID', this.curView.id.toString());
         }
         console.log(this.newpost.file);
-        // const header = new HttpHeaders()
-        //   .set('Content-Type', 'multipart/form-data');
+        var header = new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpHeaders */]()
+            .set('Content-Type', 'multipart/form-data');
         // const body: FormData = new FormData();
         // body.append('userId', this.token.id.toString());
         // body.append('body', this.newpost.body);
         // body.append('file', this.newpost.file, this.newpost.file.name);
         // body.append('board', this.curView.board);
         console.log('Sending: ' + body);
-        this.httpClient.post(apiUrl, body)
+        this.httpClient.post(apiUrl, body, { headers: header })
             .subscribe(function (res) {
             console.log('res');
             _this.newpost.file = undefined;

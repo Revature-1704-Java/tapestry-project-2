@@ -99,8 +99,8 @@ export class ModalComponent implements OnInit {
 
     console.log(this.newpost.file);
 
-    // const header = new HttpHeaders()
-    //   .set('Content-Type', 'multipart/form-data');
+     const header = new HttpHeaders()
+       .set('Content-Type', 'multipart/form-data');
 
     // const body: FormData = new FormData();
     // body.append('userId', this.token.id.toString());
@@ -110,7 +110,7 @@ export class ModalComponent implements OnInit {
 
     console.log('Sending: ' + body);
 
-    this.httpClient.post(apiUrl, body)
+    this.httpClient.post(apiUrl, body, { headers: header })
       .subscribe(res => {
         console.log('res');
         this.newpost.file = undefined;
