@@ -1025,7 +1025,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".list-group-item {\r\n    margin-top: 10px;\r\n}\r\n\r\ndiv li {\r\n    background-color: #14141f;\r\n    color: #f2f2f2;\r\n}\r\n\r\nh5 {\r\n    color: #d9d9d9;\r\n}\r\n\r\np {\r\n    color: #f2f2f2;\r\n}\r\n\r\n.resizable {\r\n    float: left;\r\n    position: relative;\r\n    margin: 3px;\r\n}\r\n\r\n.resizable img {\r\n    vertical-align: bottom;\r\n}\r\n\r\n.resizable:hover {\r\n    border: 0;\r\n    z-index: 1;\r\n}\r\n\r\n.resizable span {\r\n    position: absolute;\r\n    visibility: hidden;\r\n}\r\n\r\n.resizable:hover span {\r\n    visibility: visible;\r\n    top: 30px;\r\n    left: 30px;\r\n}\r\n", ""]);
+exports.push([module.i, ".list-group-item {\r\n    margin-top: 10px;\r\n}\r\n\r\ndiv li {\r\n    background-color: #14141f;\r\n    color: #f2f2f2;\r\n}\r\n\r\nh5 {\r\n    color: #d9d9d9;\r\n}\r\n\r\np {\r\n    color: #f2f2f2;\r\n}\r\n\r\n.resizable {\r\n    float: left;\r\n    position: relative;\r\n    margin: 3px;\r\n}\r\n\r\n.resizable img {\r\n    vertical-align: bottom;\r\n}\r\n\r\n.resizable:hover {\r\n    border: 0;\r\n    z-index: 1;\r\n}\r\n\r\n.resizable span {\r\n    position: absolute;\r\n    visibility: hidden;\r\n}\r\n\r\n.resizable:hover span {\r\n    visibility: visible;\r\n    top: 0px;\r\n    left: 0px;\r\n}\r\n", ""]);
 
 // exports
 
