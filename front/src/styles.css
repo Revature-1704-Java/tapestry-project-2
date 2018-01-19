@@ -14,9 +14,3 @@ html, body {
     background-color: darkgrey;
     height: 60px;
 }
-
-img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-}
