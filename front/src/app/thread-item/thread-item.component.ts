@@ -10,6 +10,7 @@ import { CurrentViewService } from '../shared/current-view.service';
 })
 export class ThreadItemComponent {
   @Input() thread: Thread;
+  @Input() op: boolean;
 
   constructor(public curView: CurrentViewService) { }
 
