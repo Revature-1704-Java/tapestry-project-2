@@ -33,12 +33,15 @@ p {
 .resizable span {
     position: absolute;
     visibility: hidden;
-    min-width: 170px;
-    height: auto;
 }
 
 .resizable:hover span {
     visibility: visible;
     top: -10px;
     left: -10px;
+}
+
+.resizable span img {
+    min-width: 170px;
+    height: auto;
 }
