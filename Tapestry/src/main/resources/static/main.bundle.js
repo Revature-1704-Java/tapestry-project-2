@@ -699,7 +699,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/search/search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form class=\"form-inline\">\n  <div class=\"input-group\">\n      <div class=\"input-group-addon\">\n          <span class=\"oi oi-magnifying-glass\"></span>\n      </div>\n    <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\n  </div>\n</form>"
+module.exports = "<form class=\"form-inline\">\r\n  <div class=\"input-group\">\r\n      <div class=\"input-group-addon\">\r\n          <span class=\"oi oi-magnifying-glass\"></span>\r\n      </div>\r\n    <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\r\n  </div>\r\n</form>"
 
 /***/ }),
 
