@@ -570,7 +570,10 @@ var ModalComponent = (function () {
             body.append('type', 'comment');
             body.append('postID', this.curView.id.toString());
         }
-        console.log(JSON.stringify(body));
+        console.log('length: ' + body.getAll.length);
+        console.log(body.getAll);
+        console.log('title is: ' + body.get('title'));
+        console.log('body is: ' + body.get('body'));
         this.httpClient.post(apiUrl, body)
             .subscribe(function (res) {
             _this.newpost.file = undefined;
