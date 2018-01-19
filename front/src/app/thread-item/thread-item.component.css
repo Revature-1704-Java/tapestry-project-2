@@ -37,6 +37,6 @@ p {
 
 .resizable:hover span {
     visibility: visible;
-    top: 0px;
-    left: 0px;
+    top: -10px;
+    left: -10px;
 }
