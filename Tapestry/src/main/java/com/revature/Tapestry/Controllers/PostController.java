@@ -179,6 +179,16 @@ public class PostController {
 				commentDao.save(commentToSubmit);
 				postDao.save(parentPost);
 			}
-		}	
+		}
+		//file null post comment
+		else {
+			Comment commentToSubmit = new Comment(uploader, key, textContent, new Date());
+			Post parentPost = postDao.findOne(Integer.parseInt(postId));
+			List<Comment> parentPostReplies = parentPost.getReplies();
+			parentPostReplies.add(commentToSubmit);
+			parentPost.setReplies(parentPostReplies);
+			commentDao.save(commentToSubmit);
+			postDao.save(parentPost);
+		}
 	}
 }
