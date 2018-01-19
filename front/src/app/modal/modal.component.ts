@@ -104,7 +104,10 @@ export class ModalComponent implements OnInit {
     console.log('title is: ' + body.get('title'));
     console.log('body is: ' + body.get('body'));
 
-    this.httpClient.post(apiUrl, body)
+    const header = new HttpHeaders();
+    header.delete('Content-Type');
+
+    this.httpClient.post(apiUrl, body, { headers: header })
       .subscribe(res => {
         this.newpost.file = undefined;
         this.postFile.nativeElement.value = '';
