@@ -573,10 +573,6 @@ var ModalComponent = (function () {
             body.append('type', 'comment');
             body.append('postID', this.curView.id.toString());
         }
-        console.log('length: ' + body.getAll.length);
-        console.log(body.getAll);
-        console.log('title is: ' + body.get('title'));
-        console.log('body is: ' + body.get('body'));
         var header = new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpHeaders */]();
         header.delete('Content-Type');
         this.httpClient.post(apiUrl, body, { headers: header })
@@ -975,9 +971,8 @@ module.exports = "<div class=\"row\" id=\"specificView\">\r\n  <div class=\"mr-a
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SpecificComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_operators__ = __webpack_require__("../../../../rxjs/_esm5/operators.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_current_view_service__ = __webpack_require__("../../../../../src/app/shared/current-view.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__shared_thread_service__ = __webpack_require__("../../../../../src/app/shared/thread.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__shared_current_view_service__ = __webpack_require__("../../../../../src/app/shared/current-view.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__shared_thread_service__ = __webpack_require__("../../../../../src/app/shared/thread.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -990,12 +985,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var SpecificComponent = (function () {
     function SpecificComponent(threadService, curView) {
+        var _this = this;
         this.threadService = threadService;
         this.curView = curView;
-        this.replies = this.threadService.getReplies(this.curView.id).pipe(Object(__WEBPACK_IMPORTED_MODULE_1_rxjs_operators__["a" /* share */])());
+        this.threadService.getReplies(this.curView.id).subscribe(function (res) { return _this.replies = res; });
     }
     SpecificComponent.prototype.ngOnInit = function () {
         //this.threadService.getReplies(this.curView.id);
@@ -1012,7 +1007,7 @@ var SpecificComponent = (function () {
             template: __webpack_require__("../../../../../src/app/specific/specific.component.html"),
             styles: [__webpack_require__("../../../../../src/app/specific/specific.component.css")]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__shared_thread_service__["a" /* ThreadService */], __WEBPACK_IMPORTED_MODULE_2__shared_current_view_service__["a" /* CurrentViewService */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__shared_thread_service__["a" /* ThreadService */], __WEBPACK_IMPORTED_MODULE_1__shared_current_view_service__["a" /* CurrentViewService */]])
     ], SpecificComponent);
     return SpecificComponent;
 }());

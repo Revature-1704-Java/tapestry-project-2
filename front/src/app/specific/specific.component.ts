@@ -12,11 +12,11 @@ import { Thread } from '../shared/thread';
   styleUrls: ['./specific.component.css']
 })
 export class SpecificComponent implements OnInit {
-  public replies: Observable<Array<Thread>>;
+  public replies: Array<Thread>;
   public post: Thread;
 
   constructor(private threadService: ThreadService, public curView: CurrentViewService) {
-    this.replies = this.threadService.getReplies(this.curView.id).pipe(share());
+    this.threadService.getReplies(this.curView.id).subscribe(res => this.replies = res);
   }
 
   ngOnInit(): void {

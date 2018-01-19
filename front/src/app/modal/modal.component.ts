@@ -99,11 +99,6 @@ export class ModalComponent implements OnInit {
       body.append('postID', this.curView.id.toString());
     }
 
-    console.log('length: ' + body.getAll.length);
-    console.log(body.getAll);
-    console.log('title is: ' + body.get('title'));
-    console.log('body is: ' + body.get('body'));
-
     const header = new HttpHeaders();
     header.delete('Content-Type');
 
