@@ -23,31 +23,24 @@ export class ThreadService {
             .set('Content-Type', 'application/x-www-form-urlencoded');
 
         return this.httpClient
-            .post<any>(apiUrl, body, { headers: header })
+            .post<Array<any>>(apiUrl, body, { headers: header })
             .map(val => {
-                console.log(val);
-                return val;
+                const threads: Array<Thread> = [];
+                val.map(res => {
+                    const thread = {
+                        postID: res.postID,
+                        commentID: 0,
+                        userId: res.user.userID,
+                        title: res.title,
+                        textContent: res.textContent,
+                        imagePath: this.urls.imageBasePath + res.imagePath,
+                        postTime: res.postTime
+                    };
+                    threads.push(thread as Thread);
+                });
+
+                return threads;
             });
-
-        // return this.httpClient
-        //     .post<Array<any>>(apiUrl, body, { headers: header })
-        //     .map(val => {
-        //         const threads: Array<Thread> = [];
-        //         val.map(res => {
-        //             const thread = {
-        //                 postID: res.postID,
-        //                 commentID: 0,
-        //                 userId: res.user.userID,
-        //                 title: res.title,
-        //                 textContent: res.textContent,
-        //                 imagePath: this.urls.imageBasePath + res.imagePath,
-        //                 postTime: res.postTime
-        //             };
-        //             threads.push(thread as Thread);
-        //         });
-
-        //         return threads;
-        //     });
     }
 
     getReplies(id: number): Observable<Array<Thread>> {
