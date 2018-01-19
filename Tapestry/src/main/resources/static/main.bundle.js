@@ -821,6 +821,9 @@ var ThreadService = (function () {
                     imagePath: _this.urls.imageBasePath + res.imagePath,
                     postTime: res.postTime
                 };
+                if (res.imagePath === null) {
+                    thread.imagePath = _this.urls.placeholderPostImage;
+                }
                 threads.push(thread);
             });
             return threads;
@@ -846,6 +849,9 @@ var ThreadService = (function () {
                 imagePath: _this.urls.imageBasePath + val.imagePath,
                 postTime: val.postTime
             };
+            if (val.imagePath === null) {
+                thread.imagePath = _this.urls.placeholderPostImage;
+            }
             threads.push(thread);
             val.replies.map(function (res) {
                 var reply = {
@@ -857,6 +863,9 @@ var ThreadService = (function () {
                     imagePath: _this.urls.imageBasePath + res.imagePath,
                     postTime: res.postTime
                 };
+                if (res.imagePath === null) {
+                    reply.imagePath = _this.urls.placeholderCommentImage;
+                }
                 threads.push(reply);
             });
             return threads;
@@ -916,6 +925,8 @@ var UrlsService = (function () {
     function UrlsService() {
         this.imageBasePath = 'http://s3.amazonaws.com/moirai/';
         this.serverBasePath = 'http://34.234.202.22:8181';
+        this.placeholderPostImage = 'http://placehold.it/150x150';
+        this.placeholderCommentImage = 'http://placehold.it/100x100';
     }
     UrlsService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])()
@@ -1022,7 +1033,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/thread-item/thread-item.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div [ngSwitch]=\"this.curView.view\">\r\n    <li *ngSwitchCase=\"'specific'\" class=\"list-group-item\">\r\n        <div *ngIf=\"op === true\" class=\"row\">\r\n            <div class=\"col-sm-5 col-md-4\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded\" width=\"150\" height=\"150\">\r\n            </div>\r\n            <div class=\"col-sm-7 col-md-8\">\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n                \r\n        <div *ngIf=\"op !== true\" class=\"row\">\r\n            <div class=\"col-sm-3 col-md-2\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded\" width=\"100\" height=\"100\">\r\n            </div>\r\n            <div class=\"col-sm-9 col-md-10\">\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n    </li>\r\n    <figure *ngSwitchDefault class=\"figure\">\r\n        <img [src]=\"thread.imagePath\" class=\"figure-img img-fluid rounded\" width=\"150\" height=\"150\">\r\n        <figcaption class=\"figure-caption\">\r\n            <h5>{{ thread.title }}</h5>\r\n            <p>{{ thread.textContent }}</p>\r\n        </figcaption>\r\n    </figure>\r\n</div>"
+module.exports = "<div [ngSwitch]=\"this.curView.view\">\r\n    <li *ngSwitchCase=\"'specific'\" class=\"list-group-item\">\r\n        <div *ngIf=\"op === true\" class=\"row\">\r\n            <div class=\"col-sm-5 col-md-4\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded\" width=\"150\" height=\"150\">\r\n            </div>\r\n            <div class=\"col-sm-7 col-md-8\">\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n                \r\n        <div *ngIf=\"op !== true\" class=\"row\">\r\n            <div class=\"col-sm-3 col-md-2\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded\" width=\"100\" height=\"100\">\r\n            </div>\r\n            <div class=\"col-sm-9 col-md-10\">\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n    </li>\r\n    <figure *ngSwitchDefault class=\"figure\">\r\n        <img [src]=\"thread.imagePath\" class=\"figure-img rounded\" width=\"150\" height=\"150\">\r\n        <figcaption class=\"figure-caption\">\r\n            <h5>{{ thread.title }}</h5>\r\n            <p>{{ thread.textContent }}</p>\r\n        </figcaption>\r\n    </figure>\r\n</div>"
 
 /***/ }),
 

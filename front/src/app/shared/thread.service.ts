@@ -36,6 +36,9 @@ export class ThreadService {
                         imagePath: this.urls.imageBasePath + res.imagePath,
                         postTime: res.postTime
                     };
+                    if (res.imagePath === null) {
+                        thread.imagePath = this.urls.placeholderPostImage;
+                    }
                     threads.push(thread as Thread);
                 });
 
@@ -66,6 +69,9 @@ export class ThreadService {
                     imagePath: this.urls.imageBasePath + val.imagePath,
                     postTime: val.postTime
                 };
+                if (val.imagePath === null) {
+                    thread.imagePath = this.urls.placeholderPostImage;
+                }
                 threads.push(thread as Thread);
 
                 val.replies.map(res => {
@@ -78,6 +84,9 @@ export class ThreadService {
                         imagePath: this.urls.imageBasePath + res.imagePath,
                         postTime: res.postTime
                     };
+                    if (res.imagePath === null) {
+                        reply.imagePath = this.urls.placeholderCommentImage;
+                    }
                     threads.push(reply as Thread);
                 });
 
