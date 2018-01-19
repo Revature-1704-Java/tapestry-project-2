@@ -83,29 +83,48 @@ export class ModalComponent implements OnInit {
   createPost(): void {
     const apiUrl = this.urls.serverBasePath + '/createThread';
 
-    const body = new HttpParams()
-      .set('userId', this.token.id.toString())
-      .set('body', this.newpost.body)
-      .set('file', this.newpost.file)
-      .set('board', this.curView.board);
+    // const body = new HttpParams()
+    //   .set('userId', this.token.id.toString())
+    //   .set('body', this.newpost.body)
+    //   .set('file', this.newpost.file)
+    //   .set('board', this.curView.board);
+    // if (this.curView.view === 'catalog') {
+    //   body.set('title', this.newpost.title);
+    //   body.set('type', 'post');
+    // } else {
+    //   body.set('title', '');
+    //   body.set('type', 'comment');
+    //   body.set('postID', this.curView.id.toString());
+    // }
+
+    // console.log(this.newpost.file);
+    // console.log('name: ' + this.newpost.file.name);
+
+    const data = {
+      'userId': this.token.id.toString(),
+      'body': this.newpost.body,
+      'board': this.curView.board
+    };
+
     if (this.curView.view === 'catalog') {
-      body.set('title', this.newpost.title);
-      body.set('type', 'post');
+       data['title'] = this.newpost.title;
+       data['type'] = 'post';
     } else {
-      body.set('title', '');
-      body.set('type', 'comment');
-      body.set('postID', this.curView.id.toString());
+      data['title'] = '';
+      data['type'] = 'comment';
+      data['postID'] = this.curView.id.toString();
     }
 
-    console.log(this.newpost.file);
-    console.log('name: ' + this.newpost.file.name);
+    const body: FormData = new FormData();
+    body.append('file', this.newpost.file, this.newpost.file.name);
+    body.append('data', JSON.stringify(data));
 
-     const header = new HttpHeaders()
-       .set('Content-Type', 'multipart/form-data');
+    // const header = new HttpHeaders()
+    //   .set('Content-Type', 'multipart/form-data');
 
     console.log('Sending: ' + body);
 
-    this.httpClient.post(apiUrl, body, { headers: header })
+    this.httpClient.post(apiUrl, body)
       .subscribe(res => {
         console.log('res');
         this.newpost.file = undefined;

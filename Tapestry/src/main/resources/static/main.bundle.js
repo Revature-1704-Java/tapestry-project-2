@@ -556,26 +556,42 @@ var ModalComponent = (function () {
     ModalComponent.prototype.createPost = function () {
         var _this = this;
         var apiUrl = this.urls.serverBasePath + '/createThread';
-        var body = new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["d" /* HttpParams */]()
-            .set('userId', this.token.id.toString())
-            .set('body', this.newpost.body)
-            .set('file', this.newpost.file)
-            .set('board', this.curView.board);
+        // const body = new HttpParams()
+        //   .set('userId', this.token.id.toString())
+        //   .set('body', this.newpost.body)
+        //   .set('file', this.newpost.file)
+        //   .set('board', this.curView.board);
+        // if (this.curView.view === 'catalog') {
+        //   body.set('title', this.newpost.title);
+        //   body.set('type', 'post');
+        // } else {
+        //   body.set('title', '');
+        //   body.set('type', 'comment');
+        //   body.set('postID', this.curView.id.toString());
+        // }
+        // console.log(this.newpost.file);
+        // console.log('name: ' + this.newpost.file.name);
+        var data = {
+            'userId': this.token.id.toString(),
+            'body': this.newpost.body,
+            'board': this.curView.board
+        };
         if (this.curView.view === 'catalog') {
-            body.set('title', this.newpost.title);
-            body.set('type', 'post');
+            data['title'] = this.newpost.title;
+            data['type'] = 'post';
         }
         else {
-            body.set('title', '');
-            body.set('type', 'comment');
-            body.set('postID', this.curView.id.toString());
+            data['title'] = '';
+            data['type'] = 'comment';
+            data['postID'] = this.curView.id.toString();
         }
-        console.log(this.newpost.file);
-        console.log('name: ' + this.newpost.file.name);
-        var header = new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpHeaders */]()
-            .set('Content-Type', 'multipart/form-data');
+        var body = new FormData();
+        body.append('file', this.newpost.file, this.newpost.file.name);
+        body.append('data', JSON.stringify(data));
+        // const header = new HttpHeaders()
+        //   .set('Content-Type', 'multipart/form-data');
         console.log('Sending: ' + body);
-        this.httpClient.post(apiUrl, body, { headers: header })
+        this.httpClient.post(apiUrl, body)
             .subscribe(function (res) {
             console.log('res');
             _this.newpost.file = undefined;
