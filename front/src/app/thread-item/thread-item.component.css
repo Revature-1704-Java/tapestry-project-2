@@ -15,7 +15,28 @@ p {
     color: #f2f2f2;
 }
 
-img.resizable:hover {
-    width: 440px;
-    height: auto;
+.resizable {
+    float: left;
+    position: relative;
+    margin: 3px;
+}
+
+.resizable img {
+    vertical-align: bottom;
+}
+
+.resizable:hover {
+    border: 0;
+    z-index: 1;
+}
+
+.resizable span {
+    position: absolute;
+    visibility: hidden;
+}
+
+.resizable:hover span {
+    visibility: visible;
+    top: 30px;
+    left: 30px;
 }

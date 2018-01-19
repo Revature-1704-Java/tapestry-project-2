@@ -21,7 +21,12 @@
         </div>
     </li>
     <figure *ngSwitchDefault class="figure">
-        <img [src]="thread.imagePath" class="figure-img rounded resizable" width="150" height="150">
+        <span class="resizable">
+            <img [src]="thread.imagePath" class="figure-img rounded" width="150" height="150">
+            <span>
+                <img [src]="thread.imagePath" class="figure-img rounded">
+            </span>
+        </span>
         <figcaption class="figure-caption">
             <h5>{{ thread.title }}</h5>
             <p>{{ thread.textContent }}</p>

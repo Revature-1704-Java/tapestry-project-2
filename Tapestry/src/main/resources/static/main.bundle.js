@@ -705,7 +705,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/search/search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form class=\"form-inline\">\r\n  <div class=\"input-group\">\r\n      <div class=\"input-group-addon\">\r\n          <span class=\"oi oi-magnifying-glass\"></span>\r\n      </div>\r\n    <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\r\n  </div>\r\n</form>"
+module.exports = "<form class=\"form-inline\">\n  <div class=\"input-group\">\n      <div class=\"input-group-addon\">\n          <span class=\"oi oi-magnifying-glass\"></span>\n      </div>\n    <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\n  </div>\n</form>"
 
 /***/ }),
 
@@ -1025,7 +1025,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".list-group-item {\r\n    margin-top: 10px;\r\n}\r\n\r\ndiv li {\r\n    background-color: #14141f;\r\n    color: #f2f2f2;\r\n}\r\n\r\nh5 {\r\n    color: #d9d9d9;\r\n}\r\n\r\np {\r\n    color: #f2f2f2;\r\n}\r\n\r\nimg.resizable:hover {\r\n    width: 440px;\r\n    height: auto;\r\n}\r\n", ""]);
+exports.push([module.i, ".list-group-item {\r\n    margin-top: 10px;\r\n}\r\n\r\ndiv li {\r\n    background-color: #14141f;\r\n    color: #f2f2f2;\r\n}\r\n\r\nh5 {\r\n    color: #d9d9d9;\r\n}\r\n\r\np {\r\n    color: #f2f2f2;\r\n}\r\n\r\n.resizable {\r\n    float: left;\r\n    position: relative;\r\n    margin: 3px;\r\n}\r\n\r\n.resizable img {\r\n    vertical-align: bottom;\r\n}\r\n\r\n.resizable:hover {\r\n    border: 0;\r\n    z-index: 1;\r\n}\r\n\r\n.resizable span {\r\n    position: absolute;\r\n    visibility: hidden;\r\n}\r\n\r\n.resizable:hover span {\r\n    visibility: visible;\r\n    top: 30px;\r\n    left: 30px;\r\n}\r\n", ""]);
 
 // exports
 
@@ -1038,7 +1038,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/thread-item/thread-item.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div [ngSwitch]=\"this.curView.view\">\r\n    <li *ngSwitchCase=\"'specific'\" class=\"list-group-item\">\r\n        <div *ngIf=\"op === true\" class=\"row\">\r\n            <div class=\"col-sm-5 col-md-3\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded resizable\" width=\"150\" height=\"150\">\r\n            </div>\r\n            <div class=\"col-sm-7 col-md-9\">\r\n                <h5>{{ thread.username }} says:</h5>\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n                \r\n        <div *ngIf=\"op !== true\" class=\"row\">\r\n            <div class=\"col-sm-3 col-md-2\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded resizable\" width=\"100\" height=\"100\">\r\n            </div>\r\n            <div class=\"col-sm-9 col-md-10\">\r\n                <h5>{{ thread.username }} says:</h5>\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n    </li>\r\n    <figure *ngSwitchDefault class=\"figure\">\r\n        <img [src]=\"thread.imagePath\" class=\"figure-img rounded resizable\" width=\"150\" height=\"150\">\r\n        <figcaption class=\"figure-caption\">\r\n            <h5>{{ thread.title }}</h5>\r\n            <p>{{ thread.textContent }}</p>\r\n        </figcaption>\r\n    </figure>\r\n</div>"
+module.exports = "<div [ngSwitch]=\"this.curView.view\">\r\n    <li *ngSwitchCase=\"'specific'\" class=\"list-group-item\">\r\n        <div *ngIf=\"op === true\" class=\"row\">\r\n            <div class=\"col-sm-5 col-md-3\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded resizable\" width=\"150\" height=\"150\">\r\n            </div>\r\n            <div class=\"col-sm-7 col-md-9\">\r\n                <h5>{{ thread.username }} says:</h5>\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n                \r\n        <div *ngIf=\"op !== true\" class=\"row\">\r\n            <div class=\"col-sm-3 col-md-2\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded resizable\" width=\"100\" height=\"100\">\r\n            </div>\r\n            <div class=\"col-sm-9 col-md-10\">\r\n                <h5>{{ thread.username }} says:</h5>\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n    </li>\r\n    <figure *ngSwitchDefault class=\"figure\">\r\n        <span class=\"resizable\">\r\n            <img [src]=\"thread.imagePath\" class=\"figure-img rounded\" width=\"150\" height=\"150\">\r\n            <span>\r\n                <img [src]=\"thread.imagePath\" class=\"figure-img rounded\">\r\n            </span>\r\n        </span>\r\n        <figcaption class=\"figure-caption\">\r\n            <h5>{{ thread.title }}</h5>\r\n            <p>{{ thread.textContent }}</p>\r\n        </figcaption>\r\n    </figure>\r\n</div>"
 
 /***/ }),
 
