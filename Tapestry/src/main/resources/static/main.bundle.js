@@ -385,7 +385,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "#signupButtonNav {\r\n    margin-right: 8px;\r\n}", ""]);
 
 // exports
 
@@ -398,7 +398,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div [ngSwitch]=\"this.token.auth\">\r\n    <div *ngSwitchCase=\"true\" class=\"dropdown\">\r\n        <button type=\"button form-control\" class=\"btn btn-secondary dropdown-toggle\" id=\"dropdownLogin\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\r\n            Pic\r\n        </button>\r\n        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownLogin\">\r\n            <h6 class=\"dropdown-header\">Your Name</h6>\r\n            <button class=\"dropdown-item\" type=\"button\" disabled>\r\n                <span class=\"oi oi-person\">&nbsp;</span> Profile\r\n            </button>\r\n\r\n            <button class=\"dropdown-item\" type=\"button\" disabled>\r\n                <span class=\"oi oi-cog\">&nbsp;</span> Settings\r\n            </button>\r\n\r\n            <button class=\"dropdown-item\" type=\"button\" (click)=\"logout()\">\r\n                <span class=\"oi oi-account-logout\">&nbsp;</span> Logout\r\n            </button>\r\n\r\n            <div class=\"dropdown-divider\"></div>\r\n            <button class=\"dropdown-item\" type=\"button\" disabled>\r\n                Night mode &nbsp;&nbsp;<span class=\"oi oi-moon\"></span>\r\n            </button>\r\n        </div>\r\n    </div>\r\n    <div *ngSwitchDefault>\r\n        <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#userModal\">\r\n            Sign up\r\n        </button>\r\n\r\n        <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#loginModal\">\r\n            <span class=\"oi oi-account-login\">&nbsp;</span> Log in\r\n        </button>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div [ngSwitch]=\"this.token.auth\">\r\n    <div *ngSwitchCase=\"true\" class=\"dropdown\">\r\n        <button type=\"button form-control\" class=\"btn btn-secondary dropdown-toggle\" id=\"dropdownLogin\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\r\n            Pic\r\n        </button>\r\n        <div class=\"dropdown-menu\" aria-labelledby=\"dropdownLogin\">\r\n            <h6 class=\"dropdown-header\">Your Name</h6>\r\n            <button class=\"dropdown-item\" type=\"button\" disabled>\r\n                <span class=\"oi oi-person\">&nbsp;</span> Profile\r\n            </button>\r\n\r\n            <button class=\"dropdown-item\" type=\"button\" disabled>\r\n                <span class=\"oi oi-cog\">&nbsp;</span> Settings\r\n            </button>\r\n\r\n            <button class=\"dropdown-item\" type=\"button\" (click)=\"logout()\">\r\n                <span class=\"oi oi-account-logout\">&nbsp;</span> Logout\r\n            </button>\r\n\r\n            <div class=\"dropdown-divider\"></div>\r\n            <button class=\"dropdown-item\" type=\"button\" disabled>\r\n                Night mode &nbsp;&nbsp;<span class=\"oi oi-moon\"></span>\r\n            </button>\r\n        </div>\r\n    </div>\r\n    <div *ngSwitchDefault class=\"input-group\">\r\n        <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#userModal\" id=\"signupButtonNav\">\r\n            Sign up\r\n        </button>\r\n\r\n        <button type=\"button\" class=\"btn btn-secondary\" data-toggle=\"modal\" data-target=\"#loginModal\">\r\n            <span class=\"oi oi-account-login\">&nbsp;</span> Log in\r\n        </button>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -699,7 +699,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/search/search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form class=\"form-inline\">\r\n  <div class=\"input-group\">\r\n      <div class=\"input-group-addon\">\r\n          <span class=\"oi oi-magnifying-glass\"></span>\r\n      </div>\r\n    <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\r\n  </div>\r\n</form>"
+module.exports = "<form class=\"form-inline\">\n  <div class=\"input-group\">\n      <div class=\"input-group-addon\">\n          <span class=\"oi oi-magnifying-glass\"></span>\n      </div>\n    <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\n  </div>\n</form>"
 
 /***/ }),
 
