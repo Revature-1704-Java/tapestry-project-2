@@ -62,13 +62,15 @@ public class PostController {
 		List<Post> list = postDao.findAll();
 		for (Post p : list) {
 			List<Board> boards = p.getBoardsPosted();
+			if (boards == null) {
+				System.out.println("no boards found");
+			}
 			for(Board b : boards) {
-				if (boardName == b.getBoardName()) {
+				if (boardName.equals(b.getBoardName())) {
 					postsReturned.add(p);
 				}
 			}	
 		}
-		
 		return postsReturned;
 		
 		/* //get s3client

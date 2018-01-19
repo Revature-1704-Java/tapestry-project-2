@@ -15,6 +15,9 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.JoinColumn;
 
 @Entity
@@ -106,7 +109,7 @@ public class Post {
 		this.title = title;
 	}
 	
-	
+	@JsonIgnore
 	@ManyToMany
     @JoinTable(name="POST_BOARD",
         joinColumns=
