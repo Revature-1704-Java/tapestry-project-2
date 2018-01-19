@@ -97,12 +97,20 @@ export class ModalComponent implements OnInit {
       body.set('postID', this.curView.id.toString());
     }
 
-    const header = new HttpHeaders()
-      .set('Content-Type', 'multipart/form-data');
+    console.log(this.newpost.file);
+
+    // const header = new HttpHeaders()
+    //   .set('Content-Type', 'multipart/form-data');
+
+    // const body: FormData = new FormData();
+    // body.append('userId', this.token.id.toString());
+    // body.append('body', this.newpost.body);
+    // body.append('file', this.newpost.file, this.newpost.file.name);
+    // body.append('board', this.curView.board);
 
     console.log('Sending: ' + body);
 
-    this.httpClient.post(apiUrl, body, { headers: header })
+    this.httpClient.post(apiUrl, body)
       .subscribe(res => {
         console.log('res');
         this.newpost.file = undefined;
