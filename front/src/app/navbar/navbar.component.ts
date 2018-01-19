@@ -19,7 +19,9 @@ export class NavbarComponent implements OnInit {
   switchBoard(newBoard: string): void {
     this.curView.board = newBoard;
 
-    this.threadService.updateThreads(newBoard);
+    //this.threadService.updateThreads(newBoard);
+    this.router.navigateByUrl('/Dummy', { skipLocationChange: true })
+      .then(() => this.router.navigate([newBoard]));
   }
 
 }
