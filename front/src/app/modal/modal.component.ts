@@ -100,8 +100,11 @@ export class ModalComponent implements OnInit {
     const header = new HttpHeaders()
       .set('Content-Type', 'multipart/form-data');
 
+    console.log('Sending: ' + body);
+
     this.httpClient.post(apiUrl, body, { headers: header })
       .subscribe(res => {
+        console.log('res');
         this.newpost.file = undefined;
         this.postFile.nativeElement.value = '';
 
