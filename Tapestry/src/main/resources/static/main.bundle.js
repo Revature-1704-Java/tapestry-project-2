@@ -496,12 +496,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var ModalComponent = (function () {
-    function ModalComponent(httpClient, token, curView, urls, cdr) {
+    function ModalComponent(httpClient, token, curView, urls, arf) {
         this.httpClient = httpClient;
         this.token = token;
         this.curView = curView;
         this.urls = urls;
-        this.cdr = cdr;
+        this.arf = arf;
         this.user = { username: '', password: '' };
         this.newuser = { username: '', email: '', password: '' };
         this.newpost = { title: '', body: '', file: undefined };
@@ -582,7 +582,7 @@ var ModalComponent = (function () {
             _this.newpost.file = undefined;
             _this.postFile.nativeElement.value = '';
             _this.postClose.nativeElement.click();
-            _this.cdr.detectChanges();
+            _this.arf.tick();
         }, function (err) { return console.log(err); });
     };
     __decorate([
@@ -608,7 +608,7 @@ var ModalComponent = (function () {
             styles: [__webpack_require__("../../../../../src/app/modal/modal.component.css")]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__shared_token_service__["a" /* TokenService */],
-            __WEBPACK_IMPORTED_MODULE_2__shared_current_view_service__["a" /* CurrentViewService */], __WEBPACK_IMPORTED_MODULE_4__shared_urls_service__["a" /* UrlsService */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["k" /* ChangeDetectorRef */]])
+            __WEBPACK_IMPORTED_MODULE_2__shared_current_view_service__["a" /* CurrentViewService */], __WEBPACK_IMPORTED_MODULE_4__shared_urls_service__["a" /* UrlsService */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["g" /* ApplicationRef */]])
     ], ModalComponent);
     return ModalComponent;
 }());
