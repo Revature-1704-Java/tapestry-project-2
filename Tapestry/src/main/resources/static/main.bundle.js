@@ -572,8 +572,10 @@ var ModalComponent = (function () {
         }
         var header = new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpHeaders */]()
             .set('Content-Type', 'multipart/form-data');
+        console.log('Sending: ' + body);
         this.httpClient.post(apiUrl, body, { headers: header })
             .subscribe(function (res) {
+            console.log('res');
             _this.newpost.file = undefined;
             _this.postFile.nativeElement.value = '';
             _this.postClose.nativeElement.click();
