@@ -570,9 +570,7 @@ var ModalComponent = (function () {
             body.append('type', 'comment');
             body.append('postID', this.curView.id.toString());
         }
-        var xhr = new XMLHttpRequest;
-        xhr.open('POST', '/', true);
-        xhr.send(body);
+        console.log(JSON.stringify(body));
         this.httpClient.post(apiUrl, body)
             .subscribe(function (res) {
             _this.newpost.file = undefined;

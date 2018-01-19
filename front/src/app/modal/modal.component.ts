@@ -90,18 +90,16 @@ export class ModalComponent implements OnInit {
     body.append('body', this.newpost.body);
     body.append('board', this.curView.board);
 
-  if (this.curView.view === 'catalog') {
-     body.append('title', this.newpost.title);
-     body.append('type', 'post');
-  } else {
-    body.append('title', '');
-    body.append('type', 'comment');
-    body.append('postID', this.curView.id.toString());
-  }
+    if (this.curView.view === 'catalog') {
+      body.append('title', this.newpost.title);
+      body.append('type', 'post');
+    } else {
+      body.append('title', '');
+      body.append('type', 'comment');
+      body.append('postID', this.curView.id.toString());
+    }
 
-  let xhr = new XMLHttpRequest;
-  xhr.open('POST', '/', true);
-  xhr.send(body);
+    console.log(JSON.stringify(body));
 
     this.httpClient.post(apiUrl, body)
       .subscribe(res => {
