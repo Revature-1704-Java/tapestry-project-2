@@ -5,7 +5,6 @@ agent any
 stages {
    stage('Preparation') { 
       steps{
-	sh 'service tapestry stop'
       	git branch: 'master', url: 'https://github.com/Revature-1704-Java/tapestry-project-2.git'
       }
    }
@@ -33,8 +32,6 @@ stages {
    stage('Deploy'){
    	steps{
        slackSend color: '#0F0F0F', message: 'Master Build was successful'
-       sh 'service tapestry start'
-       slackSend color: '#000000', message: 'Master Build was Deployed'
 	}
    }
 }
