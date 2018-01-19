@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Thread } from './thread';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toArray';
 
@@ -9,10 +11,17 @@ import { UrlsService } from './urls.service';
 
 @Injectable()
 export class ThreadService {
-    public threads: Observable<Array<Thread>>;
-    public replies: Observable<Array<Thread>>;
+    private threads: Observable<Array<Thread>>;
+    private threadsSubject: Subject<any>;
+
+    private replies: Observable<Array<Thread>>;
+    private repliesSubject: Subject<any>;
+
     
-    constructor(private httpClient: HttpClient, public urls: UrlsService) { }
+    constructor(private httpClient: HttpClient, public urls: UrlsService) {
+        this.threadsSubject = new ReplaySubject(1);
+        this.repliesSubject = new ReplaySubject(1);
+    }
 
     updateThreads(board: string): void {
         this.threads = this.getThreads(board);
@@ -23,38 +32,47 @@ export class ThreadService {
     }
 
 
-    getThreads(board: string): Observable<Array<Thread>> {
-        const apiUrl = this.urls.serverBasePath + '/getPosts';
+    getThreads(board: string, refresh: boolean = false): Observable<Array<Thread>> {
+        if (refresh || !this.threads) {
+            const apiUrl = this.urls.serverBasePath + '/getPosts';
 
-        const body = new HttpParams()
-            .set('boardName', board);
-        
-        const header = new HttpHeaders()
-            .set('Content-Type', 'application/x-www-form-urlencoded');
+            const body = new HttpParams()
+                .set('boardName', board);
+            
+            const header = new HttpHeaders()
+                .set('Content-Type', 'application/x-www-form-urlencoded');
 
-        return this.httpClient
-            .post<Array<any>>(apiUrl, body, { headers: header })
-            .map(val => {
-                const threads: Array<Thread> = [];
-                val.map(res => {
-                    const thread = {
-                        postID: res.postID,
-                        commentID: 0,
-                        userId: res.user.userID,
-                        username: res.user.username,
-                        title: res.title,
-                        textContent: res.textContent,
-                        imagePath: this.urls.imageBasePath + res.imagePath,
-                        postTime: res.postTime
-                    };
-                    if (res.imagePath === null) {
-                        thread.imagePath = this.urls.placeholderPostImage;
-                    }
-                    threads.push(thread as Thread);
+            this.threads = this.httpClient
+                .post<Array<any>>(apiUrl, body, { headers: header })
+                .map(val => {
+                    const threads: Array<Thread> = [];
+                    val.map(res => {
+                        const thread = {
+                            postID: res.postID,
+                            commentID: 0,
+                            userId: res.user.userID,
+                            username: res.user.username,
+                            title: res.title,
+                            textContent: res.textContent,
+                            imagePath: this.urls.imageBasePath + res.imagePath,
+                            postTime: res.postTime
+                        };
+                        if (res.imagePath === null) {
+                            thread.imagePath = this.urls.placeholderPostImage;
+                        }
+                        threads.push(thread as Thread);
+                    });
+
+                    return threads;
                 });
 
-                return threads;
-            });
+            this.threads.subscribe(
+                res => this.threadsSubject.next(res),
+                err => this.threadsSubject.error(err)
+            );
+        }
+
+        return this.threadsSubject.asObservable();
     }
 
     getReplies(id: number): Observable<Array<Thread>> {
