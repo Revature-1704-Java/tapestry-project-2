@@ -1,4 +1,4 @@
-import { ApplicationRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms/src/model';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
@@ -23,7 +23,7 @@ export class ModalComponent implements OnInit {
   @ViewChild('postFile') postFile: ElementRef;
 
   constructor(private httpClient: HttpClient, public token: TokenService, 
-    public curView: CurrentViewService, public urls: UrlsService, private arf: ApplicationRef) { }
+    public curView: CurrentViewService, public urls: UrlsService) { }
 
   ngOnInit(): void {
   }
@@ -113,7 +113,6 @@ export class ModalComponent implements OnInit {
         this.postFile.nativeElement.value = '';
 
         this.postClose.nativeElement.click();
-        this.arf.tick();
       }, err => console.log(err));
 
   }
