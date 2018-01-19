@@ -128,7 +128,7 @@ public class PostController {
 	public void submitPost(@RequestParam(value="type", required=true) String type, @RequestParam(value="userId", required=true) String userId,
 			@RequestParam(value="title", required = false) String title, @RequestParam(value="body", required=true) String textContent, 
 			@RequestParam(value="file", required=false) MultipartFile inputImage, @RequestParam(value="board", required=false) String board,
-			@RequestParam(value="postId", required=false) String postId)
+			@RequestParam(value="postID", required=false) String postID)
 	{
 		String bucketName = "moirai";
 		//AWSCredentialsProvider credentials = new AWSStaticCredentialsProvider 
@@ -172,7 +172,7 @@ public class PostController {
 			else if (type.equals("comment"))
 			{
 				Comment commentToSubmit = new Comment(uploader, key, textContent, new Date());
-				Post parentPost = postDao.findOne(Integer.parseInt(postId));
+				Post parentPost = postDao.findOne(Integer.parseInt(postID));
 				List<Comment> parentPostReplies = parentPost.getReplies();
 				parentPostReplies.add(commentToSubmit);
 				parentPost.setReplies(parentPostReplies);
@@ -183,7 +183,7 @@ public class PostController {
 		//file null post comment
 		else {
 			Comment commentToSubmit = new Comment(uploader, key, textContent, new Date());
-			Post parentPost = postDao.findOne(Integer.parseInt(postId));
+			Post parentPost = postDao.findOne(Integer.parseInt(postID));
 			List<Comment> parentPostReplies = parentPost.getReplies();
 			parentPostReplies.add(commentToSubmit);
 			parentPost.setReplies(parentPostReplies);
