@@ -54,10 +54,10 @@ public class UserController {
 		User user = new User(username, email, password);
 		if (existingUser ==  null){
 			userDao.save(user);
-			return null;
+			return userDao.findByEmail(email);
 		}
 		
-		return user;
+		return null;
 	}
 	
 	@GetMapping(value="/user/{id}", produces=MediaType.APPLICATION_JSON_VALUE)

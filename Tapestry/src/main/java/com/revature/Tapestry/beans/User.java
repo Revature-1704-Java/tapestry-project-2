@@ -79,7 +79,6 @@ public class User {
 	}
 	
 	public boolean isCorrectPassword(String passwordToCheck) {
-		System.out.println(password);
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		return passwordEncoder.matches(passwordToCheck, this.getPassword());
 	}
