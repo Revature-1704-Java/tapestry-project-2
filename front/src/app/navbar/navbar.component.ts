@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { CurrentViewService } from '../shared/current-view.service';
+import { ThreadService } from '../shared/thread.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,17 +11,15 @@ import { CurrentViewService } from '../shared/current-view.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public curView: CurrentViewService, private router: Router) { }
+  constructor(public curView: CurrentViewService, private router: Router, private threadService: ThreadService) { }
 
   ngOnInit(): void {
   }
 
   switchBoard(newBoard: string): void {
     this.curView.board = newBoard;
-    
-    const curUrl = this.router.url;
-    this.router.navigateByUrl('/Dummy', { skipLocationChange: true })
-      .then(() => this.router.navigate([curUrl]));
+
+    this.threadService.updateThreads(newBoard);
   }
 
 }

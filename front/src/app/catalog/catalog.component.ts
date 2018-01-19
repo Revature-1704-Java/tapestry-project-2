@@ -11,12 +11,13 @@ import { CurrentViewService } from '../shared/current-view.service';
   styleUrls: ['./catalog.component.css']
 })
 export class CatalogComponent implements OnInit {
-  public threads: Observable<Array<Thread>>;
+  public threads: Array<Thread>;
 
   constructor(private threadService: ThreadService, public curView: CurrentViewService) { }
 
   ngOnInit(): void {
-    this.threads = this.threadService.getThreads(this.curView.board);
+    // this.threads = this.threadService.getThreads(this.curView.board);
+    this.threadService.getThreads(this.curView.board).subscribe(res => this.threads = res);
   }
 
   viewSpecific(id: number): void {

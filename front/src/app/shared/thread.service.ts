@@ -4,14 +4,24 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toArray';
-import { ReturnStatement } from '@angular/compiler/src/output/output_ast';
+
 import { UrlsService } from './urls.service';
 
 @Injectable()
 export class ThreadService {
-    private threads: Array<Thread>;
-
+    public threads: Observable<Array<Thread>>;
+    public replies: Observable<Array<Thread>>;
+    
     constructor(private httpClient: HttpClient, public urls: UrlsService) { }
+
+    updateThreads(board: string): void {
+        this.threads = this.getThreads(board);
+    }
+
+    updateReplies(id: number): void {
+        this.replies = this.getReplies(id);
+    }
+
 
     getThreads(board: string): Observable<Array<Thread>> {
         const apiUrl = this.urls.serverBasePath + '/getPosts';
