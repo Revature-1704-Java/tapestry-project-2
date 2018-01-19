@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms/src/model';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { CurrentViewService } from '../shared/current-view.service';
 import { TokenService } from '../shared/token.service';
@@ -23,7 +24,7 @@ export class ModalComponent implements OnInit {
   @ViewChild('postFile') postFile: ElementRef;
 
   constructor(private httpClient: HttpClient, public token: TokenService, 
-    public curView: CurrentViewService, public urls: UrlsService) { }
+    public curView: CurrentViewService, public urls: UrlsService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -108,6 +109,10 @@ export class ModalComponent implements OnInit {
         this.postFile.nativeElement.value = '';
 
         this.postClose.nativeElement.click();
+
+        const curUrl = this.router.url;
+        this.router.navigateByUrl('/Dummy', { skipLocationChange: true })
+          .then(() => this.router.navigate([curUrl]));
       }, err => console.log(err));
 
   }
