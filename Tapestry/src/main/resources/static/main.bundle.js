@@ -263,7 +263,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".footer {\r\n    margin-top: 20px;\r\n}", ""]);
+exports.push([module.i, ".footer {\n    margin-top: 20px;\n}", ""]);
 
 // exports
 
@@ -337,7 +337,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/header/header.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top\">\n  <div class=\"container\">\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n      <span class=\"navbar-toggler-icon\"></span>\n    </button>\n    <div class=\"collapse navbar-collapse\" id=\"navbarNav\">\n      <div class=\"mr-auto\">\n        <app-navbar></app-navbar>\n      </div>\n\n      <app-search></app-search>\n      <app-login></app-login>\n    </div>\n  </div>\n</nav>"
+module.exports = "<nav class=\"navbar navbar-expand-lg navbar-inverse bg-dark navbar-fixed-top\">\n  <div class=\"container\">\n    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n      <span class=\"navbar-toggler-icon\"></span>\n    </button>\n    <div class=\"collapse navbar-collapse\" id=\"navbarNav\">\n      <img src=\"../assets/taptrans.png\">\n      <h1>Tapestry</h1>\n      <div class=\"mr-auto\">\n        <app-navbar></app-navbar>\n      </div>\n\n      <app-search></app-search>\n      <app-login></app-login>\n    </div>\n  </div>\n</nav>"
 
 /***/ }),
 
@@ -705,7 +705,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/search/search.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form class=\"form-inline\">\n  <div class=\"input-group\">\n      <div class=\"input-group-addon\">\n          <span class=\"oi oi-magnifying-glass\"></span>\n      </div>\n    <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\n  </div>\n</form>"
+module.exports = "<form class=\"form-inline\">\r\n  <div class=\"input-group\">\r\n      <div class=\"input-group-addon\">\r\n          <span class=\"oi oi-magnifying-glass\"></span>\r\n      </div>\r\n    <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\r\n  </div>\r\n</form>"
 
 /***/ }),
 
@@ -951,7 +951,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "#specificView {\r\n    margin-top: 20px;\r\n}\r\n\r\n#createReply {\r\n    margin-right: 10px;\r\n}\r\n\r\nh4 {\r\n    color: #d9d9d9;\r\n}\r\n\r\n#btn button-success {\r\n    background-color: #a0a0c5;\r\n    border-color: #a0a0c5;\r\n}\r\n\r\nbutton:hover {\r\n    background-color: #3a3a5f;\r\n    border-color: #3a3a5f;\r\n}\r\n\r\nbutton:active {\r\n    background-color: #46466d;\r\n    border-color: #46466d;\r\n}", ""]);
+exports.push([module.i, "#specificView {\n    margin-top: 20px;\n}\n\n#createReply {\n    margin-right: 10px;\n}\n\nh4 {\n    color: #d9d9d9;\n}\n\n#btn button-success {\n    background-color: #a0a0c5;\n    border-color: #a0a0c5;\n}\n\nbutton:hover {\n    background-color: #3a3a5f;\n    border-color: #3a3a5f;\n}\n\nbutton:active {\n    background-color: #46466d;\n    border-color: #46466d;\n}", ""]);
 
 // exports
 
@@ -1025,7 +1025,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".list-group-item {\r\n    margin-top: 10px;\r\n}\r\n\r\ndiv li {\r\n    background-color: #14141f;\r\n    color: #f2f2f2;\r\n}\r\n\r\nh5 {\r\n    color: #d9d9d9;\r\n}\r\n\r\np {\r\n    color: #f2f2f2;\r\n}", ""]);
+exports.push([module.i, ".list-group-item {\n    margin-top: 10px;\n}\n\ndiv li {\n    background-color: #14141f;\n    color: #f2f2f2;\n}\n\nh5 {\n    color: #d9d9d9;\n}\n\np {\n    color: #f2f2f2;\n}", ""]);
 
 // exports
 
@@ -1038,7 +1038,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/thread-item/thread-item.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div [ngSwitch]=\"this.curView.view\">\r\n    <li *ngSwitchCase=\"'specific'\" class=\"list-group-item\">\r\n        <div *ngIf=\"op === true\" class=\"row\">\r\n            <div class=\"col-sm-5 col-md-3\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded\" width=\"150\" height=\"150\">\r\n            </div>\r\n            <div class=\"col-sm-7 col-md-9\">\r\n                <h5>From: {{ thread.username }}</h5>\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n                \r\n        <div *ngIf=\"op !== true\" class=\"row\">\r\n            <div class=\"col-sm-3 col-md-2\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded\" width=\"100\" height=\"100\">\r\n            </div>\r\n            <div class=\"col-sm-9 col-md-10\">\r\n                <h5>From: {{ thread.username }}</h5>\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n    </li>\r\n    <figure *ngSwitchDefault class=\"figure\">\r\n        <img [src]=\"thread.imagePath\" class=\"figure-img rounded\" width=\"150\" height=\"150\">\r\n        <figcaption class=\"figure-caption\">\r\n            <h5>{{ thread.title }}</h5>\r\n            <p>{{ thread.textContent }}</p>\r\n        </figcaption>\r\n    </figure>\r\n</div>"
+module.exports = "<div [ngSwitch]=\"this.curView.view\">\r\n    <li *ngSwitchCase=\"'specific'\" class=\"list-group-item\">\r\n        <div *ngIf=\"op === true\" class=\"row\">\r\n            <div class=\"col-sm-5 col-md-3\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded\" width=\"150\" height=\"150\">\r\n            </div>\r\n            <div class=\"col-sm-7 col-md-9\">\r\n                <h5>{{ thread.username }} says:</h5>\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n                \r\n        <div *ngIf=\"op !== true\" class=\"row\">\r\n            <div class=\"col-sm-3 col-md-2\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded\" width=\"100\" height=\"100\">\r\n            </div>\r\n            <div class=\"col-sm-9 col-md-10\">\r\n                <h5>From: {{ thread.username }}</h5>\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n    </li>\r\n    <figure *ngSwitchDefault class=\"figure\">\r\n        <img [src]=\"thread.imagePath\" class=\"figure-img rounded\" width=\"150\" height=\"150\">\r\n        <figcaption class=\"figure-caption\">\r\n            <h5>{{ thread.title }}</h5>\r\n            <p>{{ thread.textContent }}</p>\r\n        </figcaption>\r\n    </figure>\r\n</div>"
 
 /***/ }),
 
