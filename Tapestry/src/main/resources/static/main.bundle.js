@@ -571,6 +571,7 @@ var ModalComponent = (function () {
             body.set('postID', this.curView.id.toString());
         }
         console.log(this.newpost.file);
+        console.log('name: ' + this.newpost.file.name);
         var header = new __WEBPACK_IMPORTED_MODULE_1__angular_common_http__["c" /* HttpHeaders */]()
             .set('Content-Type', 'multipart/form-data');
         console.log('Sending: ' + body);

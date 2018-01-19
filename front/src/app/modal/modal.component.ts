@@ -98,6 +98,7 @@ export class ModalComponent implements OnInit {
     }
 
     console.log(this.newpost.file);
+    console.log('name: ' + this.newpost.file.name);
 
      const header = new HttpHeaders()
        .set('Content-Type', 'multipart/form-data');
