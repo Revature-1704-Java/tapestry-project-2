@@ -25,7 +25,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "app-header {\r\n    background-color: #14141f;\r\n}", ""]);
 
 // exports
 
@@ -188,7 +188,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "#catalogView {\r\n    margin-top: 20px;\r\n}", ""]);
+exports.push([module.i, "#catalogView {\r\n    margin-top: 5em;\r\n    padding-top: 1em;\r\n    background-color: #28283e;\r\n}\r\n\r\nhr {\r\n    border: 1px #0a0a10 dashed;\r\n}\r\n\r\nbutton {\r\n    background-color: #a0a0c5;\r\n    border-color: #a0a0c5;\r\n}\r\n\r\nbutton:hover {\r\n    background-color: #3a3a5f;\r\n    border-color: #3a3a5f;\r\n}\r\n\r\nbutton:active {\r\n    background-color: #46466d;\r\n    border-color: #46466d;\r\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -324,7 +324,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "h1 {\r\n    color: #ffffcc;\r\n    padding: 0 1em 0 .5em;\r\n    font-family:\"Courier New\", Courier, monospace;\r\n}", ""]);
 
 // exports
 
@@ -623,7 +623,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "a {\r\n    color: #ffffcc;\r\n}\r\n\r\na:hover {\r\n    color: #e6b800;\r\n}\r\n\r\na:active {\r\n    color: #e6b800;\r\n}", ""]);
 
 // exports
 
@@ -946,7 +946,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "#specificView {\r\n    margin-top: 20px;\r\n}\r\n\r\n#createReply {\r\n    margin-right: 10px;\r\n}", ""]);
+exports.push([module.i, "#specificView {\r\n    margin-top: 20px;\r\n}\r\n\r\n#createReply {\r\n    margin-right: 10px;\r\n}\r\n\r\nh4 {\r\n    color: #d9d9d9;\r\n}\r\n\r\n#btn button-success {\r\n    background-color: #a0a0c5;\r\n    border-color: #a0a0c5;\r\n}\r\n\r\nbutton:hover {\r\n    background-color: #3a3a5f;\r\n    border-color: #3a3a5f;\r\n}\r\n\r\nbutton:active {\r\n    background-color: #46466d;\r\n    border-color: #46466d;\r\n}", ""]);
 
 // exports
 
@@ -1020,7 +1020,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".list-group-item {\r\n    margin-top: 10px;\r\n}", ""]);
+exports.push([module.i, ".list-group-item {\r\n    margin-top: 10px;\r\n}\r\n\r\ndiv li {\r\n    background-color: #14141f;\r\n    color: #f2f2f2;\r\n}\r\n\r\nh5 {\r\n    color: #d9d9d9;\r\n}\r\n\r\np {\r\n    color: #f2f2f2;\r\n}", ""]);
 
 // exports
 
