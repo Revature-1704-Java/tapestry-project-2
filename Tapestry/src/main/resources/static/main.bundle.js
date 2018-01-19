@@ -496,11 +496,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var ModalComponent = (function () {
-    function ModalComponent(httpClient, token, curView, urls) {
+    function ModalComponent(httpClient, token, curView, urls, cdr) {
         this.httpClient = httpClient;
         this.token = token;
         this.curView = curView;
         this.urls = urls;
+        this.cdr = cdr;
         this.user = { username: '', password: '' };
         this.newuser = { username: '', email: '', password: '' };
         this.newpost = { title: '', body: '', file: undefined };
@@ -581,6 +582,7 @@ var ModalComponent = (function () {
             _this.newpost.file = undefined;
             _this.postFile.nativeElement.value = '';
             _this.postClose.nativeElement.click();
+            _this.cdr.detectChanges();
         }, function (err) { return console.log(err); });
     };
     __decorate([
@@ -606,7 +608,7 @@ var ModalComponent = (function () {
             styles: [__webpack_require__("../../../../../src/app/modal/modal.component.css")]
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_common_http__["a" /* HttpClient */], __WEBPACK_IMPORTED_MODULE_3__shared_token_service__["a" /* TokenService */],
-            __WEBPACK_IMPORTED_MODULE_2__shared_current_view_service__["a" /* CurrentViewService */], __WEBPACK_IMPORTED_MODULE_4__shared_urls_service__["a" /* UrlsService */]])
+            __WEBPACK_IMPORTED_MODULE_2__shared_current_view_service__["a" /* CurrentViewService */], __WEBPACK_IMPORTED_MODULE_4__shared_urls_service__["a" /* UrlsService */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["k" /* ChangeDetectorRef */]])
     ], ModalComponent);
     return ModalComponent;
 }());
@@ -1036,7 +1038,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/thread-item/thread-item.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div [ngSwitch]=\"this.curView.view\">\r\n    <li *ngSwitchCase=\"'specific'\" class=\"list-group-item\">\r\n        <div *ngIf=\"op === true\" class=\"row\">\r\n            <div class=\"col-sm-5 col-md-4\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded\" width=\"150\" height=\"150\">\r\n            </div>\r\n            <div class=\"col-sm-7 col-md-8\">\r\n                <h5>From: {{ thread.username }}</h5>\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n                \r\n        <div *ngIf=\"op !== true\" class=\"row\">\r\n            <div class=\"col-sm-3 col-md-2\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded\" width=\"100\" height=\"100\">\r\n            </div>\r\n            <div class=\"col-sm-9 col-md-10\">\r\n                <h5>From: {{ thread.username }}</h5>\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n    </li>\r\n    <figure *ngSwitchDefault class=\"figure\">\r\n        <img [src]=\"thread.imagePath\" class=\"figure-img rounded\" width=\"150\" height=\"150\">\r\n        <figcaption class=\"figure-caption\">\r\n            <h5>{{ thread.title }}</h5>\r\n            <p>{{ thread.textContent }}</p>\r\n        </figcaption>\r\n    </figure>\r\n</div>"
+module.exports = "<div [ngSwitch]=\"this.curView.view\">\r\n    <li *ngSwitchCase=\"'specific'\" class=\"list-group-item\">\r\n        <div *ngIf=\"op === true\" class=\"row\">\r\n            <div class=\"col-sm-5 col-md-3\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded\" width=\"150\" height=\"150\">\r\n            </div>\r\n            <div class=\"col-sm-7 col-md-9\">\r\n                <h5>From: {{ thread.username }}</h5>\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n                \r\n        <div *ngIf=\"op !== true\" class=\"row\">\r\n            <div class=\"col-sm-3 col-md-2\">\r\n                <img [src]=\"thread.imagePath\" class=\"rounded\" width=\"100\" height=\"100\">\r\n            </div>\r\n            <div class=\"col-sm-9 col-md-10\">\r\n                <h5>From: {{ thread.username }}</h5>\r\n                <p>{{ thread.textContent }}</p>\r\n            </div>\r\n        </div>\r\n    </li>\r\n    <figure *ngSwitchDefault class=\"figure\">\r\n        <img [src]=\"thread.imagePath\" class=\"figure-img rounded\" width=\"150\" height=\"150\">\r\n        <figcaption class=\"figure-caption\">\r\n            <h5>{{ thread.title }}</h5>\r\n            <p>{{ thread.textContent }}</p>\r\n        </figcaption>\r\n    </figure>\r\n</div>"
 
 /***/ }),
 

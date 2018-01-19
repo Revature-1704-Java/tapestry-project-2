@@ -1,10 +1,10 @@
 <div [ngSwitch]="this.curView.view">
     <li *ngSwitchCase="'specific'" class="list-group-item">
         <div *ngIf="op === true" class="row">
-            <div class="col-sm-5 col-md-4">
+            <div class="col-sm-5 col-md-3">
                 <img [src]="thread.imagePath" class="rounded" width="150" height="150">
             </div>
-            <div class="col-sm-7 col-md-8">
+            <div class="col-sm-7 col-md-9">
                 <h5>From: {{ thread.username }}</h5>
                 <p>{{ thread.textContent }}</p>
             </div>
